@@ -5,7 +5,7 @@ export const createLocation = Joi.object({
     village: Joi.string().required(),
     taluka: Joi.string().required(),
     district: Joi.string().required(),
-    pincode: Joi.string().required(),
+    pincode: Joi.string().optional(),
 });
 
 export const updateLocation = Joi.object({
