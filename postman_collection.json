@@ -1,0 +1,397 @@
+{
+  "item": [
+    {
+      "id": "374914aa-87eb-4f2a-ac7d-5f7e0ce5dc06",
+      "name": "AUTH",
+      "description": {
+        "content": "Routes for auth",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fd2701e6-b5d3-4dff-a82b-41b6efe47d8b",
+          "name": "Sign Up",
+          "request": {
+            "description": {
+              "content": "Controller: signUp\nSchema: signUpSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Required |\n| middleName | string | Required |\n| lastName | string | Required |\n| password | string | Required |\n| phoneNumber | string | Required |\n| role | string | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| houseType | string | Optional |\n| phoneNumber2 | string | Optional |\n| profilePhoto | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].fullName | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].occupation | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].skills | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "auth",
+                "signup"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"sample_firstName\",\n  \"middleName\": \"sample_middleName\",\n  \"lastName\": \"sample_lastName\",\n  \"password\": \"Password123!\",\n  \"phoneNumber\": \"sample_phoneNumber\",\n  \"role\": \"sample_role\",\n  \"village\": \"sample_village\",\n  \"pincode\": \"sample_pincode\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"currentAddress\": \"sample_currentAddress\",\n  \"houseType\": \"sample_houseType\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"profilePhoto\": \"sample_profilePhoto\",\n  \"familyMembers\": [\n    {\n      \"fullName\": \"sample_fullName\",\n      \"relation\": \"sample_relation\",\n      \"dob\": \"sample_dob\",\n      \"education\": \"sample_education\",\n      \"occupation\": \"sample_occupation\",\n      \"isMarried\": \"sample_isMarried\",\n      \"bloodGroup\": \"sample_bloodGroup\",\n      \"skills\": \"sample_skills\",\n      \"phoneNumber\": \"sample_phoneNumber\"\n    }\n  ]\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "59cf09f6-ba2c-4843-aa70-20fe5c9fd4f8",
+          "name": "Login",
+          "request": {
+            "description": {
+              "content": "Controller: login\nSchema: loginSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| phoneNumber | string | Required |\n| password | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "auth",
+                "login"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneNumber\": \"sample_phoneNumber\",\n  \"password\": \"Password123!\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "31960564-5b8d-4464-8709-c5b07edd6cca",
+          "name": "Otp Verification",
+          "request": {
+            "description": {
+              "content": "Controller: otpVerification\nSchema: otpVerificationSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| phoneNumber | string | Required |\n| otp | number | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "auth",
+                "verify-otp"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneNumber\": \"sample_phoneNumber\",\n  \"otp\": 123\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "5b07cfdc-ec69-45a0-a654-523c3b748ba4",
+          "name": "Forgot Password",
+          "request": {
+            "description": {
+              "content": "Controller: forgotPassword\nSchema: forgotPasswordSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| phoneNumber | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "auth",
+                "forgot-password"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneNumber\": \"sample_phoneNumber\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "dc6ac3be-f239-49fe-8645-cdd32ac185ce",
+          "name": "Reset Password",
+          "request": {
+            "description": {
+              "content": "Controller: resetPassword\nSchema: resetPasswordSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| phoneNumber | string | Required |\n| password | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "auth",
+                "reset-password"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneNumber\": \"sample_phoneNumber\",\n  \"password\": \"Password123!\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "158785f4-6bc6-4f85-ae7e-2b372b0c6c5b",
+      "name": "USER",
+      "description": {
+        "content": "Routes for user",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fa50119a-9b7a-489b-92db-c97fabc510dd",
+          "name": "Create User",
+          "request": {
+            "description": {
+              "content": "Controller: createUser\nSchema: createUser\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Required |\n| middleName | string | Required |\n| lastName | string | Required |\n| phoneNumber | string | Required |\n| password | string | Required |\n| profilePhoto | string | Optional |\n| isActive | boolean | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| houseType | string | Optional |\n| phoneNumber2 | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].fullName | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].occupation | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].skills | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "user",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"sample_firstName\",\n  \"middleName\": \"sample_middleName\",\n  \"lastName\": \"sample_lastName\",\n  \"phoneNumber\": \"9725097885\",\n  \"password\": \"Admin@123\",\n  \"profilePhoto\": null,\n  \"isActive\": true,\n  \"village\": \"sample_village\",\n  \"pincode\": \"sample_pincode\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"currentAddress\": \"sample_currentAddress\",\n  \"houseType\": \"sample_houseType\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"familyMembers\": [\n    {\n      \"fullName\": \"sample_fullName\",\n      \"relation\": \"sample_relation\",\n      \"dob\": \"sample_dob\",\n      \"education\": \"sample_education\",\n      \"occupation\": \"sample_occupation\",\n      \"isMarried\": \"sample_isMarried\",\n      \"bloodGroup\": \"sample_bloodGroup\",\n      \"skills\": \"sample_skills\",\n      \"phoneNumber\": \"sample_phoneNumber\"\n    }\n  ]\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "1dcb8ba8-37b0-4495-a3ea-5aefc925cccf",
+          "name": "Update User",
+          "request": {
+            "description": {
+              "content": "Controller: updateUser\nSchema: updateUser\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| userId | string | Required |\n| firstName | string | Optional |\n| middleName | string | Optional |\n| lastName | string | Optional |\n| email | string | Optional |\n| phoneNumber | string | Optional |\n| password | string | Optional |\n| profilePhoto | string | Optional |\n| isActive | boolean | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| houseType | string | Optional |\n| phoneNumber2 | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].fullName | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].occupation | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].skills | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "user",
+                "update"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"sample_userId\",\n  \"firstName\": \"sample_firstName\",\n  \"middleName\": \"sample_middleName\",\n  \"lastName\": \"sample_lastName\",\n  \"email\": \"test@example.com\",\n  \"phoneNumber\": \"sample_phoneNumber\",\n  \"password\": \"Password123!\",\n  \"profilePhoto\": \"sample_profilePhoto\",\n  \"isActive\": true,\n  \"village\": \"sample_village\",\n  \"pincode\": \"sample_pincode\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"currentAddress\": \"sample_currentAddress\",\n  \"houseType\": \"sample_houseType\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"familyMembers\": [\n    {\n      \"fullName\": \"sample_fullName\",\n      \"relation\": \"sample_relation\",\n      \"dob\": \"sample_dob\",\n      \"education\": \"sample_education\",\n      \"occupation\": \"sample_occupation\",\n      \"isMarried\": \"sample_isMarried\",\n      \"bloodGroup\": \"sample_bloodGroup\",\n      \"skills\": \"sample_skills\",\n      \"phoneNumber\": \"sample_phoneNumber\"\n    }\n  ]\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "e03c8003-517c-4c36-8ebe-8c16968304cd",
+          "name": "Delete User",
+          "request": {
+            "description": {
+              "content": "Controller: deleteUser\nSchema: deleteUser\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| id | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "user",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"sample_id\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "1e860c2d-9acb-41f3-b38f-300669028ea2",
+          "name": "Get Users",
+          "request": {
+            "description": {
+              "content": "Controller: getUsers\nSchema: getUsers\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| page | number | Optional |\n| limit | number | Optional |\n| search | string | Optional |\n| sortFilter | string | Optional |\n| activeFilter | string | Optional |\n| startDateFilter | string | Optional |\n| endDateFilter | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "user"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": true,
+                  "key": "search",
+                  "value": "sample_search"
+                },
+                {
+                  "disabled": true,
+                  "key": "sortFilter",
+                  "value": "sample_sortFilter"
+                },
+                {
+                  "disabled": true,
+                  "key": "activeFilter",
+                  "value": "sample_activeFilter"
+                },
+                {
+                  "disabled": true,
+                  "key": "startDateFilter",
+                  "value": "sample_startDateFilter"
+                },
+                {
+                  "disabled": true,
+                  "key": "endDateFilter",
+                  "value": "sample_endDateFilter"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "any",
+      "value": "http://localhost:5000",
+      "key": "BASE_URL"
+    },
+    {
+      "type": "any",
+      "value": "",
+      "key": "TOKEN"
+    }
+  ],
+  "info": {
+    "_postman_id": "a165e559-abae-4a12-a70c-8aa7a826157e",
+    "name": "Gondaliya Family API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Auto generated API collection",
+      "type": "text/plain"
+    }
+  }
+}

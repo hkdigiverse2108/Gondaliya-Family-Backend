@@ -1,0 +1,15 @@
+Base paths found: {"auth":{"path":"/auth","isProtected":false},"nativePlace":{"path":"/native-place","isProtected":false},"user":{"path":"/user","isProtected":true}}
+Processing router: auth at /auth
+Found 5 routes in auth
+  Processing route: POST /signup
+  Processing route: POST /login
+  Processing route: POST /verify-otp
+  Processing route: POST /forgot-password
+  Processing route: POST /reset-password
+Skipping router nativePlace because file was not found
+Processing router: user at /user
+Found 4 routes in user
+  Processing route: POST /add
+  Processing route: PUT /update
+  Processing route: DELETE /:id
+  Processing route: GET /
