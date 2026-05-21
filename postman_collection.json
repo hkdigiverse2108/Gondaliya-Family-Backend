@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "5d6cbe5e-29e5-4ce2-8938-32b2942d4112",
+      "id": "aa0d4928-fc49-4eed-b87b-eded12e883f6",
       "name": "AUTH",
       "description": {
         "content": "Routes for auth",
@@ -9,11 +9,11 @@
       },
       "item": [
         {
-          "id": "92b0a1a1-a52e-493a-8ca8-452f0ed6efcf",
+          "id": "838cac20-794a-4eea-bb80-fec332273a5a",
           "name": "Sign Up",
           "request": {
             "description": {
-              "content": "Controller: signUp\nSchema: signUpSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Required |\n| middleName | string | Required |\n| lastName | string | Required |\n| phoneNumber | string | Required |\n| password | string | Required |\n| profilePhoto | string | Optional |\n| isActive | boolean | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| houseType | string | Optional |\n| phoneNumber2 | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].firstName | string | Optional |\n| familyMembers[].middleName | string | Optional |\n| familyMembers[].lastName | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].occupation | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].skills | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n| workDetails | object | Optional |\n| workDetails.hasOwnBusiness | boolean | Optional |\n| workDetails.businessDetails | object | Optional |\n| workDetails.businessDetails.category | string | Optional |\n| workDetails.businessDetails.subCategory | string | Optional |\n| workDetails.businessDetails.businessName | string | Optional |\n| workDetails.businessDetails.ownerName | string | Optional |\n| workDetails.businessDetails.description | string | Optional |\n| workDetails.businessDetails.locations | array | Optional |\n| workDetails.businessDetails.locations[].shopAddress | string | Optional |\n| workDetails.businessDetails.locations[].areaCity | string | Optional |\n| workDetails.businessDetails.locations[].state | string | Optional |\n| workDetails.businessDetails.locations[].pincode | string | Optional |\n| workDetails.businessDetails.locations[].googleMapLink | string | Optional |\n| workDetails.businessDetails.contactInfo | object | Optional |\n| workDetails.businessDetails.contactInfo.mobile1 | string | Optional |\n| workDetails.businessDetails.contactInfo.mobile2 | string | Optional |\n| workDetails.businessDetails.contactInfo.email | string | Optional |\n| workDetails.businessDetails.contactInfo.website | string | Optional |\n| workDetails.businessDetails.contactInfo.portfolioLink | string | Optional |\n| workDetails.jobDetails | object | Optional |\n| workDetails.jobDetails.jobCategory | string | Optional |\n| workDetails.jobDetails.jobRole | string | Optional |\n| workDetails.jobDetails.companyName | string | Optional |\n| workDetails.jobDetails.jobLocation | string | Optional |\n",
+              "content": "Controller: signUp\nSchema: signUpSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Required |\n| middleName | string | Required |\n| lastName | string | Required |\n| dob | string | Optional |\n| bloodGroup | string | Optional |\n| education | string | Optional |\n| isMarried | string | Optional |\n| profilePhoto | string | Optional |\n| phoneNumber | string | Required |\n| phoneNumber2 | string | Optional |\n| password | string | Required |\n| isActive | boolean | Optional |\n| nativeVillage | string | Optional |\n| nativeTaluka | string | Optional |\n| nativeDistrict | string | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| currentCity | string | Optional |\n| currentState | string | Optional |\n| houseType | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].firstName | string | Optional |\n| familyMembers[].middleName | string | Optional |\n| familyMembers[].lastName | string | Optional |\n| familyMembers[].profilePhoto | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n| familyMembers[].workDetails | object | Optional |\n| workDetails | object | Optional |\n| workDetails.hasOwnBusiness | boolean | Optional |\n| workDetails.businessDetails | object | Optional |\n| workDetails.businessDetails.category | string | Optional |\n| workDetails.businessDetails.subCategory | string | Optional |\n| workDetails.businessDetails.businessName | string | Optional |\n| workDetails.businessDetails.ownerName | string | Optional |\n| workDetails.businessDetails.description | string | Optional |\n| workDetails.businessDetails.locations | array | Optional |\n| workDetails.businessDetails.locations[].shopAddress | string | Optional |\n| workDetails.businessDetails.locations[].areaCity | string | Optional |\n| workDetails.businessDetails.locations[].state | string | Optional |\n| workDetails.businessDetails.locations[].pincode | string | Optional |\n| workDetails.businessDetails.locations[].googleMapLink | string | Optional |\n| workDetails.businessDetails.contactInfo | object | Optional |\n| workDetails.businessDetails.contactInfo.mobile1 | string | Optional |\n| workDetails.businessDetails.contactInfo.mobile2 | string | Optional |\n| workDetails.businessDetails.contactInfo.email | string | Optional |\n| workDetails.businessDetails.contactInfo.website | string | Optional |\n| workDetails.businessDetails.contactInfo.portfolioLink | string | Optional |\n| workDetails.jobDetails | object | Optional |\n| workDetails.jobDetails.jobCategory | string | Optional |\n| workDetails.jobDetails.jobRole | string | Optional |\n| workDetails.jobDetails.companyName | string | Optional |\n| workDetails.jobDetails.jobLocation | string | Optional |\n",
               "type": "text/markdown"
             },
             "url": {
@@ -36,14 +36,14 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Pramit\",\n  \"middleName\": \"Rajubhai\",\n  \"lastName\": \"Mangukiya\",\n  \"phoneNumber\": \"9725097885\",\n  \"password\": \"Admin@123\",\n  \"profilePhoto\": \"null\",\n  \"isActive\": true,\n  \"village\": \"sample_village\",\n  \"pincode\": \"sample_pincode\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"currentAddress\": \"sample_currentAddress\",\n  \"houseType\": \"sample_houseType\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"familyMembers\": [\n    {\n      \"firstName\": \"sample_firstName\",\n      \"middleName\": \"sample_middleName\",\n      \"lastName\": \"sample_lastName\",\n      \"relation\": \"sample_relation\",\n      \"dob\": \"sample_dob\",\n      \"education\": \"sample_education\",\n      \"occupation\": \"sample_occupation\",\n      \"isMarried\": \"sample_isMarried\",\n      \"bloodGroup\": \"sample_bloodGroup\",\n      \"skills\": \"sample_skills\",\n      \"phoneNumber\": \"sample_phoneNumber\"\n    }\n  ],\n  \"workDetails\": {\n    \"hasOwnBusiness\": true,\n    \"businessDetails\": {\n      \"category\": \"sample_category\",\n      \"subCategory\": \"sample_subCategory\",\n      \"businessName\": \"sample_businessName\",\n      \"ownerName\": \"sample_ownerName\",\n      \"description\": \"sample_description\",\n      \"locations\": [\n        {\n          \"shopAddress\": \"sample_shopAddress\",\n          \"areaCity\": \"sample_areaCity\",\n          \"state\": \"sample_state\",\n          \"pincode\": \"sample_pincode\",\n          \"googleMapLink\": \"sample_googleMapLink\"\n        }\n      ],\n      \"contactInfo\": {\n        \"mobile1\": \"sample_mobile1\",\n        \"mobile2\": \"sample_mobile2\",\n        \"email\": \"test@example.com\",\n        \"website\": \"sample_website\",\n        \"portfolioLink\": \"sample_portfolioLink\"\n      }\n    },\n    \"jobDetails\": {\n      \"jobCategory\": \"sample_jobCategory\",\n      \"jobRole\": \"sample_jobRole\",\n      \"companyName\": \"sample_companyName\",\n      \"jobLocation\": \"sample_jobLocation\"\n    }\n  }\n}"
+              "raw": "{\n  \"firstName\": \"Pramit\",\n  \"middleName\": \"Rajubhai\",\n  \"lastName\": \"Mangukiya\",\n  \"dob\": \"sample_dob\",\n  \"bloodGroup\": \"A+\",\n  \"education\": \"BCA\",\n  \"isMarried\": \"Yes\",\n  \"profilePhoto\": \"null\",\n  \"phoneNumber\": \"9725097885\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"password\": \"Admin@123\",\n  \"isActive\": true,\n  \"nativeVillage\": \"sample_nativeVillage\",\n  \"nativeTaluka\": \"sample_nativeTaluka\",\n  \"nativeDistrict\": \"sample_nativeDistrict\",\n  \"village\": \"Lakhanka\",\n  \"pincode\": \"sample_pincode\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"currentAddress\": \"C 602 shivdhara Campus\",\n  \"currentCity\": \"sample_currentCity\",\n  \"currentState\": \"sample_currentState\",\n  \"houseType\": \"own\",\n  \"familyMembers\": [\n    {\n      \"firstName\": \"sample_firstName\",\n      \"middleName\": \"sample_middleName\",\n      \"lastName\": \"sample_lastName\",\n      \"profilePhoto\": \"sample_profilePhoto\",\n      \"relation\": \"sample_relation\",\n      \"dob\": \"sample_dob\",\n      \"education\": \"sample_education\",\n      \"isMarried\": \"sample_isMarried\",\n      \"bloodGroup\": \"sample_bloodGroup\",\n      \"phoneNumber\": \"sample_phoneNumber\",\n      \"workDetails\": {}\n    }\n  ],\n  \"workDetails\": {\n    \"hasOwnBusiness\": true,\n    \"businessDetails\": {\n      \"category\": \"sample_category\",\n      \"subCategory\": \"sample_subCategory\",\n      \"businessName\": \"sample_businessName\",\n      \"ownerName\": \"sample_ownerName\",\n      \"description\": \"sample_description\",\n      \"locations\": [\n        {\n          \"shopAddress\": \"sample_shopAddress\",\n          \"areaCity\": \"sample_areaCity\",\n          \"state\": \"sample_state\",\n          \"pincode\": \"sample_pincode\",\n          \"googleMapLink\": \"sample_googleMapLink\"\n        }\n      ],\n      \"contactInfo\": {\n        \"mobile1\": \"sample_mobile1\",\n        \"mobile2\": \"sample_mobile2\",\n        \"email\": \"test@example.com\",\n        \"website\": \"sample_website\",\n        \"portfolioLink\": \"sample_portfolioLink\"\n      }\n    },\n    \"jobDetails\": {\n      \"jobCategory\": \"sample_jobCategory\",\n      \"jobRole\": \"sample_jobRole\",\n      \"companyName\": \"sample_companyName\",\n      \"jobLocation\": \"sample_jobLocation\"\n    }\n  }\n}"
             }
           },
           "response": [],
           "event": []
         },
         {
-          "id": "1c67529c-85ae-4c18-aa8b-1ef75886440b",
+          "id": "3cf58dc1-ef80-4de1-a5bd-f2529ad00074",
           "name": "Login",
           "request": {
             "description": {
@@ -77,7 +77,7 @@
           "event": []
         },
         {
-          "id": "3082cec3-881f-4467-b63e-69435479146e",
+          "id": "7c767d1a-f848-433d-928c-136f292e0f91",
           "name": "Otp Verification",
           "request": {
             "description": {
@@ -111,7 +111,7 @@
           "event": []
         },
         {
-          "id": "9ea47c83-6d49-4742-858a-3075b08383df",
+          "id": "dc61cc4a-b8a6-412c-bafd-9ed90dfd3830",
           "name": "Forgot Password",
           "request": {
             "description": {
@@ -145,7 +145,7 @@
           "event": []
         },
         {
-          "id": "95b709fe-ee3e-445d-9c22-0ff66fe85549",
+          "id": "7ff01bf0-182b-4dfa-ae4d-b6f697bc3470",
           "name": "Reset Password",
           "request": {
             "description": {
@@ -182,7 +182,7 @@
       "event": []
     },
     {
-      "id": "c09ce3d9-d3b2-4fac-a487-789472c8aacb",
+      "id": "1064e44c-450a-463d-bce2-af6e150c8eab",
       "name": "LOCATION",
       "description": {
         "content": "Routes for location",
@@ -190,7 +190,7 @@
       },
       "item": [
         {
-          "id": "c51265c8-3111-49c1-9378-11be7465e8b9",
+          "id": "73406c11-493d-480e-9715-6f3faa06cf8e",
           "name": "Create Location",
           "request": {
             "description": {
@@ -224,7 +224,7 @@
           "event": []
         },
         {
-          "id": "f4508397-4e6c-4e32-93c5-58d51cc7a3c9",
+          "id": "f29d3fc9-3aeb-4169-b2e5-18281a931ef7",
           "name": "Update Location",
           "request": {
             "description": {
@@ -258,7 +258,7 @@
           "event": []
         },
         {
-          "id": "37bc1f3c-5018-4d68-8ed2-0941c6a13027",
+          "id": "270633e2-6a33-4380-8cee-dfddab3de569",
           "name": "Delete Location",
           "request": {
             "description": {
@@ -299,7 +299,7 @@
           "event": []
         },
         {
-          "id": "da198ca9-a567-4d13-8f13-13454a06fb70",
+          "id": "a4fc80da-158d-49c3-9ea8-0e439a0e6736",
           "name": "Get Locations",
           "request": {
             "description": {
@@ -339,7 +339,7 @@
           "event": []
         },
         {
-          "id": "d3cd4e61-5004-49d1-8147-0cd2339c0381",
+          "id": "8c69395b-c967-4afa-97a0-ec1777ad43a7",
           "name": "Get Districts",
           "request": {
             "description": {
@@ -364,7 +364,7 @@
           "event": []
         },
         {
-          "id": "f1a236e0-6567-4be5-af24-233cfc497b2c",
+          "id": "ef663cca-c9a5-4f7b-8abe-820129b3e6c8",
           "name": "Get Talukas",
           "request": {
             "description": {
@@ -395,7 +395,7 @@
           "event": []
         },
         {
-          "id": "ffcc66ce-167c-4414-83ba-0ffbec6d3d75",
+          "id": "57ae0f5c-9bc1-4e62-8793-56497d30a4a3",
           "name": "Get Villages",
           "request": {
             "description": {
@@ -434,7 +434,7 @@
       "event": []
     },
     {
-      "id": "2151acd5-0003-4da5-972c-ea9675b14530",
+      "id": "5d9c74f3-0a5c-41df-a481-161e430aa34e",
       "name": "USER",
       "description": {
         "content": "Routes for user",
@@ -442,11 +442,11 @@
       },
       "item": [
         {
-          "id": "4802d738-01c4-47d9-8e25-7c3c5aa402e7",
+          "id": "b0b82c1c-57bb-41f6-8624-c861e6517479",
           "name": "Create User",
           "request": {
             "description": {
-              "content": "Controller: createUser\nSchema: createUser\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Required |\n| middleName | string | Required |\n| lastName | string | Required |\n| phoneNumber | string | Required |\n| password | string | Required |\n| profilePhoto | string | Optional |\n| isActive | boolean | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| houseType | string | Optional |\n| phoneNumber2 | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].firstName | string | Optional |\n| familyMembers[].middleName | string | Optional |\n| familyMembers[].lastName | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].occupation | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].skills | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n| workDetails | object | Optional |\n| workDetails.hasOwnBusiness | boolean | Optional |\n| workDetails.businessDetails | object | Optional |\n| workDetails.businessDetails.category | string | Optional |\n| workDetails.businessDetails.subCategory | string | Optional |\n| workDetails.businessDetails.businessName | string | Optional |\n| workDetails.businessDetails.ownerName | string | Optional |\n| workDetails.businessDetails.description | string | Optional |\n| workDetails.businessDetails.locations | array | Optional |\n| workDetails.businessDetails.locations[].shopAddress | string | Optional |\n| workDetails.businessDetails.locations[].areaCity | string | Optional |\n| workDetails.businessDetails.locations[].state | string | Optional |\n| workDetails.businessDetails.locations[].pincode | string | Optional |\n| workDetails.businessDetails.locations[].googleMapLink | string | Optional |\n| workDetails.businessDetails.contactInfo | object | Optional |\n| workDetails.businessDetails.contactInfo.mobile1 | string | Optional |\n| workDetails.businessDetails.contactInfo.mobile2 | string | Optional |\n| workDetails.businessDetails.contactInfo.email | string | Optional |\n| workDetails.businessDetails.contactInfo.website | string | Optional |\n| workDetails.businessDetails.contactInfo.portfolioLink | string | Optional |\n| workDetails.jobDetails | object | Optional |\n| workDetails.jobDetails.jobCategory | string | Optional |\n| workDetails.jobDetails.jobRole | string | Optional |\n| workDetails.jobDetails.companyName | string | Optional |\n| workDetails.jobDetails.jobLocation | string | Optional |\n",
+              "content": "Controller: createUser\nSchema: createUser\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Required |\n| middleName | string | Required |\n| lastName | string | Required |\n| dob | string | Optional |\n| bloodGroup | string | Optional |\n| education | string | Optional |\n| isMarried | string | Optional |\n| profilePhoto | string | Optional |\n| phoneNumber | string | Required |\n| phoneNumber2 | string | Optional |\n| password | string | Required |\n| isActive | boolean | Optional |\n| nativeVillage | string | Optional |\n| nativeTaluka | string | Optional |\n| nativeDistrict | string | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| currentCity | string | Optional |\n| currentState | string | Optional |\n| houseType | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].firstName | string | Optional |\n| familyMembers[].middleName | string | Optional |\n| familyMembers[].lastName | string | Optional |\n| familyMembers[].profilePhoto | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n| familyMembers[].workDetails | object | Optional |\n| familyMembers[].workDetails.hasOwnBusiness | boolean | Optional |\n| familyMembers[].workDetails.businessDetails | object | Optional |\n| familyMembers[].workDetails.businessDetails.category | string | Optional |\n| familyMembers[].workDetails.businessDetails.subCategory | string | Optional |\n| familyMembers[].workDetails.businessDetails.businessName | string | Optional |\n| familyMembers[].workDetails.businessDetails.ownerName | string | Optional |\n| familyMembers[].workDetails.businessDetails.description | string | Optional |\n| familyMembers[].workDetails.businessDetails.locations | array | Optional |\n| familyMembers[].workDetails.businessDetails.locations[].shopAddress | string | Optional |\n| familyMembers[].workDetails.businessDetails.locations[].areaCity | string | Optional |\n| familyMembers[].workDetails.businessDetails.locations[].state | string | Optional |\n| familyMembers[].workDetails.businessDetails.locations[].pincode | string | Optional |\n| familyMembers[].workDetails.businessDetails.locations[].googleMapLink | string | Optional |\n| familyMembers[].workDetails.businessDetails.contactInfo | object | Optional |\n| familyMembers[].workDetails.businessDetails.contactInfo.mobile1 | string | Optional |\n| familyMembers[].workDetails.businessDetails.contactInfo.mobile2 | string | Optional |\n| familyMembers[].workDetails.businessDetails.contactInfo.email | string | Optional |\n| familyMembers[].workDetails.businessDetails.contactInfo.website | string | Optional |\n| familyMembers[].workDetails.businessDetails.contactInfo.portfolioLink | string | Optional |\n| familyMembers[].workDetails.jobDetails | object | Optional |\n| familyMembers[].workDetails.jobDetails.jobCategory | string | Optional |\n| familyMembers[].workDetails.jobDetails.jobRole | string | Optional |\n| familyMembers[].workDetails.jobDetails.companyName | string | Optional |\n| familyMembers[].workDetails.jobDetails.jobLocation | string | Optional |\n| workDetails | object | Optional |\n| workDetails.hasOwnBusiness | boolean | Optional |\n| workDetails.businessDetails | object | Optional |\n| workDetails.businessDetails.category | string | Optional |\n| workDetails.businessDetails.subCategory | string | Optional |\n| workDetails.businessDetails.businessName | string | Optional |\n| workDetails.businessDetails.ownerName | string | Optional |\n| workDetails.businessDetails.description | string | Optional |\n| workDetails.businessDetails.locations | array | Optional |\n| workDetails.businessDetails.locations[].shopAddress | string | Optional |\n| workDetails.businessDetails.locations[].areaCity | string | Optional |\n| workDetails.businessDetails.locations[].state | string | Optional |\n| workDetails.businessDetails.locations[].pincode | string | Optional |\n| workDetails.businessDetails.locations[].googleMapLink | string | Optional |\n| workDetails.businessDetails.contactInfo | object | Optional |\n| workDetails.businessDetails.contactInfo.mobile1 | string | Optional |\n| workDetails.businessDetails.contactInfo.mobile2 | string | Optional |\n| workDetails.businessDetails.contactInfo.email | string | Optional |\n| workDetails.businessDetails.contactInfo.website | string | Optional |\n| workDetails.businessDetails.contactInfo.portfolioLink | string | Optional |\n| workDetails.jobDetails | object | Optional |\n| workDetails.jobDetails.jobCategory | string | Optional |\n| workDetails.jobDetails.jobRole | string | Optional |\n| workDetails.jobDetails.companyName | string | Optional |\n| workDetails.jobDetails.jobLocation | string | Optional |\n",
               "type": "text/markdown"
             },
             "url": {
@@ -469,18 +469,18 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Het\",\n  \"middleName\": \"Rajubhai\",\n  \"lastName\": \"Mangukiya\",\n  \"phoneNumber\": \"8866005029\",\n  \"password\": \"Admin@123\",\n  \"profilePhoto\": \"sample_profilePhoto\",\n  \"isActive\": true,\n  \"village\": \"Lakhanka\",\n  \"pincode\": \"394101\",\n  \"taluka\": \"Gadhada\",\n  \"district\": \"Botad\",\n  \"currentAddress\": \"C - 602, Shivdhara, Campus, Mota Varachha, Surat\",\n  \"houseType\": \"Own\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"familyMembers\": [\n    {\n      \"firstName\": \"sample_firstName\",\n      \"middleName\": \"sample_middleName\",\n      \"lastName\": \"sample_lastName\",\n      \"relation\": \"Brother\",\n      \"dob\": \"2003/10/24\",\n      \"education\": \"BCA\",\n      \"occupation\": \"IT\",\n      \"isMarried\": \"unMarried\",\n      \"bloodGroup\": \"A+\",\n      \"skills\": \"Hello\",\n      \"phoneNumber\": \"9725095525\",\n      \"fullName\": \"Pramit Mangukiya\"\n    }\n  ],\n  \"workDetails\": {\n    \"hasOwnBusiness\": true,\n    \"businessDetails\": {\n      \"category\": \"sample_category\",\n      \"subCategory\": \"sample_subCategory\",\n      \"businessName\": \"sample_businessName\",\n      \"ownerName\": \"sample_ownerName\",\n      \"description\": \"sample_description\",\n      \"locations\": [\n        {\n          \"shopAddress\": \"sample_shopAddress\",\n          \"areaCity\": \"sample_areaCity\",\n          \"state\": \"sample_state\",\n          \"pincode\": \"sample_pincode\",\n          \"googleMapLink\": \"sample_googleMapLink\"\n        }\n      ],\n      \"contactInfo\": {\n        \"mobile1\": \"sample_mobile1\",\n        \"mobile2\": \"sample_mobile2\",\n        \"email\": \"test@example.com\",\n        \"website\": \"sample_website\",\n        \"portfolioLink\": \"sample_portfolioLink\"\n      }\n    },\n    \"jobDetails\": {\n      \"jobCategory\": \"sample_jobCategory\",\n      \"jobRole\": \"sample_jobRole\",\n      \"companyName\": \"sample_companyName\",\n      \"jobLocation\": \"sample_jobLocation\"\n    }\n  }\n}"
+              "raw": "{\n  \"firstName\": \"Het\",\n  \"middleName\": \"Rajubhai\",\n  \"lastName\": \"Mangukiya\",\n  \"dob\": \"sample_dob\",\n  \"bloodGroup\": \"sample_bloodGroup\",\n  \"education\": \"sample_education\",\n  \"isMarried\": \"sample_isMarried\",\n  \"profilePhoto\": \"sample_profilePhoto\",\n  \"phoneNumber\": \"8866005029\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"password\": \"Admin@123\",\n  \"isActive\": true,\n  \"nativeVillage\": \"sample_nativeVillage\",\n  \"nativeTaluka\": \"sample_nativeTaluka\",\n  \"nativeDistrict\": \"sample_nativeDistrict\",\n  \"village\": \"Lakhanka\",\n  \"pincode\": \"394101\",\n  \"taluka\": \"Gadhada\",\n  \"district\": \"Botad\",\n  \"currentAddress\": \"C - 602, Shivdhara, Campus, Mota Varachha, Surat\",\n  \"currentCity\": \"sample_currentCity\",\n  \"currentState\": \"sample_currentState\",\n  \"houseType\": \"Own\",\n  \"familyMembers\": [\n    {\n      \"firstName\": \"sample_firstName\",\n      \"middleName\": \"sample_middleName\",\n      \"lastName\": \"sample_lastName\",\n      \"profilePhoto\": \"sample_profilePhoto\",\n      \"relation\": \"Brother\",\n      \"dob\": \"2003/10/24\",\n      \"education\": \"BCA\",\n      \"isMarried\": \"unMarried\",\n      \"bloodGroup\": \"A+\",\n      \"phoneNumber\": \"9725095525\",\n      \"workDetails\": {\n        \"hasOwnBusiness\": true,\n        \"businessDetails\": {\n          \"category\": \"sample_category\",\n          \"subCategory\": \"sample_subCategory\",\n          \"businessName\": \"sample_businessName\",\n          \"ownerName\": \"sample_ownerName\",\n          \"description\": \"sample_description\",\n          \"locations\": [\n            {\n              \"shopAddress\": \"sample_shopAddress\",\n              \"areaCity\": \"sample_areaCity\",\n              \"state\": \"sample_state\",\n              \"pincode\": \"sample_pincode\",\n              \"googleMapLink\": \"sample_googleMapLink\"\n            }\n          ],\n          \"contactInfo\": {\n            \"mobile1\": \"sample_mobile1\",\n            \"mobile2\": \"sample_mobile2\",\n            \"email\": \"test@example.com\",\n            \"website\": \"sample_website\",\n            \"portfolioLink\": \"sample_portfolioLink\"\n          }\n        },\n        \"jobDetails\": {\n          \"jobCategory\": \"sample_jobCategory\",\n          \"jobRole\": \"sample_jobRole\",\n          \"companyName\": \"sample_companyName\",\n          \"jobLocation\": \"sample_jobLocation\"\n        }\n      },\n      \"occupation\": \"IT\",\n      \"skills\": \"Hello\",\n      \"fullName\": \"Pramit Mangukiya\"\n    }\n  ],\n  \"workDetails\": {\n    \"hasOwnBusiness\": true,\n    \"businessDetails\": {\n      \"category\": \"sample_category\",\n      \"subCategory\": \"sample_subCategory\",\n      \"businessName\": \"sample_businessName\",\n      \"ownerName\": \"sample_ownerName\",\n      \"description\": \"sample_description\",\n      \"locations\": [\n        {\n          \"shopAddress\": \"sample_shopAddress\",\n          \"areaCity\": \"sample_areaCity\",\n          \"state\": \"sample_state\",\n          \"pincode\": \"sample_pincode\",\n          \"googleMapLink\": \"sample_googleMapLink\"\n        }\n      ],\n      \"contactInfo\": {\n        \"mobile1\": \"sample_mobile1\",\n        \"mobile2\": \"sample_mobile2\",\n        \"email\": \"test@example.com\",\n        \"website\": \"sample_website\",\n        \"portfolioLink\": \"sample_portfolioLink\"\n      }\n    },\n    \"jobDetails\": {\n      \"jobCategory\": \"sample_jobCategory\",\n      \"jobRole\": \"sample_jobRole\",\n      \"companyName\": \"sample_companyName\",\n      \"jobLocation\": \"sample_jobLocation\"\n    }\n  }\n}"
             }
           },
           "response": [],
           "event": []
         },
         {
-          "id": "d2e09d8c-0e24-470e-b4d4-17aa8660152a",
+          "id": "a5f55b5b-e31c-4dab-8c49-5f137516c261",
           "name": "Update User",
           "request": {
             "description": {
-              "content": "Controller: updateUser\nSchema: updateUser\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| userId | string | Required |\n| firstName | string | Optional |\n| middleName | string | Optional |\n| lastName | string | Optional |\n| email | string | Optional |\n| phoneNumber | string | Optional |\n| password | string | Optional |\n| profilePhoto | string | Optional |\n| isActive | boolean | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| houseType | string | Optional |\n| phoneNumber2 | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].firstName | string | Optional |\n| familyMembers[].middleName | string | Optional |\n| familyMembers[].lastName | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].occupation | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].skills | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n| workDetails | object | Optional |\n| workDetails.hasOwnBusiness | boolean | Optional |\n| workDetails.businessDetails | object | Optional |\n| workDetails.businessDetails.category | string | Optional |\n| workDetails.businessDetails.subCategory | string | Optional |\n| workDetails.businessDetails.businessName | string | Optional |\n| workDetails.businessDetails.ownerName | string | Optional |\n| workDetails.businessDetails.description | string | Optional |\n| workDetails.businessDetails.locations | array | Optional |\n| workDetails.businessDetails.locations[].shopAddress | string | Optional |\n| workDetails.businessDetails.locations[].areaCity | string | Optional |\n| workDetails.businessDetails.locations[].state | string | Optional |\n| workDetails.businessDetails.locations[].pincode | string | Optional |\n| workDetails.businessDetails.locations[].googleMapLink | string | Optional |\n| workDetails.businessDetails.contactInfo | object | Optional |\n| workDetails.businessDetails.contactInfo.mobile1 | string | Optional |\n| workDetails.businessDetails.contactInfo.mobile2 | string | Optional |\n| workDetails.businessDetails.contactInfo.email | string | Optional |\n| workDetails.businessDetails.contactInfo.website | string | Optional |\n| workDetails.businessDetails.contactInfo.portfolioLink | string | Optional |\n| workDetails.jobDetails | object | Optional |\n| workDetails.jobDetails.jobCategory | string | Optional |\n| workDetails.jobDetails.jobRole | string | Optional |\n| workDetails.jobDetails.companyName | string | Optional |\n| workDetails.jobDetails.jobLocation | string | Optional |\n",
+              "content": "Controller: updateUser\nSchema: updateUser\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| userId | string | Required |\n| firstName | string | Optional |\n| middleName | string | Optional |\n| lastName | string | Optional |\n| dob | string | Optional |\n| bloodGroup | string | Optional |\n| education | string | Optional |\n| isMarried | string | Optional |\n| profilePhoto | string | Optional |\n| email | string | Optional |\n| phoneNumber | string | Optional |\n| phoneNumber2 | string | Optional |\n| password | string | Optional |\n| isActive | boolean | Optional |\n| nativeVillage | string | Optional |\n| nativeTaluka | string | Optional |\n| nativeDistrict | string | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| currentCity | string | Optional |\n| currentState | string | Optional |\n| houseType | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].firstName | string | Optional |\n| familyMembers[].middleName | string | Optional |\n| familyMembers[].lastName | string | Optional |\n| familyMembers[].profilePhoto | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n| familyMembers[].workDetails | object | Optional |\n| familyMembers[].workDetails.hasOwnBusiness | boolean | Optional |\n| familyMembers[].workDetails.businessDetails | object | Optional |\n| familyMembers[].workDetails.businessDetails.category | string | Optional |\n| familyMembers[].workDetails.businessDetails.subCategory | string | Optional |\n| familyMembers[].workDetails.businessDetails.businessName | string | Optional |\n| familyMembers[].workDetails.businessDetails.ownerName | string | Optional |\n| familyMembers[].workDetails.businessDetails.description | string | Optional |\n| familyMembers[].workDetails.businessDetails.locations | array | Optional |\n| familyMembers[].workDetails.businessDetails.locations[].shopAddress | string | Optional |\n| familyMembers[].workDetails.businessDetails.locations[].areaCity | string | Optional |\n| familyMembers[].workDetails.businessDetails.locations[].state | string | Optional |\n| familyMembers[].workDetails.businessDetails.locations[].pincode | string | Optional |\n| familyMembers[].workDetails.businessDetails.locations[].googleMapLink | string | Optional |\n| familyMembers[].workDetails.businessDetails.contactInfo | object | Optional |\n| familyMembers[].workDetails.businessDetails.contactInfo.mobile1 | string | Optional |\n| familyMembers[].workDetails.businessDetails.contactInfo.mobile2 | string | Optional |\n| familyMembers[].workDetails.businessDetails.contactInfo.email | string | Optional |\n| familyMembers[].workDetails.businessDetails.contactInfo.website | string | Optional |\n| familyMembers[].workDetails.businessDetails.contactInfo.portfolioLink | string | Optional |\n| familyMembers[].workDetails.jobDetails | object | Optional |\n| familyMembers[].workDetails.jobDetails.jobCategory | string | Optional |\n| familyMembers[].workDetails.jobDetails.jobRole | string | Optional |\n| familyMembers[].workDetails.jobDetails.companyName | string | Optional |\n| familyMembers[].workDetails.jobDetails.jobLocation | string | Optional |\n| workDetails | object | Optional |\n| workDetails.hasOwnBusiness | boolean | Optional |\n| workDetails.businessDetails | object | Optional |\n| workDetails.businessDetails.category | string | Optional |\n| workDetails.businessDetails.subCategory | string | Optional |\n| workDetails.businessDetails.businessName | string | Optional |\n| workDetails.businessDetails.ownerName | string | Optional |\n| workDetails.businessDetails.description | string | Optional |\n| workDetails.businessDetails.locations | array | Optional |\n| workDetails.businessDetails.locations[].shopAddress | string | Optional |\n| workDetails.businessDetails.locations[].areaCity | string | Optional |\n| workDetails.businessDetails.locations[].state | string | Optional |\n| workDetails.businessDetails.locations[].pincode | string | Optional |\n| workDetails.businessDetails.locations[].googleMapLink | string | Optional |\n| workDetails.businessDetails.contactInfo | object | Optional |\n| workDetails.businessDetails.contactInfo.mobile1 | string | Optional |\n| workDetails.businessDetails.contactInfo.mobile2 | string | Optional |\n| workDetails.businessDetails.contactInfo.email | string | Optional |\n| workDetails.businessDetails.contactInfo.website | string | Optional |\n| workDetails.businessDetails.contactInfo.portfolioLink | string | Optional |\n| workDetails.jobDetails | object | Optional |\n| workDetails.jobDetails.jobCategory | string | Optional |\n| workDetails.jobDetails.jobRole | string | Optional |\n| workDetails.jobDetails.companyName | string | Optional |\n| workDetails.jobDetails.jobLocation | string | Optional |\n",
               "type": "text/markdown"
             },
             "url": {
@@ -503,14 +503,14 @@
             "method": "PUT",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"userId\": \"sample_userId\",\n  \"firstName\": \"sample_firstName\",\n  \"middleName\": \"sample_middleName\",\n  \"lastName\": \"sample_lastName\",\n  \"email\": \"test@example.com\",\n  \"phoneNumber\": \"sample_phoneNumber\",\n  \"password\": \"Password123!\",\n  \"profilePhoto\": \"sample_profilePhoto\",\n  \"isActive\": true,\n  \"village\": \"sample_village\",\n  \"pincode\": \"sample_pincode\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"currentAddress\": \"sample_currentAddress\",\n  \"houseType\": \"sample_houseType\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"familyMembers\": [\n    {\n      \"firstName\": \"sample_firstName\",\n      \"middleName\": \"sample_middleName\",\n      \"lastName\": \"sample_lastName\",\n      \"relation\": \"sample_relation\",\n      \"dob\": \"sample_dob\",\n      \"education\": \"sample_education\",\n      \"occupation\": \"sample_occupation\",\n      \"isMarried\": \"sample_isMarried\",\n      \"bloodGroup\": \"sample_bloodGroup\",\n      \"skills\": \"sample_skills\",\n      \"phoneNumber\": \"sample_phoneNumber\",\n      \"fullName\": \"sample_fullName\"\n    }\n  ],\n  \"workDetails\": {\n    \"hasOwnBusiness\": true,\n    \"businessDetails\": {\n      \"category\": \"sample_category\",\n      \"subCategory\": \"sample_subCategory\",\n      \"businessName\": \"sample_businessName\",\n      \"ownerName\": \"sample_ownerName\",\n      \"description\": \"sample_description\",\n      \"locations\": [\n        {\n          \"shopAddress\": \"sample_shopAddress\",\n          \"areaCity\": \"sample_areaCity\",\n          \"state\": \"sample_state\",\n          \"pincode\": \"sample_pincode\",\n          \"googleMapLink\": \"sample_googleMapLink\"\n        }\n      ],\n      \"contactInfo\": {\n        \"mobile1\": \"sample_mobile1\",\n        \"mobile2\": \"sample_mobile2\",\n        \"email\": \"test@example.com\",\n        \"website\": \"sample_website\",\n        \"portfolioLink\": \"sample_portfolioLink\"\n      }\n    },\n    \"jobDetails\": {\n      \"jobCategory\": \"sample_jobCategory\",\n      \"jobRole\": \"sample_jobRole\",\n      \"companyName\": \"sample_companyName\",\n      \"jobLocation\": \"sample_jobLocation\"\n    }\n  }\n}"
+              "raw": "{\n  \"userId\": \"sample_userId\",\n  \"firstName\": \"sample_firstName\",\n  \"middleName\": \"sample_middleName\",\n  \"lastName\": \"sample_lastName\",\n  \"dob\": \"sample_dob\",\n  \"bloodGroup\": \"sample_bloodGroup\",\n  \"education\": \"sample_education\",\n  \"isMarried\": \"sample_isMarried\",\n  \"profilePhoto\": \"sample_profilePhoto\",\n  \"email\": \"test@example.com\",\n  \"phoneNumber\": \"sample_phoneNumber\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"password\": \"Password123!\",\n  \"isActive\": true,\n  \"nativeVillage\": \"sample_nativeVillage\",\n  \"nativeTaluka\": \"sample_nativeTaluka\",\n  \"nativeDistrict\": \"sample_nativeDistrict\",\n  \"village\": \"sample_village\",\n  \"pincode\": \"sample_pincode\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"currentAddress\": \"sample_currentAddress\",\n  \"currentCity\": \"sample_currentCity\",\n  \"currentState\": \"sample_currentState\",\n  \"houseType\": \"sample_houseType\",\n  \"familyMembers\": [\n    {\n      \"firstName\": \"sample_firstName\",\n      \"middleName\": \"sample_middleName\",\n      \"lastName\": \"sample_lastName\",\n      \"profilePhoto\": \"sample_profilePhoto\",\n      \"relation\": \"sample_relation\",\n      \"dob\": \"sample_dob\",\n      \"education\": \"sample_education\",\n      \"isMarried\": \"sample_isMarried\",\n      \"bloodGroup\": \"sample_bloodGroup\",\n      \"phoneNumber\": \"sample_phoneNumber\",\n      \"workDetails\": {\n        \"hasOwnBusiness\": true,\n        \"businessDetails\": {\n          \"category\": \"sample_category\",\n          \"subCategory\": \"sample_subCategory\",\n          \"businessName\": \"sample_businessName\",\n          \"ownerName\": \"sample_ownerName\",\n          \"description\": \"sample_description\",\n          \"locations\": [\n            {\n              \"shopAddress\": \"sample_shopAddress\",\n              \"areaCity\": \"sample_areaCity\",\n              \"state\": \"sample_state\",\n              \"pincode\": \"sample_pincode\",\n              \"googleMapLink\": \"sample_googleMapLink\"\n            }\n          ],\n          \"contactInfo\": {\n            \"mobile1\": \"sample_mobile1\",\n            \"mobile2\": \"sample_mobile2\",\n            \"email\": \"test@example.com\",\n            \"website\": \"sample_website\",\n            \"portfolioLink\": \"sample_portfolioLink\"\n          }\n        },\n        \"jobDetails\": {\n          \"jobCategory\": \"sample_jobCategory\",\n          \"jobRole\": \"sample_jobRole\",\n          \"companyName\": \"sample_companyName\",\n          \"jobLocation\": \"sample_jobLocation\"\n        }\n      },\n      \"occupation\": \"sample_occupation\",\n      \"skills\": \"sample_skills\",\n      \"fullName\": \"sample_fullName\"\n    }\n  ],\n  \"workDetails\": {\n    \"hasOwnBusiness\": true,\n    \"businessDetails\": {\n      \"category\": \"sample_category\",\n      \"subCategory\": \"sample_subCategory\",\n      \"businessName\": \"sample_businessName\",\n      \"ownerName\": \"sample_ownerName\",\n      \"description\": \"sample_description\",\n      \"locations\": [\n        {\n          \"shopAddress\": \"sample_shopAddress\",\n          \"areaCity\": \"sample_areaCity\",\n          \"state\": \"sample_state\",\n          \"pincode\": \"sample_pincode\",\n          \"googleMapLink\": \"sample_googleMapLink\"\n        }\n      ],\n      \"contactInfo\": {\n        \"mobile1\": \"sample_mobile1\",\n        \"mobile2\": \"sample_mobile2\",\n        \"email\": \"test@example.com\",\n        \"website\": \"sample_website\",\n        \"portfolioLink\": \"sample_portfolioLink\"\n      }\n    },\n    \"jobDetails\": {\n      \"jobCategory\": \"sample_jobCategory\",\n      \"jobRole\": \"sample_jobRole\",\n      \"companyName\": \"sample_companyName\",\n      \"jobLocation\": \"sample_jobLocation\"\n    }\n  }\n}"
             }
           },
           "response": [],
           "event": []
         },
         {
-          "id": "579b66d1-0a2a-4d4f-8e6c-439f8e1b856e",
+          "id": "7c4ce6c9-b318-403c-9d76-d1aa34447758",
           "name": "Delete User",
           "request": {
             "description": {
@@ -551,7 +551,7 @@
           "event": []
         },
         {
-          "id": "fb2281ab-bdd3-4232-8c30-f4330dfd4dc5",
+          "id": "763af11f-24de-44ff-a798-2c7b344fbf18",
           "name": "Get Users",
           "request": {
             "description": {
@@ -609,6 +609,137 @@
           },
           "response": [],
           "event": []
+        },
+        {
+          "id": "b133a900-1fa9-4660-b2f4-5053cdf9018f",
+          "name": "Add Family Member",
+          "request": {
+            "description": {
+              "content": "Controller: addFamilyMember\nSchema: addFamilyMemberSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Optional |\n| middleName | string | Optional |\n| lastName | string | Optional |\n| profilePhoto | string | Optional |\n| relation | string | Optional |\n| dob | string | Optional |\n| education | string | Optional |\n| isMarried | string | Optional |\n| bloodGroup | string | Optional |\n| phoneNumber | string | Optional |\n| workDetails | object | Optional |\n| workDetails.hasOwnBusiness | boolean | Optional |\n| workDetails.businessDetails | object | Optional |\n| workDetails.businessDetails.category | string | Optional |\n| workDetails.businessDetails.subCategory | string | Optional |\n| workDetails.businessDetails.businessName | string | Optional |\n| workDetails.businessDetails.ownerName | string | Optional |\n| workDetails.businessDetails.description | string | Optional |\n| workDetails.businessDetails.locations | array | Optional |\n| workDetails.businessDetails.locations[].shopAddress | string | Optional |\n| workDetails.businessDetails.locations[].areaCity | string | Optional |\n| workDetails.businessDetails.locations[].state | string | Optional |\n| workDetails.businessDetails.locations[].pincode | string | Optional |\n| workDetails.businessDetails.locations[].googleMapLink | string | Optional |\n| workDetails.businessDetails.contactInfo | object | Optional |\n| workDetails.businessDetails.contactInfo.mobile1 | string | Optional |\n| workDetails.businessDetails.contactInfo.mobile2 | string | Optional |\n| workDetails.businessDetails.contactInfo.email | string | Optional |\n| workDetails.businessDetails.contactInfo.website | string | Optional |\n| workDetails.businessDetails.contactInfo.portfolioLink | string | Optional |\n| workDetails.jobDetails | object | Optional |\n| workDetails.jobDetails.jobCategory | string | Optional |\n| workDetails.jobDetails.jobRole | string | Optional |\n| workDetails.jobDetails.companyName | string | Optional |\n| workDetails.jobDetails.jobLocation | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "user",
+                ":id",
+                "family"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"sample_firstName\",\n  \"middleName\": \"sample_middleName\",\n  \"lastName\": \"sample_lastName\",\n  \"profilePhoto\": \"sample_profilePhoto\",\n  \"relation\": \"sample_relation\",\n  \"dob\": \"sample_dob\",\n  \"education\": \"sample_education\",\n  \"isMarried\": \"sample_isMarried\",\n  \"bloodGroup\": \"sample_bloodGroup\",\n  \"phoneNumber\": \"sample_phoneNumber\",\n  \"workDetails\": {\n    \"hasOwnBusiness\": true,\n    \"businessDetails\": {\n      \"category\": \"sample_category\",\n      \"subCategory\": \"sample_subCategory\",\n      \"businessName\": \"sample_businessName\",\n      \"ownerName\": \"sample_ownerName\",\n      \"description\": \"sample_description\",\n      \"locations\": [\n        {\n          \"shopAddress\": \"sample_shopAddress\",\n          \"areaCity\": \"sample_areaCity\",\n          \"state\": \"sample_state\",\n          \"pincode\": \"sample_pincode\",\n          \"googleMapLink\": \"sample_googleMapLink\"\n        }\n      ],\n      \"contactInfo\": {\n        \"mobile1\": \"sample_mobile1\",\n        \"mobile2\": \"sample_mobile2\",\n        \"email\": \"test@example.com\",\n        \"website\": \"sample_website\",\n        \"portfolioLink\": \"sample_portfolioLink\"\n      }\n    },\n    \"jobDetails\": {\n      \"jobCategory\": \"sample_jobCategory\",\n      \"jobRole\": \"sample_jobRole\",\n      \"companyName\": \"sample_companyName\",\n      \"jobLocation\": \"sample_jobLocation\"\n    }\n  }\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "6bccfb94-5929-4fc1-941c-a6ba20a6e76f",
+          "name": "Update Family Member",
+          "request": {
+            "description": {
+              "content": "Controller: updateFamilyMember\nSchema: updateFamilyMemberSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Optional |\n| middleName | string | Optional |\n| lastName | string | Optional |\n| profilePhoto | string | Optional |\n| relation | string | Optional |\n| dob | string | Optional |\n| education | string | Optional |\n| isMarried | string | Optional |\n| bloodGroup | string | Optional |\n| phoneNumber | string | Optional |\n| workDetails | object | Optional |\n| workDetails.hasOwnBusiness | boolean | Optional |\n| workDetails.businessDetails | object | Optional |\n| workDetails.businessDetails.category | string | Optional |\n| workDetails.businessDetails.subCategory | string | Optional |\n| workDetails.businessDetails.businessName | string | Optional |\n| workDetails.businessDetails.ownerName | string | Optional |\n| workDetails.businessDetails.description | string | Optional |\n| workDetails.businessDetails.locations | array | Optional |\n| workDetails.businessDetails.locations[].shopAddress | string | Optional |\n| workDetails.businessDetails.locations[].areaCity | string | Optional |\n| workDetails.businessDetails.locations[].state | string | Optional |\n| workDetails.businessDetails.locations[].pincode | string | Optional |\n| workDetails.businessDetails.locations[].googleMapLink | string | Optional |\n| workDetails.businessDetails.contactInfo | object | Optional |\n| workDetails.businessDetails.contactInfo.mobile1 | string | Optional |\n| workDetails.businessDetails.contactInfo.mobile2 | string | Optional |\n| workDetails.businessDetails.contactInfo.email | string | Optional |\n| workDetails.businessDetails.contactInfo.website | string | Optional |\n| workDetails.businessDetails.contactInfo.portfolioLink | string | Optional |\n| workDetails.jobDetails | object | Optional |\n| workDetails.jobDetails.jobCategory | string | Optional |\n| workDetails.jobDetails.jobRole | string | Optional |\n| workDetails.jobDetails.companyName | string | Optional |\n| workDetails.jobDetails.jobLocation | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "user",
+                ":id",
+                "family",
+                ":memberId"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "sample_memberId",
+                  "key": "memberId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"sample_firstName\",\n  \"middleName\": \"sample_middleName\",\n  \"lastName\": \"sample_lastName\",\n  \"profilePhoto\": \"sample_profilePhoto\",\n  \"relation\": \"sample_relation\",\n  \"dob\": \"sample_dob\",\n  \"education\": \"sample_education\",\n  \"isMarried\": \"sample_isMarried\",\n  \"bloodGroup\": \"sample_bloodGroup\",\n  \"phoneNumber\": \"sample_phoneNumber\",\n  \"workDetails\": {\n    \"hasOwnBusiness\": true,\n    \"businessDetails\": {\n      \"category\": \"sample_category\",\n      \"subCategory\": \"sample_subCategory\",\n      \"businessName\": \"sample_businessName\",\n      \"ownerName\": \"sample_ownerName\",\n      \"description\": \"sample_description\",\n      \"locations\": [\n        {\n          \"shopAddress\": \"sample_shopAddress\",\n          \"areaCity\": \"sample_areaCity\",\n          \"state\": \"sample_state\",\n          \"pincode\": \"sample_pincode\",\n          \"googleMapLink\": \"sample_googleMapLink\"\n        }\n      ],\n      \"contactInfo\": {\n        \"mobile1\": \"sample_mobile1\",\n        \"mobile2\": \"sample_mobile2\",\n        \"email\": \"test@example.com\",\n        \"website\": \"sample_website\",\n        \"portfolioLink\": \"sample_portfolioLink\"\n      }\n    },\n    \"jobDetails\": {\n      \"jobCategory\": \"sample_jobCategory\",\n      \"jobRole\": \"sample_jobRole\",\n      \"companyName\": \"sample_companyName\",\n      \"jobLocation\": \"sample_jobLocation\"\n    }\n  }\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "f6662a36-4bfc-4146-b1a7-c4e33a30ca63",
+          "name": "Delete Family Member",
+          "request": {
+            "description": {
+              "content": "Controller: deleteFamilyMember\nSchema: deleteFamilyMemberSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "user",
+                ":id",
+                "family",
+                ":memberId"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "sample_memberId",
+                  "key": "memberId"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {}
+          },
+          "response": [],
+          "event": []
         }
       ],
       "event": [],
@@ -638,7 +769,7 @@
     }
   ],
   "info": {
-    "_postman_id": "3ef54b1b-ac04-4be3-b432-80271290d002",
+    "_postman_id": "d2415980-8c82-4769-85b3-63505d9224ee",
     "name": "Gondaliya Family API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {

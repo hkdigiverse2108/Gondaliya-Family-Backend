@@ -56,9 +56,22 @@ export const logger = winston.createLogger({
 });
 
 export const reqInfo = async function (req) {
-    let splitResult = req.header('user-agent').split("(").toString().split(")")
-    let browserName = splitResult[splitResult.length - 1]
-    splitResult = splitResult[0].split(",")
-    let osName = splitResult[1]
-    logger.http(`${req.method} ${req.headers.host}${req.originalUrl} \x1b[33m device os => [${osName}] \x1b[1m\x1b[37mip address => ${req.ip} \n\x1b[36m browser => ${browserName}`)
+    try {
+        let userAgent = req.header('user-agent') || '';
+        let osName = 'Unknown';
+        let browserName = 'Unknown';
+        
+        if (userAgent.includes('(') && userAgent.includes(')')) {
+            let splitResult = userAgent.split("(").toString().split(")");
+            browserName = splitResult[splitResult.length - 1];
+            splitResult = splitResult[0].split(",");
+            osName = splitResult[1] || 'Unknown';
+        } else {
+            browserName = userAgent;
+        }
+
+        logger.http(`${req.method} ${req.headers.host}${req.originalUrl} \x1b[33m device os => [${osName}] \x1b[1m\x1b[37mip address => ${req.ip} \n\x1b[36m browser => ${browserName}`)
+    } catch (err) {
+        logger.http(`${req.method} ${req.headers.host}${req.originalUrl} \x1b[1m\x1b[37mip address => ${req.ip}`)
+    }
 }

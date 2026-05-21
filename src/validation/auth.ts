@@ -6,30 +6,39 @@ export const signUpSchema = Joi.object({
     firstName: Joi.string().required(),
     middleName: Joi.string().required(),
     lastName: Joi.string().required(),
-    phoneNumber: Joi.string().length(10).required(),
-    password: Joi.string().required(),
+    dob: Joi.string().optional().allow(null, ''),
+    bloodGroup: Joi.string().valid(...Object.values(BLOOD_GROUPS)).optional().allow(null, ''),
+    education: Joi.string().optional().allow(null, ''),
+    isMarried: Joi.string().valid(...Object.values(MARITAL_STATUS)).optional().allow(null, ''),
     profilePhoto: Joi.string().optional().allow(null, ''),
+    phoneNumber: Joi.string().length(10).required(),
+    phoneNumber2: Joi.string().length(10).optional().allow(null, ''),
+    password: Joi.string().required(),
     isActive: Joi.boolean().optional(),
+    nativeVillage: Joi.string().optional().allow(null, ''),
+    nativeTaluka: Joi.string().optional().allow(null, ''),
+    nativeDistrict: Joi.string().optional().allow(null, ''),
     village: Joi.string().optional().allow(null, ''),
     pincode: Joi.string().optional().allow(null, ''),
     taluka: Joi.string().optional().allow(null, ''),
     district: Joi.string().optional().allow(null, ''),
     currentAddress: Joi.string().optional().allow(null, ''),
+    currentCity: Joi.string().optional().allow(null, ''),
+    currentState: Joi.string().optional().allow(null, ''),
     houseType: Joi.string().valid(...Object.values(HOUSE_TYPES)).optional().allow(null, ''),
-    phoneNumber2: Joi.string().length(10).optional().allow(null, ''),
     familyMembers: Joi.array().items(
         Joi.object({
             firstName: Joi.string().optional().allow(null, ''),
             middleName: Joi.string().optional().allow(null, ''),
             lastName: Joi.string().optional().allow(null, ''),
+            profilePhoto: Joi.string().optional().allow(null, ''),
             relation: Joi.string().valid(...Object.values(RELATIONS)).optional().allow(null, ''),
             dob: Joi.string().optional().allow(null, ''),
             education: Joi.string().optional().allow(null, ''),
-            occupation: Joi.string().optional().allow(null, ''),
             isMarried: Joi.string().valid(...Object.values(MARITAL_STATUS)).optional().allow(null, ''),
             bloodGroup: Joi.string().valid(...Object.values(BLOOD_GROUPS)).optional().allow(null, ''),
-            skills: Joi.string().optional().allow(null, ''),
-            phoneNumber: Joi.string().length(10).optional().allow(null, '')
+            phoneNumber: Joi.string().length(10).optional().allow(null, ''),
+            workDetails: Joi.object().optional().allow(null),
         })
     ).optional(),
     workDetails: Joi.object({
@@ -87,7 +96,27 @@ export const resetPasswordSchema = Joi.object({
 
 export const validateRequest = (schema: Joi.ObjectSchema) => {
     return (req: Request, res: Response, next: NextFunction) => {
-        const { error } = schema.validate(req.body);
+        const { error } = schema.validate(req.body, { abortEarly: true, allowUnknown: false });
+        if (error) {
+            return responseError(res, HTTP_STATUS.BAD_REQUEST, error.details[0].message);
+        }
+        next();
+    };
+};
+
+export const validateParams = (schema: Joi.ObjectSchema) => {
+    return (req: Request, res: Response, next: NextFunction) => {
+        const { error } = schema.validate(req.params, { abortEarly: true });
+        if (error) {
+            return responseError(res, HTTP_STATUS.BAD_REQUEST, error.details[0].message);
+        }
+        next();
+    };
+};
+
+export const validateQuery = (schema: Joi.ObjectSchema) => {
+    return (req: Request, res: Response, next: NextFunction) => {
+        const { error } = schema.validate(req.query, { abortEarly: true, allowUnknown: false });
         if (error) {
             return responseError(res, HTTP_STATUS.BAD_REQUEST, error.details[0].message);
         }

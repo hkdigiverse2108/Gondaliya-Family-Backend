@@ -1,28 +1,10 @@
 import { userModel } from '../../database';
 import { responseSuccess, responseError, internalServerError, HTTP_STATUS, generateHash, compareHash, generateToken, USER_ROLES } from '../../common';
-import { responseMessage, redisSet, redisGet, redisDel, email_verification_mail, getFirstMatch, createData, updateData } from '../../helper';
+import { responseMessage, redisSet, redisGet, redisDel, getFirstMatch, createData, updateData, promoteIfHasPhone, resolveOnSelfRegister, linkSelfRegisteredMember } from '../../helper';
 
 export const signUp = async (req, res) => {
     try {
-        const {
-            firstName,
-            middleName,
-            lastName,
-            email,
-            password,
-            phoneNumber,
-            role,
-            village,
-            pincode,
-            taluka,
-            district,
-            currentAddress,
-            houseType,
-            phoneNumber2,
-            profilePhoto,
-            familyMembers,
-            workDetails
-        } = req.body;
+        const { firstName, middleName, lastName, dob, bloodGroup, education, isMarried, profilePhoto, email, password, phoneNumber, phoneNumber2, role, nativeVillage, nativeTaluka, nativeDistrict, village, pincode, taluka, district, currentAddress, currentCity, currentState, houseType, familyMembers, workDetails } = req.body;
 
         if (email) {
             const isEmailExist = await getFirstMatch(userModel, { email, isDeleted: false }, {}, {});
@@ -62,37 +44,62 @@ export const signUp = async (req, res) => {
             }
         }
 
+        const selfRegisterLink = await resolveOnSelfRegister(phoneNumber);
+
         const hashedPassword = await generateHash(password);
 
         const newUser = await createData(userModel, {
             firstName,
             middleName,
             lastName,
+            dob: dob || null,
+            bloodGroup: bloodGroup || null,
+            education: education || null,
+            isMarried: isMarried || null,
+            profilePhoto: profilePhoto || null,
             email: email || null,
             password: hashedPassword,
             phoneNumber,
+            phoneNumber2: phoneNumber2 || null,
             role: role || USER_ROLES.USER,
             isActive: true,
-            isPhoneVerified: false,
             isDeleted: false,
+            nativeVillage:  nativeVillage  || null,
+            nativeTaluka:   nativeTaluka   || null,
+            nativeDistrict: nativeDistrict || null,
             village: village || null,
             pincode: pincode || null,
             taluka: taluka || null,
             district: district || null,
             currentAddress: currentAddress || null,
+            currentCity:    currentCity    || null,
+            currentState:   currentState   || null,
             houseType: houseType || null,
-            phoneNumber2: phoneNumber2 || null,
-            profilePhoto: profilePhoto || null,
             familyMembers: familyMembers || [],
-            workDetails: workDetails || null
+            workDetails: workDetails || null,
+            // If linked to a family, mark as non-head
+            isHeadOfFamily: !selfRegisterLink.alreadyLinked,
         });
+
+        // Auto-create accounts for family members that already have a phone number
+        if (newUser.familyMembers?.length) {
+            await promoteIfHasPhone(newUser);
+        }
+
+        if (selfRegisterLink.alreadyLinked) {
+            await linkSelfRegisteredMember(
+                String(newUser._id),
+                selfRegisterLink.headId!,
+                selfRegisterLink.familyMemberRefId!
+            );
+        }
 
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
         await redisSet(`otp:${phoneNumber}`, otp, 600);
 
         return responseSuccess(res, "OTP generated successfully! Please verify your phone number using this OTP.", {
             phoneNumber,
-            otp // Returning OTP in response for easy testing since email is removed/optional
+            otp
         });
     } catch (error) {
         return internalServerError(res, error);
