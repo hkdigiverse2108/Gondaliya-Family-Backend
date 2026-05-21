@@ -26,12 +26,3 @@ export const getLocations = Joi.object({
 export const deleteLocation = Joi.object({
     id: Joi.string().custom(isValidObjectId).required(),
 });
-
-export const getTalukas = Joi.object({
-    district: Joi.string().required(),
-});
-
-export const getVillages = Joi.object({
-    district: Joi.string().required(),
-    taluka: Joi.string().required(),
-});
