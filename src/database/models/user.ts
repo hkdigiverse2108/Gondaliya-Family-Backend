@@ -18,9 +18,9 @@ const userSchema: any = new mongoose.Schema({
     houseType: { type: String, enum: Object.values(HOUSE_TYPES), default: null },
     phoneNumber2: { type: String, default: null },
     familyMembers: [{
-        firstName: { type: String },
-        middleName: { type: String },
-        lastName: { type: String },
+        firstName: { type: String, default: null },
+        middleName: { type: String, default: null },
+        lastName: { type: String, default: null },
         relation: { type: String, enum: Object.values(RELATIONS), default: null },
         dob: { type: String, default: null },
         education: { type: String, default: null },
