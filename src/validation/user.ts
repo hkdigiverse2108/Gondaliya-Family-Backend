@@ -18,7 +18,9 @@ export const createUser = Joi.object({
     phoneNumber2: Joi.string().length(10).optional().allow(null, ''),
     familyMembers: Joi.array().items(
         Joi.object({
-            fullName: Joi.string().optional().allow(null, ''),
+            firstName: Joi.string().optional().allow(null, ''),
+            middleName: Joi.string().optional().allow(null, ''),
+            lastName: Joi.string().optional().allow(null, ''),
             relation: Joi.string().valid(...Object.values(RELATIONS)).optional().allow(null, ''),
             dob: Joi.string().optional().allow(null, ''),
             education: Joi.string().optional().allow(null, ''),
@@ -82,7 +84,9 @@ export const updateUser = Joi.object({
     phoneNumber2: Joi.string().length(10).optional().allow(null, ''),
     familyMembers: Joi.array().items(
         Joi.object({
-            fullName: Joi.string().optional().allow(null, ''),
+            firstName: Joi.string().optional().allow(null, ''),
+            middleName: Joi.string().optional().allow(null, ''),
+            lastName: Joi.string().optional().allow(null, ''),
             relation: Joi.string().valid(...Object.values(RELATIONS)).optional().allow(null, ''),
             dob: Joi.string().optional().allow(null, ''),
             education: Joi.string().optional().allow(null, ''),

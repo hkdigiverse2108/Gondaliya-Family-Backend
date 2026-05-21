@@ -8,10 +8,10 @@ export const createLocation = async (req, res) => {
         const { village, taluka, district, pincode } = req.body;
 
         const existing = await getFirstMatch(locationModel, {
-            village: { $regex: `^${village.trim()}$`, $options: 'si' },
-            taluka: { $regex: `^${taluka.trim()}$`, $options: 'si' },
-            district: { $regex: `^${district.trim()}$`, $options: 'si' },
-            pincode: pincode.trim(),
+            village: { $regex: `^${village?.trim() || ''}$`, $options: 'si' },
+            taluka: { $regex: `^${taluka?.trim() || ''}$`, $options: 'si' },
+            district: { $regex: `^${district?.trim() || ''}$`, $options: 'si' },
+            pincode: pincode?.trim() || '',
             isDeleted: false
         }, {}, {});
 
@@ -20,10 +20,10 @@ export const createLocation = async (req, res) => {
         }
 
         const newLocation = await createData(locationModel, {
-            village: village.trim(),
-            taluka: taluka.trim(),
-            district: district.trim(),
-            pincode: pincode.trim()
+            village: village?.trim() || '',
+            taluka: taluka?.trim() || '',
+            district: district?.trim() || '',
+            pincode: pincode?.trim() || ''
         });
 
         await redisDelPattern(`locations:*`);

@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "374914aa-87eb-4f2a-ac7d-5f7e0ce5dc06",
+      "id": "a81071bc-4938-4662-8dde-21660952ee77",
       "name": "AUTH",
       "description": {
         "content": "Routes for auth",
@@ -9,11 +9,11 @@
       },
       "item": [
         {
-          "id": "fd2701e6-b5d3-4dff-a82b-41b6efe47d8b",
+          "id": "f73a9dd7-8791-42d3-a334-7a3d535a9c67",
           "name": "Sign Up",
           "request": {
             "description": {
-              "content": "Controller: signUp\nSchema: signUpSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Required |\n| middleName | string | Required |\n| lastName | string | Required |\n| password | string | Required |\n| phoneNumber | string | Required |\n| role | string | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| houseType | string | Optional |\n| phoneNumber2 | string | Optional |\n| profilePhoto | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].fullName | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].occupation | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].skills | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n",
+              "content": "Controller: signUp\nSchema: signUpSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Required |\n| middleName | string | Required |\n| lastName | string | Required |\n| password | string | Required |\n| phoneNumber | string | Required |\n| profilePhoto | string | Optional |\n",
               "type": "text/markdown"
             },
             "url": {
@@ -36,14 +36,14 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstName\": \"sample_firstName\",\n  \"middleName\": \"sample_middleName\",\n  \"lastName\": \"sample_lastName\",\n  \"password\": \"Password123!\",\n  \"phoneNumber\": \"sample_phoneNumber\",\n  \"role\": \"sample_role\",\n  \"village\": \"sample_village\",\n  \"pincode\": \"sample_pincode\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"currentAddress\": \"sample_currentAddress\",\n  \"houseType\": \"sample_houseType\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"profilePhoto\": \"sample_profilePhoto\",\n  \"familyMembers\": [\n    {\n      \"fullName\": \"sample_fullName\",\n      \"relation\": \"sample_relation\",\n      \"dob\": \"sample_dob\",\n      \"education\": \"sample_education\",\n      \"occupation\": \"sample_occupation\",\n      \"isMarried\": \"sample_isMarried\",\n      \"bloodGroup\": \"sample_bloodGroup\",\n      \"skills\": \"sample_skills\",\n      \"phoneNumber\": \"sample_phoneNumber\"\n    }\n  ]\n}"
+              "raw": "{\n  \"firstName\": \"Pramit\",\n  \"middleName\": \"Rajubhai\",\n  \"lastName\": \"Mangukiya\",\n  \"password\": \"Admin@123\",\n  \"phoneNumber\": \"9725097885\",\n  \"profilePhoto\": \"null\"\n}"
             }
           },
           "response": [],
           "event": []
         },
         {
-          "id": "59cf09f6-ba2c-4843-aa70-20fe5c9fd4f8",
+          "id": "4566c888-25d1-4f31-bd67-be94dbcc3506",
           "name": "Login",
           "request": {
             "description": {
@@ -77,7 +77,7 @@
           "event": []
         },
         {
-          "id": "31960564-5b8d-4464-8709-c5b07edd6cca",
+          "id": "1438e52f-5d66-4dfa-aa22-bc1d03c3ae3d",
           "name": "Otp Verification",
           "request": {
             "description": {
@@ -111,7 +111,7 @@
           "event": []
         },
         {
-          "id": "5b07cfdc-ec69-45a0-a654-523c3b748ba4",
+          "id": "077cfb6d-90ea-4910-8911-355302972c1b",
           "name": "Forgot Password",
           "request": {
             "description": {
@@ -145,7 +145,7 @@
           "event": []
         },
         {
-          "id": "dc6ac3be-f239-49fe-8645-cdd32ac185ce",
+          "id": "cd98e325-1429-42f1-b0ec-815984c5dec6",
           "name": "Reset Password",
           "request": {
             "description": {
@@ -182,7 +182,259 @@
       "event": []
     },
     {
-      "id": "158785f4-6bc6-4f85-ae7e-2b372b0c6c5b",
+      "id": "9f10c3d8-d15d-4242-ac4a-58fe0beeb390",
+      "name": "LOCATION",
+      "description": {
+        "content": "Routes for location",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "771e0f33-35d7-4a41-a7d0-3f6811cc03da",
+          "name": "Create Location",
+          "request": {
+            "description": {
+              "content": "Controller: createLocation\nSchema: createLocation\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| village | string | Required |\n| taluka | string | Required |\n| district | string | Required |\n| pincode | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "location",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"village\": \"sample_village\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"pincode\": \"sample_pincode\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "bb705226-ac24-4ea5-b47f-fa80a8c7129f",
+          "name": "Update Location",
+          "request": {
+            "description": {
+              "content": "Controller: updateLocation\nSchema: updateLocation\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| id | string | Required |\n| village | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| pincode | string | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "location",
+                "update"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"sample_id\",\n  \"village\": \"sample_village\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"pincode\": \"sample_pincode\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "7126cc40-4208-431b-b2d9-e77f6b68aa09",
+          "name": "Delete Location",
+          "request": {
+            "description": {
+              "content": "Controller: deleteLocation\nSchema: deleteLocation\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| id | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "location",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"sample_id\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "ab774698-7ae0-49c7-bb8e-0f6c7a1bed3b",
+          "name": "Get Locations",
+          "request": {
+            "description": {
+              "content": "Controller: getLocations\nSchema: getLocations\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| page | number | Optional |\n| limit | number | Optional |\n| search | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "location"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "sample_search"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "efda6a67-ace4-4607-918d-3d8764b9e0f8",
+          "name": "Get Districts",
+          "request": {
+            "description": {
+              "content": "Controller: getDistricts",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "location",
+                "districts"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "37aea22d-f50e-4dd5-92bf-17790433cca0",
+          "name": "Get Talukas",
+          "request": {
+            "description": {
+              "content": "Controller: getTalukas\nSchema: getTalukas\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| district | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "location",
+                "talukas"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "district",
+                  "value": "sample_district"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "4d0f62e5-dd6f-4e91-b528-584be701c565",
+          "name": "Get Villages",
+          "request": {
+            "description": {
+              "content": "Controller: getVillages\nSchema: getVillages\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| district | string | Required |\n| taluka | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "location",
+                "villages"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "district",
+                  "value": "sample_district"
+                },
+                {
+                  "disabled": false,
+                  "key": "taluka",
+                  "value": "sample_taluka"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7d0697c5-1fec-4d26-8dc6-5ebe006c1821",
       "name": "USER",
       "description": {
         "content": "Routes for user",
@@ -190,11 +442,11 @@
       },
       "item": [
         {
-          "id": "fa50119a-9b7a-489b-92db-c97fabc510dd",
+          "id": "e31ca074-a55d-4dbb-950e-2d51fc6ce63f",
           "name": "Create User",
           "request": {
             "description": {
-              "content": "Controller: createUser\nSchema: createUser\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Required |\n| middleName | string | Required |\n| lastName | string | Required |\n| phoneNumber | string | Required |\n| password | string | Required |\n| profilePhoto | string | Optional |\n| isActive | boolean | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| houseType | string | Optional |\n| phoneNumber2 | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].fullName | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].occupation | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].skills | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n",
+              "content": "Controller: createUser\nSchema: createUser\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Required |\n| middleName | string | Required |\n| lastName | string | Required |\n| phoneNumber | string | Required |\n| password | string | Required |\n| profilePhoto | string | Optional |\n| isActive | boolean | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| houseType | string | Optional |\n| phoneNumber2 | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].firstName | string | Optional |\n| familyMembers[].middleName | string | Optional |\n| familyMembers[].lastName | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].occupation | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].skills | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n| workDetails | object | Optional |\n| workDetails.hasOwnBusiness | boolean | Optional |\n| workDetails.businessDetails | object | Optional |\n| workDetails.businessDetails.category | string | Optional |\n| workDetails.businessDetails.subCategory | string | Optional |\n| workDetails.businessDetails.businessName | string | Optional |\n| workDetails.businessDetails.ownerName | string | Optional |\n| workDetails.businessDetails.description | string | Optional |\n| workDetails.businessDetails.locations | array | Optional |\n| workDetails.businessDetails.locations[].shopAddress | string | Optional |\n| workDetails.businessDetails.locations[].areaCity | string | Optional |\n| workDetails.businessDetails.locations[].state | string | Optional |\n| workDetails.businessDetails.locations[].pincode | string | Optional |\n| workDetails.businessDetails.locations[].googleMapLink | string | Optional |\n| workDetails.businessDetails.contactInfo | object | Optional |\n| workDetails.businessDetails.contactInfo.mobile1 | string | Optional |\n| workDetails.businessDetails.contactInfo.mobile2 | string | Optional |\n| workDetails.businessDetails.contactInfo.email | string | Optional |\n| workDetails.businessDetails.contactInfo.website | string | Optional |\n| workDetails.businessDetails.contactInfo.portfolioLink | string | Optional |\n| workDetails.jobDetails | object | Optional |\n| workDetails.jobDetails.jobCategory | string | Optional |\n| workDetails.jobDetails.jobRole | string | Optional |\n| workDetails.jobDetails.companyName | string | Optional |\n| workDetails.jobDetails.jobLocation | string | Optional |\n",
               "type": "text/markdown"
             },
             "url": {
@@ -217,18 +469,18 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstName\": \"sample_firstName\",\n  \"middleName\": \"sample_middleName\",\n  \"lastName\": \"sample_lastName\",\n  \"phoneNumber\": \"9725097885\",\n  \"password\": \"Admin@123\",\n  \"profilePhoto\": null,\n  \"isActive\": true,\n  \"village\": \"sample_village\",\n  \"pincode\": \"sample_pincode\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"currentAddress\": \"sample_currentAddress\",\n  \"houseType\": \"sample_houseType\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"familyMembers\": [\n    {\n      \"fullName\": \"sample_fullName\",\n      \"relation\": \"sample_relation\",\n      \"dob\": \"sample_dob\",\n      \"education\": \"sample_education\",\n      \"occupation\": \"sample_occupation\",\n      \"isMarried\": \"sample_isMarried\",\n      \"bloodGroup\": \"sample_bloodGroup\",\n      \"skills\": \"sample_skills\",\n      \"phoneNumber\": \"sample_phoneNumber\"\n    }\n  ]\n}"
+              "raw": "{\n  \"firstName\": \"Het\",\n  \"middleName\": \"Rajubhai\",\n  \"lastName\": \"Mangukiya\",\n  \"phoneNumber\": \"8866005029\",\n  \"password\": \"Admin@123\",\n  \"profilePhoto\": null,\n  \"isActive\": true,\n  \"village\": \"Lakhanka\",\n  \"pincode\": \"394101\",\n  \"taluka\": \"Gadhada\",\n  \"district\": \"Botad\",\n  \"currentAddress\": \"C - 602, Shivdhara, Campus, Mota Varachha, Surat\",\n  \"houseType\": \"Own\",\n  \"phoneNumber2\": null,\n  \"familyMembers\": [\n    {\n      \"fullName\": \"Pramit Mangukiya\",\n      \"relation\": \"Brother\",\n      \"dob\": \"2003/10/24\",\n      \"education\": \"BCA\",\n      \"occupation\": \"IT\",\n      \"isMarried\": \"unMarried\",\n      \"bloodGroup\": \"A+\",\n      \"skills\": \"Hello\",\n      \"phoneNumber\": \"9725095525\"\n    }\n  ],\n  \"workDetails\": {\n    \"hasOwnBusiness\": true,\n    \"businessDetails\": {\n      \"category\": \"sample_category\",\n      \"subCategory\": \"sample_subCategory\",\n      \"businessName\": \"sample_businessName\",\n      \"ownerName\": \"sample_ownerName\",\n      \"description\": \"sample_description\",\n      \"locations\": [\n        {\n          \"shopAddress\": \"sample_shopAddress\",\n          \"areaCity\": \"sample_areaCity\",\n          \"state\": \"sample_state\",\n          \"pincode\": \"sample_pincode\",\n          \"googleMapLink\": \"sample_googleMapLink\"\n        }\n      ],\n      \"contactInfo\": {\n        \"mobile1\": \"sample_mobile1\",\n        \"mobile2\": \"sample_mobile2\",\n        \"email\": \"test@example.com\",\n        \"website\": \"sample_website\",\n        \"portfolioLink\": \"sample_portfolioLink\"\n      }\n    },\n    \"jobDetails\": {\n      \"jobCategory\": \"sample_jobCategory\",\n      \"jobRole\": \"sample_jobRole\",\n      \"companyName\": \"sample_companyName\",\n      \"jobLocation\": \"sample_jobLocation\"\n    }\n  }\n}"
             }
           },
           "response": [],
           "event": []
         },
         {
-          "id": "1dcb8ba8-37b0-4495-a3ea-5aefc925cccf",
+          "id": "44b14d00-4e35-4855-8ecf-8bbc3273072a",
           "name": "Update User",
           "request": {
             "description": {
-              "content": "Controller: updateUser\nSchema: updateUser\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| userId | string | Required |\n| firstName | string | Optional |\n| middleName | string | Optional |\n| lastName | string | Optional |\n| email | string | Optional |\n| phoneNumber | string | Optional |\n| password | string | Optional |\n| profilePhoto | string | Optional |\n| isActive | boolean | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| houseType | string | Optional |\n| phoneNumber2 | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].fullName | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].occupation | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].skills | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n",
+              "content": "Controller: updateUser\nSchema: updateUser\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| userId | string | Required |\n| firstName | string | Optional |\n| middleName | string | Optional |\n| lastName | string | Optional |\n| email | string | Optional |\n| phoneNumber | string | Optional |\n| password | string | Optional |\n| profilePhoto | string | Optional |\n| isActive | boolean | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| houseType | string | Optional |\n| phoneNumber2 | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].firstName | string | Optional |\n| familyMembers[].middleName | string | Optional |\n| familyMembers[].lastName | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].occupation | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].skills | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n| workDetails | object | Optional |\n| workDetails.hasOwnBusiness | boolean | Optional |\n| workDetails.businessDetails | object | Optional |\n| workDetails.businessDetails.category | string | Optional |\n| workDetails.businessDetails.subCategory | string | Optional |\n| workDetails.businessDetails.businessName | string | Optional |\n| workDetails.businessDetails.ownerName | string | Optional |\n| workDetails.businessDetails.description | string | Optional |\n| workDetails.businessDetails.locations | array | Optional |\n| workDetails.businessDetails.locations[].shopAddress | string | Optional |\n| workDetails.businessDetails.locations[].areaCity | string | Optional |\n| workDetails.businessDetails.locations[].state | string | Optional |\n| workDetails.businessDetails.locations[].pincode | string | Optional |\n| workDetails.businessDetails.locations[].googleMapLink | string | Optional |\n| workDetails.businessDetails.contactInfo | object | Optional |\n| workDetails.businessDetails.contactInfo.mobile1 | string | Optional |\n| workDetails.businessDetails.contactInfo.mobile2 | string | Optional |\n| workDetails.businessDetails.contactInfo.email | string | Optional |\n| workDetails.businessDetails.contactInfo.website | string | Optional |\n| workDetails.businessDetails.contactInfo.portfolioLink | string | Optional |\n| workDetails.jobDetails | object | Optional |\n| workDetails.jobDetails.jobCategory | string | Optional |\n| workDetails.jobDetails.jobRole | string | Optional |\n| workDetails.jobDetails.companyName | string | Optional |\n| workDetails.jobDetails.jobLocation | string | Optional |\n",
               "type": "text/markdown"
             },
             "url": {
@@ -251,14 +503,14 @@
             "method": "PUT",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"userId\": \"sample_userId\",\n  \"firstName\": \"sample_firstName\",\n  \"middleName\": \"sample_middleName\",\n  \"lastName\": \"sample_lastName\",\n  \"email\": \"test@example.com\",\n  \"phoneNumber\": \"sample_phoneNumber\",\n  \"password\": \"Password123!\",\n  \"profilePhoto\": \"sample_profilePhoto\",\n  \"isActive\": true,\n  \"village\": \"sample_village\",\n  \"pincode\": \"sample_pincode\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"currentAddress\": \"sample_currentAddress\",\n  \"houseType\": \"sample_houseType\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"familyMembers\": [\n    {\n      \"fullName\": \"sample_fullName\",\n      \"relation\": \"sample_relation\",\n      \"dob\": \"sample_dob\",\n      \"education\": \"sample_education\",\n      \"occupation\": \"sample_occupation\",\n      \"isMarried\": \"sample_isMarried\",\n      \"bloodGroup\": \"sample_bloodGroup\",\n      \"skills\": \"sample_skills\",\n      \"phoneNumber\": \"sample_phoneNumber\"\n    }\n  ]\n}"
+              "raw": "{\n  \"userId\": \"sample_userId\",\n  \"firstName\": \"sample_firstName\",\n  \"middleName\": \"sample_middleName\",\n  \"lastName\": \"sample_lastName\",\n  \"email\": \"test@example.com\",\n  \"phoneNumber\": \"sample_phoneNumber\",\n  \"password\": \"Password123!\",\n  \"profilePhoto\": \"sample_profilePhoto\",\n  \"isActive\": true,\n  \"village\": \"sample_village\",\n  \"pincode\": \"sample_pincode\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"currentAddress\": \"sample_currentAddress\",\n  \"houseType\": \"sample_houseType\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"familyMembers\": [\n    {\n      \"fullName\": \"sample_fullName\",\n      \"relation\": \"sample_relation\",\n      \"dob\": \"sample_dob\",\n      \"education\": \"sample_education\",\n      \"occupation\": \"sample_occupation\",\n      \"isMarried\": \"sample_isMarried\",\n      \"bloodGroup\": \"sample_bloodGroup\",\n      \"skills\": \"sample_skills\",\n      \"phoneNumber\": \"sample_phoneNumber\"\n    }\n  ],\n  \"workDetails\": {\n    \"hasOwnBusiness\": true,\n    \"businessDetails\": {\n      \"category\": \"sample_category\",\n      \"subCategory\": \"sample_subCategory\",\n      \"businessName\": \"sample_businessName\",\n      \"ownerName\": \"sample_ownerName\",\n      \"description\": \"sample_description\",\n      \"locations\": [\n        {\n          \"shopAddress\": \"sample_shopAddress\",\n          \"areaCity\": \"sample_areaCity\",\n          \"state\": \"sample_state\",\n          \"pincode\": \"sample_pincode\",\n          \"googleMapLink\": \"sample_googleMapLink\"\n        }\n      ],\n      \"contactInfo\": {\n        \"mobile1\": \"sample_mobile1\",\n        \"mobile2\": \"sample_mobile2\",\n        \"email\": \"test@example.com\",\n        \"website\": \"sample_website\",\n        \"portfolioLink\": \"sample_portfolioLink\"\n      }\n    },\n    \"jobDetails\": {\n      \"jobCategory\": \"sample_jobCategory\",\n      \"jobRole\": \"sample_jobRole\",\n      \"companyName\": \"sample_companyName\",\n      \"jobLocation\": \"sample_jobLocation\"\n    }\n  }\n}"
             }
           },
           "response": [],
           "event": []
         },
         {
-          "id": "e03c8003-517c-4c36-8ebe-8c16968304cd",
+          "id": "49700605-b053-4bd4-9dad-2762912bb776",
           "name": "Delete User",
           "request": {
             "description": {
@@ -299,7 +551,7 @@
           "event": []
         },
         {
-          "id": "1e860c2d-9acb-41f3-b38f-300669028ea2",
+          "id": "082ba75e-e219-4e82-9d59-bcac3baa459a",
           "name": "Get Users",
           "request": {
             "description": {
@@ -386,7 +638,7 @@
     }
   ],
   "info": {
-    "_postman_id": "a165e559-abae-4a12-a70c-8aa7a826157e",
+    "_postman_id": "88abf20b-cb2d-4cf0-922e-50973dc2913d",
     "name": "Gondaliya Family API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
