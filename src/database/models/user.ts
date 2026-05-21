@@ -28,6 +28,36 @@ const userSchema: any = new mongoose.Schema({
         skills: { type: String, default: null },
         phoneNumber: { type: String, default: null }
     }],
+    workDetails: {
+        hasOwnBusiness: { type: Boolean, default: null },
+        businessDetails: {
+            category: { type: String, default: null },
+            subCategory: { type: String, default: null },
+            businessName: { type: String, default: null },
+            ownerName: { type: String, default: null },
+            description: { type: String, default: null },
+            locations: [{
+                shopAddress: { type: String, default: null },
+                areaCity: { type: String, default: null },
+                state: { type: String, default: null },
+                pincode: { type: String, default: null },
+                googleMapLink: { type: String, default: null }
+            }],
+            contactInfo: {
+                mobile1: { type: String, default: null },
+                mobile2: { type: String, default: null },
+                email: { type: String, default: null },
+                website: { type: String, default: null },
+                portfolioLink: { type: String, default: null }
+            }
+        },
+        jobDetails: {
+            jobCategory: { type: String, default: null },
+            jobRole: { type: String, default: null },
+            companyName: { type: String, default: null },
+            jobLocation: { type: String, default: null }
+        }
+    },
     isDeleted: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },
     isLoggedIn: { type: Boolean, default: false },

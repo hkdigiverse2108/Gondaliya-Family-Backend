@@ -20,7 +20,8 @@ export const signUp = async (req, res) => {
             houseType,
             phoneNumber2,
             profilePhoto,
-            familyMembers
+            familyMembers,
+            workDetails
         } = req.body;
 
         if (email) {
@@ -82,7 +83,8 @@ export const signUp = async (req, res) => {
             houseType: houseType || null,
             phoneNumber2: phoneNumber2 || null,
             profilePhoto: profilePhoto || null,
-            familyMembers: familyMembers || []
+            familyMembers: familyMembers || [],
+            workDetails: workDetails || null
         });
 
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
