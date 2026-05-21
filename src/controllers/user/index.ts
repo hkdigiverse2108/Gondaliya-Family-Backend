@@ -168,7 +168,7 @@ export const addFamilyMember = async (req, res) => {
         const headId = req.params.id;
         const memberData = req.body || {};
 
-        const head = await userModel.findOne({ _id: isValidObjectId(headId), isDeleted: false });
+        const head = await getFirstMatch(userModel, { _id: isValidObjectId(headId), isDeleted: false }, {}, {});
         if (!head) return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound("User"));
 
         if (memberData.phoneNumber) {
@@ -185,18 +185,16 @@ export const addFamilyMember = async (req, res) => {
             }
         }
 
-        head.familyMembers.push(memberData);
+        memberData._id = new mongoose.Types.ObjectId();
+        const updatedHead = await updateData(userModel, { _id: isValidObjectId(headId), isDeleted: false }, { $push: { familyMembers: memberData } }, {});
 
         if (memberData.phoneNumber) {
-            const newMember = head.familyMembers[head.familyMembers.length - 1];
-            await addPhoneToMember(String(head._id), String(newMember._id), memberData.phoneNumber);
-        } else {
-            await head.save();
+            await addPhoneToMember(String(head._id), String(memberData._id), memberData.phoneNumber);
         }
 
         await redisDelPattern(`users:list:*`);
         await redisDel(`user:${headId}`);
-        return responseSuccess(res, responseMessage.addDataSuccess("Family member"), head);
+        return responseSuccess(res, responseMessage.addDataSuccess("Family member"), updatedHead);
     } catch (error) {
         return internalServerError(res, error);
     }
@@ -208,10 +206,10 @@ export const updateFamilyMember = async (req, res) => {
         const { id: headId, memberId } = req.params;
         const updates = req.body || {};
 
-        const head = await userModel.findOne({ _id: isValidObjectId(headId), isDeleted: false });
+        const head = await getFirstMatch(userModel, { _id: isValidObjectId(headId), isDeleted: false }, {}, {});
         if (!head) return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound("User"));
 
-        const member = head.familyMembers.id(memberId);
+        const member = head.familyMembers.find((m: any) => String(m._id) === memberId);
         if (!member) return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound("Family member"));
 
         const isAddingPhone = updates.phoneNumber && !member.phoneNumber && !member.isIndependent;
@@ -230,11 +228,20 @@ export const updateFamilyMember = async (req, res) => {
             }
         }
 
-        Object.assign(member, updates);
+        const setPayload: any = {};
+        for (const key in updates) {
+            setPayload[`familyMembers.$.${key}`] = updates[key];
+        }
+
+        const updatedHead = await updateData(
+            userModel,
+            { _id: isValidObjectId(headId), 'familyMembers._id': isValidObjectId(memberId), isDeleted: false },
+            { $set: setPayload },
+            {}
+        );
+
         if (isAddingPhone) {
             await addPhoneToMember(headId, memberId, updates.phoneNumber);
-        } else {
-            await head.save();
         }
 
         if (member.isIndependent && member.linkedUserId) {
@@ -244,13 +251,13 @@ export const updateFamilyMember = async (req, res) => {
                 if (updates[f] !== undefined) syncFields[f] = updates[f];
             }
             if (Object.keys(syncFields).length) {
-                await userModel.findByIdAndUpdate(member.linkedUserId, syncFields);
+                await updateData(userModel, { _id: isValidObjectId(member.linkedUserId) }, syncFields, {});
             }
         }
 
         await redisDelPattern(`users:list:*`);
         await redisDel(`user:${headId}`);
-        return responseSuccess(res, responseMessage.updateDataSuccess("Family member"), head);
+        return responseSuccess(res, responseMessage.updateDataSuccess("Family member"), updatedHead);
     } catch (error) {
         return internalServerError(res, error);
     }
@@ -261,25 +268,46 @@ export const deleteFamilyMember = async (req, res) => {
     try {
         const { id: headId, memberId } = req.params;
 
-        const head = await userModel.findOne({ _id: isValidObjectId(headId), isDeleted: false });
+        const head = await getFirstMatch(userModel, { _id: isValidObjectId(headId), isDeleted: false }, {}, {});
         if (!head) return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound("User"));
 
-        const member = head.familyMembers.id(memberId);
+        const member = head.familyMembers.find((m: any) => String(m._id) === memberId);
         if (!member) return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound("Family member"));
 
         if (member.isIndependent && member.linkedUserId) {
-            await userModel.findByIdAndUpdate(member.linkedUserId, {
+            await updateData(userModel, { _id: isValidObjectId(member.linkedUserId) }, {
                 isHeadOfFamily: true,
                 linkedFamily: { headUserId: null, familyMemberRefId: null },
-            });
+            }, {});
         }
 
-        head.familyMembers.pull({ _id: new mongoose.Types.ObjectId(memberId) });
-        await head.save();
+        await updateData(userModel, { _id: isValidObjectId(headId) }, {
+            $pull: { familyMembers: { _id: isValidObjectId(memberId) } }
+        }, {});
 
         await redisDelPattern(`users:list:*`);
         await redisDel(`user:${headId}`);
         return responseSuccess(res, responseMessage.deleteDataSuccess("Family member"));
+    } catch (error) {
+        return internalServerError(res, error);
+    }
+};
+
+export const getUserById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const cacheKey = `user:${id}`;
+
+        const cachedData = await redisGet(cacheKey);
+        if (cachedData) {
+            return responseSuccess(res, responseMessage.getDataSuccess("User"), JSON.parse(cachedData));
+        }
+
+        const user = await getFirstMatch(userModel, { _id: isValidObjectId(id), isDeleted: false }, {}, {});
+        if (!user) return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound("User"));
+
+        await redisSet(cacheKey, JSON.stringify(user), 600);
+        return responseSuccess(res, responseMessage.getDataSuccess("User"), user);
     } catch (error) {
         return internalServerError(res, error);
     }

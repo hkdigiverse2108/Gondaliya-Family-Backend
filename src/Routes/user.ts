@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { userController } from '../controllers';
-import { createUser, updateUser, deleteUser, getUsers, addFamilyMemberSchema, updateFamilyMemberSchema, deleteFamilyMemberSchema, validateRequest, validateParams, validateQuery } from '../validation';
+import { createUser, updateUser, deleteUser, getUsers, addFamilyMemberSchema, updateFamilyMemberSchema, deleteFamilyMemberSchema, validateRequest, validateParams, validateQuery, getUserById } from '../validation';
 
 const router = Router();
 
@@ -9,6 +9,7 @@ router.post('/add', validateRequest(createUser), userController.createUser);
 router.put('/update', validateRequest(updateUser), userController.updateUser);
 router.delete('/:id', validateParams(deleteUser), userController.deleteUser);
 router.get('/all', validateQuery(getUsers), userController.getUsers);
+router.get('/:id', validateParams(getUserById), userController.getUserById);
 
 // Family member management
 router.post('/:id/family', validateRequest(addFamilyMemberSchema), userController.addFamilyMember);
