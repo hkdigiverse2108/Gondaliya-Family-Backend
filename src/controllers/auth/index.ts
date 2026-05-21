@@ -1,4 +1,4 @@
-import { userModel, userSessionModel } from '../../database';
+import { userModel } from '../../database';
 import { responseSuccess, responseError, internalServerError, HTTP_STATUS, generateHash, compareHash, generateToken, USER_ROLES } from '../../common';
 import { responseMessage, redisSet, redisGet, redisDel, email_verification_mail, getFirstMatch, createData, updateData } from '../../helper';
 
@@ -127,8 +127,6 @@ export const otpVerification = async (req, res) => {
             status: "Login"
         });
 
-        await createData(userSessionModel, { createdBy: user._id });
-
         return responseSuccess(res, responseMessage.OTPVerified, {
             _id: user._id,
             phoneNumber: user.phoneNumber,
@@ -163,8 +161,6 @@ export const login = async (req, res) => {
             role: user.role,
             status: "Login"
         });
-
-        await createData(userSessionModel, { createdBy: user._id });
 
         return responseSuccess(res, responseMessage.loginSuccess, {
             _id: user._id,

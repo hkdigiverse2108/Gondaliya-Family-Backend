@@ -254,20 +254,46 @@ function extractExistingRequests(collectionJSON: any): Record<string, any> {
 function mergeDeep(target: any, source: any) {
   if (typeof target !== 'object' || target === null) return source;
   if (typeof source !== 'object' || source === null) return target;
-  if (Array.isArray(target) && Array.isArray(source)) return source;
-  
+
+  // For arrays: schema (target) always defines structure.
+  // If target has array items that are objects, merge each item with the corresponding source item
+  if (Array.isArray(target) && Array.isArray(source)) {
+    if (target.length === 0) return source; // no schema items, keep existing
+    return target.map((targetItem: any, idx: number) => {
+      const sourceItem = source[idx];
+      if (sourceItem === undefined) return targetItem;
+      if (typeof targetItem === 'object' && targetItem !== null && typeof sourceItem === 'object' && sourceItem !== null && !Array.isArray(targetItem)) {
+        return mergeDeep(targetItem, sourceItem);
+      }
+      return targetItem; // schema primitive wins
+    });
+  }
+
   const result: any = { ...target };
+  // Add keys that only exist in source (new fields from schema)
+  for (const key in source) {
+    if (!Object.prototype.hasOwnProperty.call(result, key)) {
+      result[key] = source[key];
+    }
+  }
   for (const key in target) {
     if (Object.prototype.hasOwnProperty.call(source, key)) {
-      if (typeof target[key] === 'object' && target[key] !== null && typeof source[key] === 'object' && source[key] !== null) {
-        result[key] = mergeDeep(target[key], source[key]);
+      const tVal = target[key];
+      const sVal = source[key];
+      if (Array.isArray(tVal) || Array.isArray(sVal)) {
+        // schema array wins for structure, preserve leaf values from source
+        result[key] = mergeDeep(tVal, sVal);
+      } else if (typeof tVal === 'object' && tVal !== null && typeof sVal === 'object' && sVal !== null) {
+        result[key] = mergeDeep(tVal, sVal);
       } else {
-        result[key] = source[key];
+        // Primitive: keep source (existing Postman value) if it's meaningful
+        result[key] = (sVal !== null && sVal !== undefined && sVal !== '') ? sVal : tVal;
       }
     }
   }
   return result;
 }
+
 
 async function syncToPostman(collectionJSON: any) {
   const apiKey = process.env.POSTMAN_API_KEY;
