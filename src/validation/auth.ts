@@ -14,6 +14,7 @@ export const signUpSchema = Joi.object({
     phoneNumber: Joi.string().length(10).required(),
     phoneNumber2: Joi.string().length(10).optional().allow(null, ''),
     password: Joi.string().required(),
+    role: Joi.string().optional(),
     isActive: Joi.boolean().optional(),
     nativeVillage: Joi.string().optional().allow(null, ''),
     nativeTaluka: Joi.string().optional().allow(null, ''),

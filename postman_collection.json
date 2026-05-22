@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "aa0d4928-fc49-4eed-b87b-eded12e883f6",
+      "id": "cd26c378-40dc-446b-96ce-dc9708d04e3b",
       "name": "AUTH",
       "description": {
         "content": "Routes for auth",
@@ -9,11 +9,11 @@
       },
       "item": [
         {
-          "id": "838cac20-794a-4eea-bb80-fec332273a5a",
+          "id": "1eb04eb3-ce5c-4e98-8787-f73db0855877",
           "name": "Sign Up",
           "request": {
             "description": {
-              "content": "Controller: signUp\nSchema: signUpSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Required |\n| middleName | string | Required |\n| lastName | string | Required |\n| dob | string | Optional |\n| bloodGroup | string | Optional |\n| education | string | Optional |\n| isMarried | string | Optional |\n| profilePhoto | string | Optional |\n| phoneNumber | string | Required |\n| phoneNumber2 | string | Optional |\n| password | string | Required |\n| isActive | boolean | Optional |\n| nativeVillage | string | Optional |\n| nativeTaluka | string | Optional |\n| nativeDistrict | string | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| currentCity | string | Optional |\n| currentState | string | Optional |\n| houseType | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].firstName | string | Optional |\n| familyMembers[].middleName | string | Optional |\n| familyMembers[].lastName | string | Optional |\n| familyMembers[].profilePhoto | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n| familyMembers[].workDetails | object | Optional |\n| workDetails | object | Optional |\n| workDetails.hasOwnBusiness | boolean | Optional |\n| workDetails.businessDetails | object | Optional |\n| workDetails.businessDetails.category | string | Optional |\n| workDetails.businessDetails.subCategory | string | Optional |\n| workDetails.businessDetails.businessName | string | Optional |\n| workDetails.businessDetails.ownerName | string | Optional |\n| workDetails.businessDetails.description | string | Optional |\n| workDetails.businessDetails.locations | array | Optional |\n| workDetails.businessDetails.locations[].shopAddress | string | Optional |\n| workDetails.businessDetails.locations[].areaCity | string | Optional |\n| workDetails.businessDetails.locations[].state | string | Optional |\n| workDetails.businessDetails.locations[].pincode | string | Optional |\n| workDetails.businessDetails.locations[].googleMapLink | string | Optional |\n| workDetails.businessDetails.contactInfo | object | Optional |\n| workDetails.businessDetails.contactInfo.mobile1 | string | Optional |\n| workDetails.businessDetails.contactInfo.mobile2 | string | Optional |\n| workDetails.businessDetails.contactInfo.email | string | Optional |\n| workDetails.businessDetails.contactInfo.website | string | Optional |\n| workDetails.businessDetails.contactInfo.portfolioLink | string | Optional |\n| workDetails.jobDetails | object | Optional |\n| workDetails.jobDetails.jobCategory | string | Optional |\n| workDetails.jobDetails.jobRole | string | Optional |\n| workDetails.jobDetails.companyName | string | Optional |\n| workDetails.jobDetails.jobLocation | string | Optional |\n",
+              "content": "Controller: signUp\nSchema: signUpSchema\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| firstName | string | Required |\n| middleName | string | Required |\n| lastName | string | Required |\n| dob | string | Optional |\n| bloodGroup | string | Optional |\n| education | string | Optional |\n| isMarried | string | Optional |\n| profilePhoto | string | Optional |\n| phoneNumber | string | Required |\n| phoneNumber2 | string | Optional |\n| password | string | Required |\n| role | string | Optional |\n| isActive | boolean | Optional |\n| nativeVillage | string | Optional |\n| nativeTaluka | string | Optional |\n| nativeDistrict | string | Optional |\n| village | string | Optional |\n| pincode | string | Optional |\n| taluka | string | Optional |\n| district | string | Optional |\n| currentAddress | string | Optional |\n| currentCity | string | Optional |\n| currentState | string | Optional |\n| houseType | string | Optional |\n| familyMembers | array | Optional |\n| familyMembers[].firstName | string | Optional |\n| familyMembers[].middleName | string | Optional |\n| familyMembers[].lastName | string | Optional |\n| familyMembers[].profilePhoto | string | Optional |\n| familyMembers[].relation | string | Optional |\n| familyMembers[].dob | string | Optional |\n| familyMembers[].education | string | Optional |\n| familyMembers[].isMarried | string | Optional |\n| familyMembers[].bloodGroup | string | Optional |\n| familyMembers[].phoneNumber | string | Optional |\n| familyMembers[].workDetails | object | Optional |\n| workDetails | object | Optional |\n| workDetails.hasOwnBusiness | boolean | Optional |\n| workDetails.businessDetails | object | Optional |\n| workDetails.businessDetails.category | string | Optional |\n| workDetails.businessDetails.subCategory | string | Optional |\n| workDetails.businessDetails.businessName | string | Optional |\n| workDetails.businessDetails.ownerName | string | Optional |\n| workDetails.businessDetails.description | string | Optional |\n| workDetails.businessDetails.locations | array | Optional |\n| workDetails.businessDetails.locations[].shopAddress | string | Optional |\n| workDetails.businessDetails.locations[].areaCity | string | Optional |\n| workDetails.businessDetails.locations[].state | string | Optional |\n| workDetails.businessDetails.locations[].pincode | string | Optional |\n| workDetails.businessDetails.locations[].googleMapLink | string | Optional |\n| workDetails.businessDetails.contactInfo | object | Optional |\n| workDetails.businessDetails.contactInfo.mobile1 | string | Optional |\n| workDetails.businessDetails.contactInfo.mobile2 | string | Optional |\n| workDetails.businessDetails.contactInfo.email | string | Optional |\n| workDetails.businessDetails.contactInfo.website | string | Optional |\n| workDetails.businessDetails.contactInfo.portfolioLink | string | Optional |\n| workDetails.jobDetails | object | Optional |\n| workDetails.jobDetails.jobCategory | string | Optional |\n| workDetails.jobDetails.jobRole | string | Optional |\n| workDetails.jobDetails.companyName | string | Optional |\n| workDetails.jobDetails.jobLocation | string | Optional |\n",
               "type": "text/markdown"
             },
             "url": {
@@ -36,14 +36,14 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Pramit\",\n  \"middleName\": \"Rajubhai\",\n  \"lastName\": \"Mangukiya\",\n  \"dob\": \"sample_dob\",\n  \"bloodGroup\": \"A+\",\n  \"education\": \"BCA\",\n  \"isMarried\": \"Yes\",\n  \"profilePhoto\": \"null\",\n  \"phoneNumber\": \"9725097885\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"password\": \"Admin@123\",\n  \"isActive\": true,\n  \"nativeVillage\": \"sample_nativeVillage\",\n  \"nativeTaluka\": \"sample_nativeTaluka\",\n  \"nativeDistrict\": \"sample_nativeDistrict\",\n  \"village\": \"Lakhanka\",\n  \"pincode\": \"sample_pincode\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"currentAddress\": \"C 602 shivdhara Campus\",\n  \"currentCity\": \"sample_currentCity\",\n  \"currentState\": \"sample_currentState\",\n  \"houseType\": \"own\",\n  \"familyMembers\": [\n    {\n      \"firstName\": \"sample_firstName\",\n      \"middleName\": \"sample_middleName\",\n      \"lastName\": \"sample_lastName\",\n      \"profilePhoto\": \"sample_profilePhoto\",\n      \"relation\": \"sample_relation\",\n      \"dob\": \"sample_dob\",\n      \"education\": \"sample_education\",\n      \"isMarried\": \"sample_isMarried\",\n      \"bloodGroup\": \"sample_bloodGroup\",\n      \"phoneNumber\": \"sample_phoneNumber\",\n      \"workDetails\": {}\n    }\n  ],\n  \"workDetails\": {\n    \"hasOwnBusiness\": true,\n    \"businessDetails\": {\n      \"category\": \"sample_category\",\n      \"subCategory\": \"sample_subCategory\",\n      \"businessName\": \"sample_businessName\",\n      \"ownerName\": \"sample_ownerName\",\n      \"description\": \"sample_description\",\n      \"locations\": [\n        {\n          \"shopAddress\": \"sample_shopAddress\",\n          \"areaCity\": \"sample_areaCity\",\n          \"state\": \"sample_state\",\n          \"pincode\": \"sample_pincode\",\n          \"googleMapLink\": \"sample_googleMapLink\"\n        }\n      ],\n      \"contactInfo\": {\n        \"mobile1\": \"sample_mobile1\",\n        \"mobile2\": \"sample_mobile2\",\n        \"email\": \"test@example.com\",\n        \"website\": \"sample_website\",\n        \"portfolioLink\": \"sample_portfolioLink\"\n      }\n    },\n    \"jobDetails\": {\n      \"jobCategory\": \"sample_jobCategory\",\n      \"jobRole\": \"sample_jobRole\",\n      \"companyName\": \"sample_companyName\",\n      \"jobLocation\": \"sample_jobLocation\"\n    }\n  }\n}"
+              "raw": "{\n  \"firstName\": \"Pramit\",\n  \"middleName\": \"Rajubhai\",\n  \"lastName\": \"Mangukiya\",\n  \"dob\": \"sample_dob\",\n  \"bloodGroup\": \"A+\",\n  \"education\": \"BCA\",\n  \"isMarried\": \"Yes\",\n  \"profilePhoto\": \"null\",\n  \"phoneNumber\": \"9725097885\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"password\": \"Admin@123\",\n  \"role\": \"sample_role\",\n  \"isActive\": true,\n  \"nativeVillage\": \"sample_nativeVillage\",\n  \"nativeTaluka\": \"sample_nativeTaluka\",\n  \"nativeDistrict\": \"sample_nativeDistrict\",\n  \"village\": \"Lakhanka\",\n  \"pincode\": \"sample_pincode\",\n  \"taluka\": \"sample_taluka\",\n  \"district\": \"sample_district\",\n  \"currentAddress\": \"C 602 shivdhara Campus\",\n  \"currentCity\": \"sample_currentCity\",\n  \"currentState\": \"sample_currentState\",\n  \"houseType\": \"own\",\n  \"familyMembers\": [\n    {\n      \"firstName\": \"sample_firstName\",\n      \"middleName\": \"sample_middleName\",\n      \"lastName\": \"sample_lastName\",\n      \"profilePhoto\": \"sample_profilePhoto\",\n      \"relation\": \"sample_relation\",\n      \"dob\": \"sample_dob\",\n      \"education\": \"sample_education\",\n      \"isMarried\": \"sample_isMarried\",\n      \"bloodGroup\": \"sample_bloodGroup\",\n      \"phoneNumber\": \"sample_phoneNumber\",\n      \"workDetails\": {}\n    }\n  ],\n  \"workDetails\": {\n    \"hasOwnBusiness\": true,\n    \"businessDetails\": {\n      \"category\": \"sample_category\",\n      \"subCategory\": \"sample_subCategory\",\n      \"businessName\": \"sample_businessName\",\n      \"ownerName\": \"sample_ownerName\",\n      \"description\": \"sample_description\",\n      \"locations\": [\n        {\n          \"shopAddress\": \"sample_shopAddress\",\n          \"areaCity\": \"sample_areaCity\",\n          \"state\": \"sample_state\",\n          \"pincode\": \"sample_pincode\",\n          \"googleMapLink\": \"sample_googleMapLink\"\n        }\n      ],\n      \"contactInfo\": {\n        \"mobile1\": \"sample_mobile1\",\n        \"mobile2\": \"sample_mobile2\",\n        \"email\": \"test@example.com\",\n        \"website\": \"sample_website\",\n        \"portfolioLink\": \"sample_portfolioLink\"\n      }\n    },\n    \"jobDetails\": {\n      \"jobCategory\": \"sample_jobCategory\",\n      \"jobRole\": \"sample_jobRole\",\n      \"companyName\": \"sample_companyName\",\n      \"jobLocation\": \"sample_jobLocation\"\n    }\n  }\n}"
             }
           },
           "response": [],
           "event": []
         },
         {
-          "id": "3cf58dc1-ef80-4de1-a5bd-f2529ad00074",
+          "id": "7f1d8e99-1a9a-4cbb-8eba-41c425f077c0",
           "name": "Login",
           "request": {
             "description": {
@@ -77,7 +77,7 @@
           "event": []
         },
         {
-          "id": "7c767d1a-f848-433d-928c-136f292e0f91",
+          "id": "eaba7fa3-60b5-462d-a322-46da0b03331f",
           "name": "Otp Verification",
           "request": {
             "description": {
@@ -111,7 +111,7 @@
           "event": []
         },
         {
-          "id": "dc61cc4a-b8a6-412c-bafd-9ed90dfd3830",
+          "id": "60c83b04-5c86-447d-9ebd-fef8dd4c4f22",
           "name": "Forgot Password",
           "request": {
             "description": {
@@ -145,7 +145,7 @@
           "event": []
         },
         {
-          "id": "7ff01bf0-182b-4dfa-ae4d-b6f697bc3470",
+          "id": "08c8da8a-1464-4c29-a7f5-d574890a2242",
           "name": "Reset Password",
           "request": {
             "description": {
@@ -182,7 +182,7 @@
       "event": []
     },
     {
-      "id": "1064e44c-450a-463d-bce2-af6e150c8eab",
+      "id": "bf2ce5dc-e24d-46ba-937b-be0da39dacf9",
       "name": "LOCATION",
       "description": {
         "content": "Routes for location",
@@ -190,7 +190,7 @@
       },
       "item": [
         {
-          "id": "73406c11-493d-480e-9715-6f3faa06cf8e",
+          "id": "01bded5f-65f9-4b10-92aa-47a268c1ca76",
           "name": "Create Location",
           "request": {
             "description": {
@@ -224,7 +224,7 @@
           "event": []
         },
         {
-          "id": "f29d3fc9-3aeb-4169-b2e5-18281a931ef7",
+          "id": "070ac25b-dfa6-40b2-a1b2-febd4b171f59",
           "name": "Update Location",
           "request": {
             "description": {
@@ -258,11 +258,11 @@
           "event": []
         },
         {
-          "id": "270633e2-6a33-4380-8cee-dfddab3de569",
-          "name": "Delete Location",
+          "id": "4f9059a9-039d-4db5-a60f-defd059948f0",
+          "name": "Delete :id",
           "request": {
             "description": {
-              "content": "Controller: deleteLocation\nSchema: deleteLocation\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| id | string | Required |\n",
+              "content": "Controller: deleteLocation",
               "type": "text/markdown"
             },
             "url": {
@@ -299,37 +299,22 @@
           "event": []
         },
         {
-          "id": "a4fc80da-158d-49c3-9ea8-0e439a0e6736",
-          "name": "Get Locations",
+          "id": "f431ceec-3944-4221-91d6-d10163af75fa",
+          "name": "Get All",
           "request": {
             "description": {
-              "content": "Controller: getLocations\nSchema: getLocations\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| page | number | Optional |\n| limit | number | Optional |\n| search | string | Optional |\n",
+              "content": "Controller: getLocations",
               "type": "text/markdown"
             },
             "url": {
               "path": [
-                "location"
+                "location",
+                "all"
               ],
               "host": [
                 "{{BASE_URL}}"
               ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10"
-                },
-                {
-                  "disabled": false,
-                  "key": "search",
-                  "value": "sample_search"
-                }
-              ],
+              "query": [],
               "variable": []
             },
             "method": "GET",
@@ -337,19 +322,30 @@
           },
           "response": [],
           "event": []
-        },
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "451677e3-d434-48eb-aaff-4d5d2d9a4c75",
+      "name": "ACCOUNT",
+      "description": {
+        "content": "Routes for account",
+        "type": "text/plain"
+      },
+      "item": [
         {
-          "id": "8c69395b-c967-4afa-97a0-ec1777ad43a7",
-          "name": "Get Districts",
+          "id": "0c7eadb6-3cfa-4703-83f5-b2df647e7db5",
+          "name": "Get Delete",
           "request": {
             "description": {
-              "content": "Controller: getDistricts",
+              "content": "Controller: renderDeletePage",
               "type": "text/markdown"
             },
             "url": {
               "path": [
-                "location",
-                "districts"
+                "account",
+                "delete"
               ],
               "host": [
                 "{{BASE_URL}}"
@@ -364,28 +360,21 @@
           "event": []
         },
         {
-          "id": "ef663cca-c9a5-4f7b-8abe-820129b3e6c8",
-          "name": "Get Talukas",
+          "id": "15e4c910-72ef-40ec-8e32-0c870b2fe314",
+          "name": "Get Item",
           "request": {
             "description": {
-              "content": "Controller: getTalukas\nSchema: getTalukas\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| district | string | Required |\n",
+              "content": "Controller: renderDeletePage",
               "type": "text/markdown"
             },
             "url": {
               "path": [
-                "location",
-                "talukas"
+                "account"
               ],
               "host": [
                 "{{BASE_URL}}"
               ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "district",
-                  "value": "sample_district"
-                }
-              ],
+              "query": [],
               "variable": []
             },
             "method": "GET",
@@ -395,36 +384,49 @@
           "event": []
         },
         {
-          "id": "57ae0f5c-9bc1-4e62-8793-56497d30a4a3",
-          "name": "Get Villages",
+          "id": "80894c0f-c7e5-494f-8c8d-acd0682d45f1",
+          "name": "Create Delete",
           "request": {
             "description": {
-              "content": "Controller: getVillages\nSchema: getVillages\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| district | string | Required |\n| taluka | string | Required |\n",
+              "content": "Controller: processDeleteAccount",
               "type": "text/markdown"
             },
             "url": {
               "path": [
-                "location",
-                "villages"
+                "account",
+                "delete"
               ],
               "host": [
                 "{{BASE_URL}}"
               ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "district",
-                  "value": "sample_district"
-                },
-                {
-                  "disabled": false,
-                  "key": "taluka",
-                  "value": "sample_taluka"
-                }
-              ],
+              "query": [],
               "variable": []
             },
-            "method": "GET",
+            "method": "POST",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "4a20d15e-9f3f-4dbf-9266-7f84be4a0e27",
+          "name": "Create Item",
+          "request": {
+            "description": {
+              "content": "Controller: processDeleteAccount",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "account"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
             "body": {}
           },
           "response": [],
@@ -434,7 +436,7 @@
       "event": []
     },
     {
-      "id": "5d9c74f3-0a5c-41df-a481-161e430aa34e",
+      "id": "0385826f-043f-4c22-ad62-e64b91f66162",
       "name": "USER",
       "description": {
         "content": "Routes for user",
@@ -442,7 +444,7 @@
       },
       "item": [
         {
-          "id": "b0b82c1c-57bb-41f6-8624-c861e6517479",
+          "id": "be64449d-35de-4d24-81d9-5aa8ffc4d0f5",
           "name": "Create User",
           "request": {
             "description": {
@@ -469,14 +471,14 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Het\",\n  \"middleName\": \"Rajubhai\",\n  \"lastName\": \"Mangukiya\",\n  \"dob\": \"sample_dob\",\n  \"bloodGroup\": \"sample_bloodGroup\",\n  \"education\": \"sample_education\",\n  \"isMarried\": \"sample_isMarried\",\n  \"profilePhoto\": \"sample_profilePhoto\",\n  \"phoneNumber\": \"8866005029\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"password\": \"Admin@123\",\n  \"isActive\": true,\n  \"nativeVillage\": \"sample_nativeVillage\",\n  \"nativeTaluka\": \"sample_nativeTaluka\",\n  \"nativeDistrict\": \"sample_nativeDistrict\",\n  \"village\": \"Lakhanka\",\n  \"pincode\": \"394101\",\n  \"taluka\": \"Gadhada\",\n  \"district\": \"Botad\",\n  \"currentAddress\": \"C - 602, Shivdhara, Campus, Mota Varachha, Surat\",\n  \"currentCity\": \"sample_currentCity\",\n  \"currentState\": \"sample_currentState\",\n  \"houseType\": \"Own\",\n  \"familyMembers\": [\n    {\n      \"firstName\": \"sample_firstName\",\n      \"middleName\": \"sample_middleName\",\n      \"lastName\": \"sample_lastName\",\n      \"profilePhoto\": \"sample_profilePhoto\",\n      \"relation\": \"Brother\",\n      \"dob\": \"2003/10/24\",\n      \"education\": \"BCA\",\n      \"isMarried\": \"unMarried\",\n      \"bloodGroup\": \"A+\",\n      \"phoneNumber\": \"9725095525\",\n      \"workDetails\": {\n        \"hasOwnBusiness\": true,\n        \"businessDetails\": {\n          \"category\": \"sample_category\",\n          \"subCategory\": \"sample_subCategory\",\n          \"businessName\": \"sample_businessName\",\n          \"ownerName\": \"sample_ownerName\",\n          \"description\": \"sample_description\",\n          \"locations\": [\n            {\n              \"shopAddress\": \"sample_shopAddress\",\n              \"areaCity\": \"sample_areaCity\",\n              \"state\": \"sample_state\",\n              \"pincode\": \"sample_pincode\",\n              \"googleMapLink\": \"sample_googleMapLink\"\n            }\n          ],\n          \"contactInfo\": {\n            \"mobile1\": \"sample_mobile1\",\n            \"mobile2\": \"sample_mobile2\",\n            \"email\": \"test@example.com\",\n            \"website\": \"sample_website\",\n            \"portfolioLink\": \"sample_portfolioLink\"\n          }\n        },\n        \"jobDetails\": {\n          \"jobCategory\": \"sample_jobCategory\",\n          \"jobRole\": \"sample_jobRole\",\n          \"companyName\": \"sample_companyName\",\n          \"jobLocation\": \"sample_jobLocation\"\n        }\n      },\n      \"occupation\": \"IT\",\n      \"skills\": \"Hello\",\n      \"fullName\": \"Pramit Mangukiya\"\n    }\n  ],\n  \"workDetails\": {\n    \"hasOwnBusiness\": true,\n    \"businessDetails\": {\n      \"category\": \"sample_category\",\n      \"subCategory\": \"sample_subCategory\",\n      \"businessName\": \"sample_businessName\",\n      \"ownerName\": \"sample_ownerName\",\n      \"description\": \"sample_description\",\n      \"locations\": [\n        {\n          \"shopAddress\": \"sample_shopAddress\",\n          \"areaCity\": \"sample_areaCity\",\n          \"state\": \"sample_state\",\n          \"pincode\": \"sample_pincode\",\n          \"googleMapLink\": \"sample_googleMapLink\"\n        }\n      ],\n      \"contactInfo\": {\n        \"mobile1\": \"sample_mobile1\",\n        \"mobile2\": \"sample_mobile2\",\n        \"email\": \"test@example.com\",\n        \"website\": \"sample_website\",\n        \"portfolioLink\": \"sample_portfolioLink\"\n      }\n    },\n    \"jobDetails\": {\n      \"jobCategory\": \"sample_jobCategory\",\n      \"jobRole\": \"sample_jobRole\",\n      \"companyName\": \"sample_companyName\",\n      \"jobLocation\": \"sample_jobLocation\"\n    }\n  }\n}"
+              "raw": "{\n  \"firstName\": \"Het\",\n  \"middleName\": \"Rajubhai\",\n  \"lastName\": \"Mangukiya\",\n  \"dob\": \"sample_dob\",\n  \"bloodGroup\": \"A+\",\n  \"education\": \"sample_education\",\n  \"isMarried\": \"sample_isMarried\",\n  \"profilePhoto\": \"sample_profilePhoto\",\n  \"phoneNumber\": \"8866005029\",\n  \"phoneNumber2\": \"sample_phoneNumber2\",\n  \"password\": \"Admin@123\",\n  \"isActive\": true,\n  \"nativeVillage\": \"sample_nativeVillage\",\n  \"nativeTaluka\": \"sample_nativeTaluka\",\n  \"nativeDistrict\": \"sample_nativeDistrict\",\n  \"village\": \"Lakhanka\",\n  \"pincode\": \"394101\",\n  \"taluka\": \"Gadhada\",\n  \"district\": \"Botad\",\n  \"currentAddress\": \"C - 602, Shivdhara, Campus, Mota Varachha, Surat\",\n  \"currentCity\": \"sample_currentCity\",\n  \"currentState\": \"sample_currentState\",\n  \"houseType\": \"Own\",\n  \"familyMembers\": [\n    {\n      \"firstName\": \"sample_firstName\",\n      \"middleName\": \"sample_middleName\",\n      \"lastName\": \"sample_lastName\",\n      \"profilePhoto\": \"sample_profilePhoto\",\n      \"relation\": \"Brother\",\n      \"dob\": \"2003/10/24\",\n      \"education\": \"BCA\",\n      \"isMarried\": \"unMarried\",\n      \"bloodGroup\": \"A+\",\n      \"phoneNumber\": \"9725095525\",\n      \"workDetails\": {\n        \"hasOwnBusiness\": true,\n        \"businessDetails\": {\n          \"category\": \"sample_category\",\n          \"subCategory\": \"sample_subCategory\",\n          \"businessName\": \"sample_businessName\",\n          \"ownerName\": \"sample_ownerName\",\n          \"description\": \"sample_description\",\n          \"locations\": [\n            {\n              \"shopAddress\": \"sample_shopAddress\",\n              \"areaCity\": \"sample_areaCity\",\n              \"state\": \"sample_state\",\n              \"pincode\": \"sample_pincode\",\n              \"googleMapLink\": \"sample_googleMapLink\"\n            }\n          ],\n          \"contactInfo\": {\n            \"mobile1\": \"sample_mobile1\",\n            \"mobile2\": \"sample_mobile2\",\n            \"email\": \"test@example.com\",\n            \"website\": \"sample_website\",\n            \"portfolioLink\": \"sample_portfolioLink\"\n          }\n        },\n        \"jobDetails\": {\n          \"jobCategory\": \"sample_jobCategory\",\n          \"jobRole\": \"sample_jobRole\",\n          \"companyName\": \"sample_companyName\",\n          \"jobLocation\": \"sample_jobLocation\"\n        }\n      },\n      \"occupation\": \"IT\",\n      \"skills\": \"Hello\",\n      \"fullName\": \"Pramit Mangukiya\"\n    }\n  ],\n  \"workDetails\": {\n    \"hasOwnBusiness\": true,\n    \"businessDetails\": {\n      \"category\": \"sample_category\",\n      \"subCategory\": \"sample_subCategory\",\n      \"businessName\": \"sample_businessName\",\n      \"ownerName\": \"sample_ownerName\",\n      \"description\": \"sample_description\",\n      \"locations\": [\n        {\n          \"shopAddress\": \"sample_shopAddress\",\n          \"areaCity\": \"sample_areaCity\",\n          \"state\": \"sample_state\",\n          \"pincode\": \"sample_pincode\",\n          \"googleMapLink\": \"sample_googleMapLink\"\n        }\n      ],\n      \"contactInfo\": {\n        \"mobile1\": \"sample_mobile1\",\n        \"mobile2\": \"sample_mobile2\",\n        \"email\": \"test@example.com\",\n        \"website\": \"sample_website\",\n        \"portfolioLink\": \"sample_portfolioLink\"\n      }\n    },\n    \"jobDetails\": {\n      \"jobCategory\": \"sample_jobCategory\",\n      \"jobRole\": \"sample_jobRole\",\n      \"companyName\": \"sample_companyName\",\n      \"jobLocation\": \"sample_jobLocation\"\n    }\n  }\n}"
             }
           },
           "response": [],
           "event": []
         },
         {
-          "id": "a5f55b5b-e31c-4dab-8c49-5f137516c261",
+          "id": "816a8e0f-bf0c-4941-811d-c77266a8a6ff",
           "name": "Update User",
           "request": {
             "description": {
@@ -510,11 +512,11 @@
           "event": []
         },
         {
-          "id": "7c4ce6c9-b318-403c-9d76-d1aa34447758",
-          "name": "Delete User",
+          "id": "958b52c4-4206-448e-b44b-1ef3f60d86de",
+          "name": "Delete :id",
           "request": {
             "description": {
-              "content": "Controller: deleteUser\nSchema: deleteUser\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| id | string | Required |\n",
+              "content": "Controller: deleteUser",
               "type": "text/markdown"
             },
             "url": {
@@ -551,57 +553,22 @@
           "event": []
         },
         {
-          "id": "763af11f-24de-44ff-a798-2c7b344fbf18",
-          "name": "Get Users",
+          "id": "773f376c-d6f3-4715-8f55-0e16040f3f9d",
+          "name": "Get All",
           "request": {
             "description": {
-              "content": "Controller: getUsers\nSchema: getUsers\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| page | number | Optional |\n| limit | number | Optional |\n| search | string | Optional |\n| sortFilter | string | Optional |\n| activeFilter | string | Optional |\n| startDateFilter | string | Optional |\n| endDateFilter | string | Optional |\n",
+              "content": "Controller: getUsers",
               "type": "text/markdown"
             },
             "url": {
               "path": [
-                "user"
+                "user",
+                "all"
               ],
               "host": [
                 "{{BASE_URL}}"
               ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10"
-                },
-                {
-                  "disabled": true,
-                  "key": "search",
-                  "value": "sample_search"
-                },
-                {
-                  "disabled": true,
-                  "key": "sortFilter",
-                  "value": "sample_sortFilter"
-                },
-                {
-                  "disabled": true,
-                  "key": "activeFilter",
-                  "value": "sample_activeFilter"
-                },
-                {
-                  "disabled": true,
-                  "key": "startDateFilter",
-                  "value": "sample_startDateFilter"
-                },
-                {
-                  "disabled": true,
-                  "key": "endDateFilter",
-                  "value": "sample_endDateFilter"
-                }
-              ],
+              "query": [],
               "variable": []
             },
             "method": "GET",
@@ -611,7 +578,39 @@
           "event": []
         },
         {
-          "id": "b133a900-1fa9-4660-b2f4-5053cdf9018f",
+          "id": "044ae290-9d79-4906-82bb-7c6bcf86c57a",
+          "name": "Get :id",
+          "request": {
+            "description": {
+              "content": "Controller: getUserById",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "user",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "89cc4f88-e977-4e3a-9c69-f1dccf97dca9",
           "name": "Add Family Member",
           "request": {
             "description": {
@@ -653,7 +652,7 @@
           "event": []
         },
         {
-          "id": "6bccfb94-5929-4fc1-941c-a6ba20a6e76f",
+          "id": "f3822ae6-2789-4949-b44a-71309ff1af00",
           "name": "Update Family Member",
           "request": {
             "description": {
@@ -702,7 +701,7 @@
           "event": []
         },
         {
-          "id": "f6662a36-4bfc-4146-b1a7-c4e33a30ca63",
+          "id": "768bb124-814d-4993-9ccf-60d125aad7ef",
           "name": "Delete Family Member",
           "request": {
             "description": {
@@ -753,6 +752,1051 @@
           }
         ]
       }
+    },
+    {
+      "id": "00dee7f2-09fe-4dca-8f22-418de4fcaa8e",
+      "name": "ANNOUNCEMENT",
+      "description": {
+        "content": "Routes for announcement",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "359d2f0f-a582-4e71-88d4-b7b4a5418e6b",
+          "name": "Create Announcement",
+          "request": {
+            "description": {
+              "content": "Controller: createAnnouncement\nSchema: createAnnouncement\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| title | string | Required |\n| description | string | Required |\n| imageUrl | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "announcements",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"sample_title\",\n  \"description\": \"sample_description\",\n  \"imageUrl\": \"sample_imageUrl\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "da8f1603-a9f0-435d-a6c2-c05fca0bc7a5",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getAnnouncements",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "announcements",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "83fcca91-675b-4848-9bd6-022679dfc6f8",
+          "name": "Update Announcement",
+          "request": {
+            "description": {
+              "content": "Controller: updateAnnouncement\nSchema: updateAnnouncement\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| id | string | Optional |\n| announcementId | string | Optional |\n| title | string | Optional |\n| description | string | Optional |\n| imageUrl | string | Optional |\n| isActive | boolean | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "announcements",
+                "update"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"sample_id\",\n  \"announcementId\": \"sample_announcementId\",\n  \"title\": \"sample_title\",\n  \"description\": \"sample_description\",\n  \"imageUrl\": \"sample_imageUrl\",\n  \"isActive\": true\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "ec0f69af-b586-4e15-aca1-7877ed9208f3",
+          "name": "Delete :id",
+          "request": {
+            "description": {
+              "content": "Controller: deleteAnnouncement",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "announcements",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "4030ba88-a6c9-410b-a774-f060615b2d73",
+      "name": "PARIVAR",
+      "description": {
+        "content": "Routes for parivar",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fb69bb6a-ee46-45bf-94df-6e8fe4eb7938",
+          "name": "Get Villages",
+          "request": {
+            "description": {
+              "content": "Controller: getVillages",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "parivar",
+                "villages"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "33f05883-e791-4075-90bb-56ce6a38bb7c",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getParivarDirectory",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "parivar",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "f0b1e8a8-8d48-4970-92ba-f4f2bd8c73d7",
+      "name": "CHAT",
+      "description": {
+        "content": "Routes for chat",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9b0e1067-5c22-421d-bafd-42c4e815ade9",
+          "name": "Send Chat Message",
+          "request": {
+            "description": {
+              "content": "Controller: sendMessage\nSchema: sendChatMessage\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| message | string | Optional |\n| mediaUrl | string | Optional |\n| mediaType | string | Optional |\n| fileSize | number | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "chat",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"sample_message\",\n  \"mediaUrl\": \"sample_mediaUrl\",\n  \"mediaType\": \"sample_mediaType\",\n  \"fileSize\": 123\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "aa60abfb-b43d-4813-87fb-77b4a820d350",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getChats",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "chat",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "e510a455-4c6c-4894-9d41-e4563816faeb",
+          "name": "Delete :id",
+          "request": {
+            "description": {
+              "content": "Controller: deleteChat",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "chat",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "1f5ed867-78e4-4f83-917d-74e95694c3f5",
+          "name": "Block Chat Message",
+          "request": {
+            "description": {
+              "content": "Controller: blockChat\nSchema: blockChatMessage\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| id | string | Optional |\n| chatId | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "chat",
+                "block"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"sample_id\",\n  \"chatId\": \"sample_chatId\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "650afca6-659e-406f-8911-29e7cdee6377",
+      "name": "LISTING",
+      "description": {
+        "content": "Routes for listing",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "12cfe715-9aa3-4ca9-b0ff-204f8d9d2f5f",
+          "name": "Create Listing",
+          "request": {
+            "description": {
+              "content": "Controller: createListing\nSchema: createListing\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| type | string | Required |\n| title | string | Required |\n| description | string | Required |\n| photos | array | Optional |\n| price | number | Required |\n| priceUnit | string | Required |\n| availableFrom | string | Required |\n| availableTo | string | Optional |\n| location | object | Required |\n| location.city | string | Required |\n| location.pincode | string | Required |\n| contactPhone | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "listings",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"sample_type\",\n  \"title\": \"sample_title\",\n  \"description\": \"sample_description\",\n  \"photos\": [\n    \"sample_string\"\n  ],\n  \"price\": 123,\n  \"priceUnit\": \"sample_priceUnit\",\n  \"availableFrom\": \"sample_availableFrom\",\n  \"availableTo\": \"sample_availableTo\",\n  \"location\": {\n    \"city\": \"sample_city\",\n    \"pincode\": \"sample_pincode\"\n  },\n  \"contactPhone\": \"sample_contactPhone\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "1e858665-5dde-4582-9025-bcf0810906e2",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getListings",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "listings",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "1ba1a2e2-0458-4ad9-b4b2-7feaae3fdcfa",
+          "name": "Get :id",
+          "request": {
+            "description": {
+              "content": "Controller: getListingById",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "listings",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "e847861b-6c98-4562-ba32-01c142fde7b4",
+          "name": "Update Listing",
+          "request": {
+            "description": {
+              "content": "Controller: updateListing\nSchema: updateListing\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| id | string | Optional |\n| listingId | string | Optional |\n| title | string | Optional |\n| description | string | Optional |\n| photos | array | Optional |\n| price | number | Optional |\n| priceUnit | string | Optional |\n| availableFrom | string | Optional |\n| availableTo | string | Optional |\n| location | object | Optional |\n| location.city | string | Optional |\n| location.pincode | string | Optional |\n| contactPhone | string | Optional |\n| status | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "listings",
+                "update"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"sample_id\",\n  \"listingId\": \"sample_listingId\",\n  \"title\": \"sample_title\",\n  \"description\": \"sample_description\",\n  \"photos\": [\n    \"sample_string\"\n  ],\n  \"price\": 123,\n  \"priceUnit\": \"sample_priceUnit\",\n  \"availableFrom\": \"sample_availableFrom\",\n  \"availableTo\": \"sample_availableTo\",\n  \"location\": {\n    \"city\": \"sample_city\",\n    \"pincode\": \"sample_pincode\"\n  },\n  \"contactPhone\": \"sample_contactPhone\",\n  \"status\": \"sample_status\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "38a1e44a-e021-4ad9-8678-4cc6d61c7305",
+          "name": "Update Listing Status",
+          "request": {
+            "description": {
+              "content": "Controller: updateListingStatus\nSchema: updateListingStatus\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| id | string | Optional |\n| listingId | string | Optional |\n| status | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "listings",
+                "status"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"sample_id\",\n  \"listingId\": \"sample_listingId\",\n  \"status\": \"sample_status\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "bf5c3918-5ff5-402b-9738-d01d9b8e7ed0",
+          "name": "Delete :id",
+          "request": {
+            "description": {
+              "content": "Controller: deleteListing",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "listings",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "414fea74-7288-4c6b-82dd-5b3591e06972",
+      "name": "INQUIRY",
+      "description": {
+        "content": "Routes for inquiry",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9aaf4134-bfb5-4048-92ef-9b22a4676adb",
+          "name": "Create Inquiry",
+          "request": {
+            "description": {
+              "content": "Controller: createInquiry\nSchema: createInquiry\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| targetType | string | Required |\n| targetId | string | Required |\n| message | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "inquiries",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetType\": \"sample_targetType\",\n  \"targetId\": \"sample_targetId\",\n  \"message\": \"sample_message\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "8d604326-ff88-40a2-9a0d-f35ebfda5f73",
+          "name": "Get Received",
+          "request": {
+            "description": {
+              "content": "Controller: getReceivedInquiries",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "inquiries",
+                "received"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "ad7c37d7-bbbc-4d8c-84f2-e1f209fc403c",
+          "name": "Get Sent",
+          "request": {
+            "description": {
+              "content": "Controller: getSentInquiries",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "inquiries",
+                "sent"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "2ff1f2f4-a510-4d9a-8920-b93aa5aa7df5",
+          "name": "Reply Inquiry",
+          "request": {
+            "description": {
+              "content": "Controller: replyInquiry\nSchema: replyInquiry\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| id | string | Optional |\n| inquiryId | string | Optional |\n| reply | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "inquiries",
+                "reply"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"sample_id\",\n  \"inquiryId\": \"sample_inquiryId\",\n  \"reply\": \"sample_reply\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "3a7b6bee-b53d-4d91-b2da-5fb3a69ab779",
+          "name": "Read Inquiry",
+          "request": {
+            "description": {
+              "content": "Controller: readInquiry\nSchema: readInquiry\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| id | string | Optional |\n| inquiryId | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "inquiries",
+                "read"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"sample_id\",\n  \"inquiryId\": \"sample_inquiryId\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "50fee370-4b84-43a9-8a8c-96008eb8484a",
+      "name": "NOTIFICATION",
+      "description": {
+        "content": "Routes for notification",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "38e3b3de-5e62-40d0-bd3b-f40a6d89bde2",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getNotifications",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "notifications",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "22312206-3fc2-41b4-9d2f-33d665672a3b",
+          "name": "PATCH Read-all",
+          "request": {
+            "description": {
+              "content": "Controller: readAllNotifications",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "notifications",
+                "read-all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "PATCH",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "7acfb138-3fe1-4f0f-bc0d-fd97f9cf042b",
+      "name": "FEEDBACK",
+      "description": {
+        "content": "Routes for feedback",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "53a26f21-c571-4f51-bcbe-61212429bc3b",
+          "name": "Create Feedback",
+          "request": {
+            "description": {
+              "content": "Controller: createFeedback\nSchema: createFeedback\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| type | string | Required |\n| message | string | Required |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "feedback",
+                "add"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"sample_type\",\n  \"message\": \"sample_message\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "5657b343-3c22-4923-bfb0-edbe4bccec86",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getFeedbacks",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "feedback",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "5d2cc9ae-3852-4acb-ba93-b147d4f1b697",
+          "name": "Update Feedback Status",
+          "request": {
+            "description": {
+              "content": "Controller: updateFeedbackStatus\nSchema: updateFeedbackStatus\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| id | string | Optional |\n| feedbackId | string | Optional |\n| status | string | Required |\n| adminNote | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "feedback",
+                "status"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"sample_id\",\n  \"feedbackId\": \"sample_feedbackId\",\n  \"status\": \"sample_status\",\n  \"adminNote\": \"sample_adminNote\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "2e37eb9c-c1cb-4dfe-a6a9-22bc518daf49",
+          "name": "Get :id",
+          "request": {
+            "description": {
+              "content": "Controller: getFeedbackById",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "feedback",
+                ":id"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "sample_id",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c3856147-f0db-494b-b80e-e57770904db3",
+      "name": "SUPPORT",
+      "description": {
+        "content": "Routes for support",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "42184abf-a910-4a0e-88f8-cf99ff870f89",
+          "name": "Get All",
+          "request": {
+            "description": {
+              "content": "Controller: getSupportContact",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "support",
+                "all"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "d2ad43c4-36ea-40cd-aa5b-30d13c020776",
+          "name": "Update Support",
+          "request": {
+            "description": {
+              "content": "Controller: updateSupportContact\nSchema: updateSupport\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| phone | string | Required |\n| phone2 | string | Optional |\n| email | string | Required |\n| address | string | Optional |\n",
+              "type": "text/markdown"
+            },
+            "url": {
+              "path": [
+                "support",
+                "update"
+              ],
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"sample_phone\",\n  \"phone2\": \"sample_phone2\",\n  \"email\": \"test@example.com\",\n  \"address\": \"sample_address\"\n}"
+            }
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{TOKEN}}",
+            "type": "string"
+          }
+        ]
+      }
     }
   ],
   "event": [],
@@ -769,7 +1813,7 @@
     }
   ],
   "info": {
-    "_postman_id": "d2415980-8c82-4769-85b3-63505d9224ee",
+    "_postman_id": "f36c934e-a11b-4ef4-a84b-12690508693c",
     "name": "Gondaliya Family API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {

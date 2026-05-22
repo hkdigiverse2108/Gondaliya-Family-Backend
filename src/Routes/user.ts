@@ -12,8 +12,8 @@ router.get('/all', validateQuery(getUsers), userController.getUsers);
 router.get('/:id', validateParams(getUserById), userController.getUserById);
 
 // Family member management
-router.post('/:id/family', validateRequest(addFamilyMemberSchema), userController.addFamilyMember);
-router.put('/:id/family/:memberId', validateRequest(updateFamilyMemberSchema), userController.updateFamilyMember);
-router.delete('/:id/family/:memberId', validateRequest(deleteFamilyMemberSchema), userController.deleteFamilyMember);
+router.post('/family', validateRequest(addFamilyMemberSchema), userController.addFamilyMember);
+router.put('/family', validateRequest(updateFamilyMemberSchema), userController.updateFamilyMember);
+router.delete('/family', validateRequest(deleteFamilyMemberSchema), userController.deleteFamilyMember);
 
 export const userRouter = router;

@@ -176,3 +176,27 @@ export const redisDelPattern = async (pattern: string) => {
     return 0;
 };
 
+/**
+ * Increment key and optionally set expiration time in seconds
+ */
+export const redisIncr = async (key: string, ttlSeconds?: number): Promise<number> => {
+    const client = getRedis();
+    if (isFallback) {
+        const currentVal = await client.get(key);
+        const count = currentVal ? parseInt(currentVal, 10) + 1 : 1;
+        await client.set(key, count.toString());
+        if (ttlSeconds && !currentVal) {
+            await client.set(key, count.toString(), 'EX', ttlSeconds);
+        }
+        return count;
+    } else {
+        const clientReal = client as Redis;
+        const count = await clientReal.incr(key);
+        if (count === 1 && ttlSeconds) {
+            await clientReal.expire(key, ttlSeconds);
+        }
+        return count;
+    }
+};
+
+

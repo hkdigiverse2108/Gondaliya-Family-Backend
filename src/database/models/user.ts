@@ -55,6 +55,7 @@ export interface IUser extends Document {
     isDeleted: boolean;
     isActive: boolean;
     isLoggedIn: boolean;
+    deviceToken: string[] | null;
 }
 
 const workDetailsSchema = new Schema({
@@ -149,6 +150,7 @@ const userSchema = new mongoose.Schema<IUser>({
     isDeleted: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },
     isLoggedIn: { type: Boolean, default: false },
+    deviceToken: { type: [String], default: [] },
 
 }, { timestamps: true });
 

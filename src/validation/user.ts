@@ -123,6 +123,7 @@ export const getUserById = Joi.object({
 });
 
 export const addFamilyMemberSchema = Joi.object({
+    id: Joi.string().custom(isValidObjectId).required(),
     firstName: Joi.string().optional().allow(null, ''),
     middleName: Joi.string().optional().allow(null, ''),
     lastName: Joi.string().optional().allow(null, ''),
@@ -137,6 +138,8 @@ export const addFamilyMemberSchema = Joi.object({
 });
 
 export const updateFamilyMemberSchema = Joi.object({
+    id: Joi.string().custom(isValidObjectId).required(),
+    memberId: Joi.string().custom(isValidObjectId).required(),
     firstName: Joi.string().optional().allow(null, ''),
     middleName: Joi.string().optional().allow(null, ''),
     lastName: Joi.string().optional().allow(null, ''),
@@ -150,4 +153,7 @@ export const updateFamilyMemberSchema = Joi.object({
     workDetails: workDetailsJoi,
 });
 
-export const deleteFamilyMemberSchema = Joi.object({});
+export const deleteFamilyMemberSchema = Joi.object({
+    id: Joi.string().custom(isValidObjectId).required(),
+    memberId: Joi.string().custom(isValidObjectId).required(),
+});

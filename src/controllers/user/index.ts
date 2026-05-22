@@ -7,6 +7,7 @@ export const createUser = async (req, res) => {
     reqInfo(req);
     try {
         let body = req.body || {};
+        console.log("DEBUG: createUser called. Req Body:", JSON.stringify(body, null, 2));
 
         const incomingPhones: string[] = [];
         if (body.phoneNumber) incomingPhones.push(body.phoneNumber);
@@ -45,8 +46,11 @@ export const createUser = async (req, res) => {
         const response = await createData(userModel, body);
         if (!response) return responseError(res, HTTP_STATUS.NOT_IMPLEMENTED, responseMessage.addDataError);
 
+        console.log("DEBUG: createData result:", JSON.stringify(response, null, 2));
+
         if (response.familyMembers?.length) {
             await promoteIfHasPhone(response);
+            console.log("DEBUG: After promoteIfHasPhone, response:", JSON.stringify(response, null, 2));
         }
 
         if (selfRegisterLink.alreadyLinked) {
@@ -58,8 +62,11 @@ export const createUser = async (req, res) => {
         }
 
         await redisDelPattern(`users:list:*`);
+        await redisDel('parivar:villages');
+        await redisDelPattern('parivar:directory:*');
         return responseSuccess(res, responseMessage.addDataSuccess("User"), response);
     } catch (error: any) {
+        console.error("DEBUG: Error in createUser:", error);
         return internalServerError(res, error);
     }
 };
@@ -109,6 +116,8 @@ export const updateUser = async (req, res) => {
 
         await redisDelPattern(`users:list:*`);
         await redisDel(`user:${userId}`);
+        await redisDel('parivar:villages');
+        await redisDelPattern('parivar:directory:*');
         return responseSuccess(res, responseMessage.updateDataSuccess("User"), user);
     } catch (error) {
         return internalServerError(res, error);
@@ -125,6 +134,8 @@ export const deleteUser = async (req, res) => {
 
         await redisDelPattern(`users:list:*`);
         await redisDel(`user:${id}`);
+        await redisDel('parivar:villages');
+        await redisDelPattern('parivar:directory:*');
         return responseSuccess(res, responseMessage.deleteDataSuccess("User"));
     } catch (error) {
         return internalServerError(res, error);
@@ -165,8 +176,9 @@ export const getUsers = async (req, res) => {
 export const addFamilyMember = async (req, res) => {
     reqInfo(req);
     try {
-        const headId = req.params.id;
-        const memberData = req.body || {};
+        const headId = req.body.id;
+        const memberData = { ...req.body };
+        delete memberData.id;
 
         const head = await getFirstMatch(userModel, { _id: isValidObjectId(headId), isDeleted: false }, {}, {});
         if (!head) return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound("User"));
@@ -194,6 +206,8 @@ export const addFamilyMember = async (req, res) => {
 
         await redisDelPattern(`users:list:*`);
         await redisDel(`user:${headId}`);
+        await redisDel('parivar:villages');
+        await redisDelPattern('parivar:directory:*');
         return responseSuccess(res, responseMessage.addDataSuccess("Family member"), updatedHead);
     } catch (error) {
         return internalServerError(res, error);
@@ -203,8 +217,10 @@ export const addFamilyMember = async (req, res) => {
 export const updateFamilyMember = async (req, res) => {
     reqInfo(req);
     try {
-        const { id: headId, memberId } = req.params;
-        const updates = req.body || {};
+        const { id: headId, memberId } = req.body;
+        const updates = { ...req.body };
+        delete updates.id;
+        delete updates.memberId;
 
         const head = await getFirstMatch(userModel, { _id: isValidObjectId(headId), isDeleted: false }, {}, {});
         if (!head) return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound("User"));
@@ -257,6 +273,8 @@ export const updateFamilyMember = async (req, res) => {
 
         await redisDelPattern(`users:list:*`);
         await redisDel(`user:${headId}`);
+        await redisDel('parivar:villages');
+        await redisDelPattern('parivar:directory:*');
         return responseSuccess(res, responseMessage.updateDataSuccess("Family member"), updatedHead);
     } catch (error) {
         return internalServerError(res, error);
@@ -266,7 +284,7 @@ export const updateFamilyMember = async (req, res) => {
 export const deleteFamilyMember = async (req, res) => {
     reqInfo(req);
     try {
-        const { id: headId, memberId } = req.params;
+        const { id: headId, memberId } = req.body;
 
         const head = await getFirstMatch(userModel, { _id: isValidObjectId(headId), isDeleted: false }, {}, {});
         if (!head) return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound("User"));
@@ -287,6 +305,8 @@ export const deleteFamilyMember = async (req, res) => {
 
         await redisDelPattern(`users:list:*`);
         await redisDel(`user:${headId}`);
+        await redisDel('parivar:villages');
+        await redisDelPattern('parivar:directory:*');
         return responseSuccess(res, responseMessage.deleteDataSuccess("Family member"));
     } catch (error) {
         return internalServerError(res, error);

@@ -5,6 +5,7 @@ import { responseMessage, redisSet, redisGet, redisDel, getFirstMatch, createDat
 export const signUp = async (req, res) => {
     try {
         const { firstName, middleName, lastName, dob, bloodGroup, education, isMarried, profilePhoto, email, password, phoneNumber, phoneNumber2, role, nativeVillage, nativeTaluka, nativeDistrict, village, pincode, taluka, district, currentAddress, currentCity, currentState, houseType, familyMembers, workDetails } = req.body;
+        console.log("DEBUG: signUp called. Req Body:", JSON.stringify(req.body, null, 2));
 
         if (email) {
             const isEmailExist = await getFirstMatch(userModel, { email, isDeleted: false }, {}, {});
@@ -64,16 +65,16 @@ export const signUp = async (req, res) => {
             role: role || USER_ROLES.USER,
             isActive: true,
             isDeleted: false,
-            nativeVillage:  nativeVillage  || null,
-            nativeTaluka:   nativeTaluka   || null,
+            nativeVillage: nativeVillage || null,
+            nativeTaluka: nativeTaluka || null,
             nativeDistrict: nativeDistrict || null,
             village: village || null,
             pincode: pincode || null,
             taluka: taluka || null,
             district: district || null,
             currentAddress: currentAddress || null,
-            currentCity:    currentCity    || null,
-            currentState:   currentState   || null,
+            currentCity: currentCity || null,
+            currentState: currentState || null,
             houseType: houseType || null,
             familyMembers: familyMembers || [],
             workDetails: workDetails || null,
@@ -81,9 +82,12 @@ export const signUp = async (req, res) => {
             isHeadOfFamily: !selfRegisterLink.alreadyLinked,
         });
 
+        console.log("DEBUG: signUp createData result:", JSON.stringify(newUser, null, 2));
+
         // Auto-create accounts for family members that already have a phone number
         if (newUser.familyMembers?.length) {
             await promoteIfHasPhone(newUser);
+            console.log("DEBUG: signUp After promoteIfHasPhone, response:", JSON.stringify(newUser, null, 2));
         }
 
         if (selfRegisterLink.alreadyLinked) {
@@ -102,6 +106,7 @@ export const signUp = async (req, res) => {
             otp
         });
     } catch (error) {
+        console.error("DEBUG: Error in signUp:", error);
         return internalServerError(res, error);
     }
 };
