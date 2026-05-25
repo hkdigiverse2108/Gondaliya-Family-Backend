@@ -81,6 +81,8 @@ export const processDeleteAccount = async (req, res) => {
         await redisDel(`user:${userId}`);
         await redisDel('parivar:villages');
         await redisDelPattern('parivar:directory:*');
+        await redisDelPattern('businesses:list:*');
+        await redisDelPattern('businesses:detail:*');
 
         return responseSuccess(res, "Your account has been permanently deleted. Thank you for using Gondaliya Family App.");
     } catch (error) {
