@@ -50,15 +50,7 @@ export const emitChatEvent = (event: ChatSocketEvent, payload: unknown) => {
 export const socketServer = (app) => {
     const server = new http.Server(app);
 
-    const io = new Server(server, {
-        cors: {
-            origin: true,
-            methods: ['GET', 'POST'],
-            credentials: true,
-        },
-        pingInterval: 25000,
-        pingTimeout: 20000,
-    });
+    const io = require('socket.io')(server, { cors: true })
 
     io.use(async (socket, next) => {
         try {
