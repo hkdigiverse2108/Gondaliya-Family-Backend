@@ -1,6 +1,6 @@
 import { chatModel } from '../../database';
 import { HTTP_STATUS, isValidObjectId, resolvePagination, responseSuccess, responseError, internalServerError, USER_ROLES } from '../../common';
-import { reqInfo, responseMessage, createData, updateData, getData, countData, redisIncr, findOneAndPopulate, findAllWithPopulate, Io, redisGet, redisSet, redisDelPattern } from '../../helper';
+import { reqInfo, responseMessage, createData, updateData, getData, countData, redisIncr, findOneAndPopulate, findAllWithPopulate, emitChatEvent, CHAT_EVENTS, redisGet, redisSet, redisDelPattern } from '../../helper';
 import moment from 'moment-timezone';
 
 const TIMEZONE = 'Asia/Calcutta';
@@ -62,9 +62,7 @@ export const sendMessage = async (req, res) => {
 
         await redisDelPattern('chats:list:*');
 
-        if (Io) {
-            Io.to('general-chat').emit('chat:message', populatedChat);
-        }
+        emitChatEvent(CHAT_EVENTS.MESSAGE, populatedChat);
 
         return responseSuccess(res, responseMessage.addDataSuccess("Message"), populatedChat);
     } catch (error) {
@@ -146,9 +144,7 @@ export const deleteChat = async (req, res) => {
 
         await redisDelPattern('chats:list:*');
 
-        if (Io) {
-            Io.to('general-chat').emit('chat:removed', { id });
-        }
+        emitChatEvent(CHAT_EVENTS.REMOVED, { id });
 
         return responseSuccess(res, responseMessage.deleteDataSuccess("Message"));
     } catch (error) {
@@ -174,9 +170,7 @@ export const blockChat = async (req, res) => {
 
         await redisDelPattern('chats:list:*');
 
-        if (Io) {
-            Io.to('general-chat').emit('chat:blocked', { id: targetId });
-        }
+        emitChatEvent(CHAT_EVENTS.BLOCKED, { id: targetId });
 
         return responseSuccess(res, responseMessage.updateDataSuccess("Message block status"));
     } catch (error) {
