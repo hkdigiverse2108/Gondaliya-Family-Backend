@@ -108,7 +108,8 @@ export const getParivarDirectory = async (req, res) => {
                     phoneNumber: member.phoneNumber,
                     workDetailsSummary: memberWorkSummary,
                     isIndependent: !!member.isIndependent,
-                    linkedUserId: member.isIndependent ? member.linkedUserId : null
+                    linkedUserId: member.isIndependent ? member.linkedUserId : null,
+                    profilePhoto: member.profilePhoto || null
                 };
             });
 
@@ -119,7 +120,8 @@ export const getParivarDirectory = async (req, res) => {
                     lastName: head.lastName,
                     village: head.village,
                     phoneNumber: head.phoneNumber,
-                    workDetailsSummary: headWorkSummary
+                    workDetailsSummary: headWorkSummary,
+                    profilePhoto: head.profilePhoto || null
                 },
                 familyMembers: formattedFamilyMembers
             };
