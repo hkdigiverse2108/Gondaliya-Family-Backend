@@ -123,19 +123,19 @@ const userSchema = new mongoose.Schema<IUser>({
     role: { type: String, enum: Object.values(USER_ROLES), default: USER_ROLES.USER },
 
     // Native place (origin village / taluka / district)
-    nativeVillage:  { type: String, default: null },
-    nativeTaluka:   { type: String, default: null },
+    nativeVillage: { type: String, default: null },
+    nativeTaluka: { type: String, default: null },
     nativeDistrict: { type: String, default: null },
 
     // Current address
-    village:        { type: String, default: null },
-    pincode:        { type: String, default: null },
-    taluka:         { type: String, default: null },
-    district:       { type: String, default: null },
+    village: { type: String, default: null },
+    pincode: { type: String, default: null },
+    taluka: { type: String, default: null },
+    district: { type: String, default: null },
     currentAddress: { type: String, default: null },
-    currentCity:    { type: String, default: null },
-    currentState:   { type: String, default: null },
-    houseType:      { type: String, enum: Object.values(HOUSE_TYPES), default: null },
+    currentCity: { type: String, default: null },
+    currentState: { type: String, default: null },
+    houseType: { type: String, enum: Object.values(HOUSE_TYPES), default: null },
 
     familyMembers: [familyMemberSchema],
     isHeadOfFamily: { type: Boolean, default: true },
