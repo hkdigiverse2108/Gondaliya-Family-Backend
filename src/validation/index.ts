@@ -10,5 +10,7 @@ export * from './feedback';
 export * from './support';
 export * from './parivar';
 export * from './business';
+export * from './privateChat';
+export * from './upload';
 
 

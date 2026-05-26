@@ -50,6 +50,7 @@ export const signUpSchema = Joi.object({
             businessName: Joi.string().optional().allow(null, ''),
             ownerName: Joi.string().optional().allow(null, ''),
             description: Joi.string().optional().allow(null, ''),
+            businessLogo: Joi.string().optional().allow(null, ''),
             locations: Joi.array().items(
                 Joi.object({
                     shopAddress: Joi.string().optional().allow(null, ''),

@@ -17,7 +17,7 @@ export const sendMessage = async (req, res) => {
     reqInfo(req);
     try {
         const { user } = req.headers;
-        const { message, mediaUrl, mediaType, fileSize } = req.body;
+        const { message, mediaUrl, mediaType, fileSize, messageType } = req.body;
 
         const actualType = mediaType || 'TEXT';
 
@@ -45,6 +45,7 @@ export const sendMessage = async (req, res) => {
             message: message || null,
             mediaUrl: mediaUrl || null,
             mediaType: actualType,
+            messageType: messageType || 'text',
             fileSize: fileSize || 0
         });
 

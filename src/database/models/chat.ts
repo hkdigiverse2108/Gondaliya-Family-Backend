@@ -5,6 +5,7 @@ const chatSchema = new Schema({
     message: { type: String, default: null },
     mediaUrl: { type: String, default: null },
     mediaType: { type: String, enum: ['TEXT', 'IMAGE', 'VIDEO', 'FILE'], default: 'TEXT' },
+    messageType: { type: String, enum: ['text', 'give', 'take'], default: 'text' },
     fileSize: { type: Number, default: 0 },
     isDeleted: { type: Boolean, default: false },
     isBlocked: { type: Boolean, default: false },

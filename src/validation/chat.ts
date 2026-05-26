@@ -5,7 +5,8 @@ export const sendChatMessage = Joi.object({
     message: Joi.string().optional().allow(null, ''),
     mediaUrl: Joi.string().optional().allow(null, ''),
     mediaType: Joi.string().valid('TEXT', 'IMAGE', 'VIDEO', 'FILE').optional(),
-    fileSize: Joi.number().optional()
+    fileSize: Joi.number().optional(),
+    messageType: Joi.string().valid('text', 'give', 'take').optional()
 });
 
 export const deleteChatMessage = Joi.object({

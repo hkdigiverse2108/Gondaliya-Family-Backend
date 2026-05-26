@@ -66,6 +66,7 @@ const workDetailsSchema = new Schema({
         businessName: { type: String, default: null },
         ownerName: { type: String, default: null },
         description: { type: String, default: null },
+        businessLogo: { type: String, default: null },
         locations: [{
             shopAddress: { type: String, default: null },
             areaCity: { type: String, default: null },

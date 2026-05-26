@@ -142,6 +142,21 @@ export const getBusinesses = async (req, res) => {
 
         let businesses = collectBusinessesFromUsers(users);
 
+        if (search) {
+            const searchLower = search.trim().toLowerCase();
+            businesses = businesses.filter((b) => {
+                return (
+                    (b.business.businessName || '').toLowerCase().includes(searchLower) ||
+                    (b.business.category || '').toLowerCase().includes(searchLower) ||
+                    (b.business.subCategory || '').toLowerCase().includes(searchLower) ||
+                    (b.business.description || '').toLowerCase().includes(searchLower) ||
+                    (b.business.ownerName || '').toLowerCase().includes(searchLower) ||
+                    (b.owner.firstName || '').toLowerCase().includes(searchLower) ||
+                    (b.owner.lastName || '').toLowerCase().includes(searchLower)
+                );
+            });
+        }
+
         if (category) {
             const cat = category.trim().toLowerCase();
             businesses = businesses.filter(
