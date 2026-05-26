@@ -6,5 +6,7 @@ test.js
 test.html
 *.bat
 .env
+firebase-service-account.json
+**/firebase-service-account*.json
 images
 pdf
