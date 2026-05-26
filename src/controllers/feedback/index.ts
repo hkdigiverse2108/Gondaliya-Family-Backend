@@ -1,5 +1,5 @@
 import { feedbackModel } from '../../database';
-import { HTTP_STATUS, isValidObjectId, resolvePagination, responseSuccess, responseError, internalServerError, USER_ROLES } from '../../common';
+import { HTTP_STATUS, isValidObjectId, resolvePagination, responseSuccess, responseError, internalServerError, USER_ROLES, FEEDBACK_STATUS } from '../../common';
 import { reqInfo, responseMessage, createData, updateData, countData, findAllWithPopulate, findOneAndPopulate, redisGet, redisSet, redisDel, redisDelPattern } from '../../helper';
 
 export const createFeedback = async (req, res) => {
@@ -12,7 +12,7 @@ export const createFeedback = async (req, res) => {
             userId: user._id,
             type,
             message,
-            status: 'PENDING',
+            status: FEEDBACK_STATUS.PENDING,
             adminNote: null
         });
 

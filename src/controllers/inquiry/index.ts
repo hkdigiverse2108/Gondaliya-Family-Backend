@@ -1,6 +1,6 @@
-import { inquiryModel, listingModel, userModel, notificationModel } from '../../database';
-import { HTTP_STATUS, isValidObjectId, resolvePagination, responseSuccess, responseError, internalServerError } from '../../common';
-import { reqInfo, responseMessage, createData, updateData, getFirstMatch, getData, countData, findAllWithPopulate, notification_to_user, redisGet, redisSet, redisDelPattern } from '../../helper';
+import { inquiryModel, listingModel, userModel } from '../../database';
+import { HTTP_STATUS, isValidObjectId, resolvePagination, responseSuccess, responseError, internalServerError, NOTIFICATION_TYPES } from '../../common';
+import { reqInfo, responseMessage, createData, updateData, getFirstMatch, getData, countData, findAllWithPopulate, dispatchNotification, redisGet, redisSet, redisDelPattern } from '../../helper';
 
 export const createInquiry = async (req, res) => {
     reqInfo(req);
@@ -41,27 +41,16 @@ export const createInquiry = async (req, res) => {
             return responseError(res, HTTP_STATUS.BAD_REQUEST, responseMessage.addDataError);
         }
 
-        const owner = await getFirstMatch(userModel, { _id: ownerId }, { _id: 1, deviceToken: 1 }, {});
-        if (owner) {
-            const title = "New Inquiry Received";
-            const body = `${user.firstName} ${user.lastName} sent an inquiry: "${message.substring(0, 40)}${message.length > 40 ? '...' : ''}"`;
+        const title = 'New Inquiry Received';
+        const body = `${user.firstName} ${user.lastName} sent an inquiry: "${message.substring(0, 40)}${message.length > 40 ? '...' : ''}"`;
 
-            await createData(notificationModel, {
-                userId: owner._id,
-                title,
-                body,
-                type: 'INQUIRY',
-                refId: inquiry._id
-            });
-
-            await redisDelPattern(`notifications:list:${owner._id}`);
-
-            if (owner.deviceToken && owner.deviceToken.length > 0) {
-                notification_to_user(owner, { refId: String(inquiry._id), type: 'INQUIRY' }, { title, body }).catch(err => {
-                    console.error("FCM Inquiry Error:", err);
-                });
-            }
-        }
+        await dispatchNotification({
+            userId: String(ownerId),
+            title,
+            body,
+            type: NOTIFICATION_TYPES.INQUIRY,
+            refId: String(inquiry._id),
+        });
 
         await redisDelPattern('inquiries:*');
 
@@ -231,27 +220,16 @@ export const replyInquiry = async (req, res) => {
 
         const updated = await updateData(inquiryModel, { _id: inquiry._id }, { reply, repliedAt: new Date() }, {});
 
-        const sender = await getFirstMatch(userModel, { _id: inquiry.senderId }, { _id: 1, deviceToken: 1 }, {});
-        if (sender) {
-            const title = "Reply to Inquiry Received";
-            const body = `${user.firstName} ${user.lastName} replied: "${reply.substring(0, 40)}${reply.length > 40 ? '...' : ''}"`;
+        const title = 'Reply to Inquiry Received';
+        const body = `${user.firstName} ${user.lastName} replied: "${reply.substring(0, 40)}${reply.length > 40 ? '...' : ''}"`;
 
-            await createData(notificationModel, {
-                userId: sender._id,
-                title,
-                body,
-                type: 'REPLY',
-                refId: inquiry._id
-            });
-
-            await redisDelPattern(`notifications:list:${sender._id}`);
-
-            if (sender.deviceToken && sender.deviceToken.length > 0) {
-                notification_to_user(sender, { refId: String(inquiry._id), type: 'REPLY' }, { title, body }).catch(err => {
-                    console.error("FCM Reply Notification Error:", err);
-                });
-            }
-        }
+        await dispatchNotification({
+            userId: String(inquiry.senderId),
+            title,
+            body,
+            type: NOTIFICATION_TYPES.REPLY,
+            refId: String(inquiry._id),
+        });
 
         await redisDelPattern('inquiries:*');
 

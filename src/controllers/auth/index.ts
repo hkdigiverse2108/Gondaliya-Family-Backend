@@ -1,6 +1,6 @@
 import { userModel } from '../../database';
 import { responseSuccess, responseError, internalServerError, HTTP_STATUS, generateHash, compareHash, generateToken, USER_ROLES } from '../../common';
-import { responseMessage, redisSet, redisGet, redisDel, getFirstMatch, createData, updateData, promoteIfHasPhone, resolveOnSelfRegister, linkSelfRegisteredMember } from '../../helper';
+import { responseMessage, redisSet, redisGet, redisDel, getFirstMatch, createData, updateData, promoteIfHasPhone, resolveOnSelfRegister, linkSelfRegisteredMember, registerDeviceTokens } from '../../helper';
 
 export const signUp = async (req, res) => {
     try {
@@ -113,7 +113,7 @@ export const signUp = async (req, res) => {
 
 export const otpVerification = async (req, res) => {
     try {
-        const { phoneNumber, otp } = req.body;
+        const { phoneNumber, otp, deviceToken } = req.body;
 
         const storedOtp = await redisGet(`otp:${phoneNumber}`);
         if (!storedOtp || storedOtp !== otp.toString()) {
@@ -128,6 +128,10 @@ export const otpVerification = async (req, res) => {
 
         if (!user) {
             return responseError(res, HTTP_STATUS.NOT_FOUND, "User not found with this phone number!");
+        }
+
+        if (deviceToken) {
+            await registerDeviceTokens(String(user._id), deviceToken);
         }
 
         // Delete OTP from Redis after successful verification
@@ -152,7 +156,7 @@ export const otpVerification = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const { phoneNumber, password } = req.body;
+        const { phoneNumber, password, deviceToken } = req.body;
 
         const user = await getFirstMatch(userModel, { phoneNumber, isDeleted: false }, {}, {});
         if (!user) {
@@ -166,6 +170,10 @@ export const login = async (req, res) => {
         const isPasswordMatch = await compareHash(password, user.password);
         if (!isPasswordMatch) {
             return responseError(res, HTTP_STATUS.UNAUTHORIZED, "Invalid phone number or password!");
+        }
+
+        if (deviceToken) {
+            await registerDeviceTokens(String(user._id), deviceToken);
         }
 
         const token = await generateToken({

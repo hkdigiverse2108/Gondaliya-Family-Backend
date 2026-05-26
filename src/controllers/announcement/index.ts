@@ -1,6 +1,6 @@
-import { announcementModel, userModel, notificationModel } from '../../database';
-import { HTTP_STATUS, isValidObjectId, resolvePagination, resolveSortAndFilter, responseSuccess, responseError, internalServerError, USER_ROLES } from '../../common';
-import { reqInfo, responseMessage, updateData, getFirstMatch, createData, getDataWithSorting, countData, redisDelPattern, redisGet, redisSet, notification_to_multiple_user, getData, insertMany } from '../../helper';
+import { announcementModel, userModel } from '../../database';
+import { HTTP_STATUS, isValidObjectId, resolvePagination, resolveSortAndFilter, responseSuccess, responseError, internalServerError, USER_ROLES, NOTIFICATION_TYPES } from '../../common';
+import { reqInfo, responseMessage, updateData, getFirstMatch, createData, getDataWithSorting, countData, redisDelPattern, redisGet, redisSet, getData, dispatchNotificationToUsers } from '../../helper';
 
 export const createAnnouncement = async (req, res) => {
     reqInfo(req);
@@ -28,24 +28,12 @@ export const createAnnouncement = async (req, res) => {
         const activeUsers = await getData(userModel, { isDeleted: false, isActive: true, role: { $ne: USER_ROLES.ADMIN } }, { _id: 1, deviceToken: 1 }, {});
 
         if (activeUsers.length > 0) {
-            const notifs = activeUsers.map(u => ({
-                userId: u._id,
-                title: "New Announcement",
+            await dispatchNotificationToUsers(activeUsers, {
+                title: 'New Announcement',
                 body: title,
-                type: 'ANNOUNCEMENT',
-                refId: announcement._id
-            }));
-            await insertMany(notificationModel, notifs);
-            await redisDelPattern('notifications:list:*');
-
-            const usersWithTokens = activeUsers.filter(u => u.deviceToken && u.deviceToken.length > 0);
-            if (usersWithTokens.length > 0) {
-                const fcmData = { refId: String(announcement._id), type: 'ANNOUNCEMENT' };
-                const fcmNotification = { title: "New Announcement", body: title };
-                notification_to_multiple_user(usersWithTokens, fcmData, fcmNotification).catch(err => {
-                    console.error("FCM Announcement Error:", err);
-                });
-            }
+                type: NOTIFICATION_TYPES.ANNOUNCEMENT,
+                refId: String(announcement._id),
+            });
         }
 
         return responseSuccess(res, responseMessage.addDataSuccess("Announcement"), announcement);

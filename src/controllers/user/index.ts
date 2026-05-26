@@ -1,6 +1,6 @@
 import { userModel } from '../../database';
 import { generateHash, HTTP_STATUS, isValidObjectId, resolvePagination, resolveSortAndFilter, USER_ROLES, responseSuccess, responseError, internalServerError } from '../../common';
-import { reqInfo, responseMessage, updateData, getFirstMatch, createData, getDataWithSorting, countData, redisGet, redisSet, redisDel, redisDelPattern, promoteIfHasPhone, resolveOnSelfRegister, linkSelfRegisteredMember, addPhoneToMember } from '../../helper';
+import { reqInfo, responseMessage, updateData, getFirstMatch, createData, getDataWithSorting, countData, redisGet, redisSet, redisDel, redisDelPattern, promoteIfHasPhone, resolveOnSelfRegister, linkSelfRegisteredMember, addPhoneToMember, registerDeviceTokens } from '../../helper';
 import mongoose from 'mongoose';
 
 export const createUser = async (req, res) => {
@@ -43,8 +43,13 @@ export const createUser = async (req, res) => {
         body.password = await generateHash(body.password);
         body.isHeadOfFamily = !selfRegisterLink.alreadyLinked;
 
-        const response = await createData(userModel, body);
+        const { deviceToken, ...userBody } = body;
+        const response = await createData(userModel, userBody);
         if (!response) return responseError(res, HTTP_STATUS.NOT_IMPLEMENTED, responseMessage.addDataError);
+
+        if (deviceToken) {
+            await registerDeviceTokens(String(response._id), deviceToken);
+        }
 
         console.log("DEBUG: createData result:", JSON.stringify(response, null, 2));
 
@@ -111,6 +116,11 @@ export const updateUser = async (req, res) => {
         // Hash password if being updated
         if (updateFields.password) {
             updateFields.password = await generateHash(updateFields.password);
+        }
+
+        if (updateFields.deviceToken) {
+            await registerDeviceTokens(userId, updateFields.deviceToken);
+            delete updateFields.deviceToken;
         }
 
         const user = await updateData(userModel, { _id: isValidObjectId(userId), isDeleted: false }, updateFields, {});

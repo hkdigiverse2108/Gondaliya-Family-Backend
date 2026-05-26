@@ -72,6 +72,7 @@ export const createUser = Joi.object({
     houseType: Joi.string().valid(...Object.values(HOUSE_TYPES)).optional().allow(null, ''),
     familyMembers: Joi.array().items(familyMemberJoi).optional(),
     workDetails: workDetailsJoi,
+    deviceToken: Joi.alternatives().try(Joi.string(), Joi.array().items(Joi.string())).optional(),
 });
 
 export const updateUser = Joi.object({
@@ -102,6 +103,7 @@ export const updateUser = Joi.object({
     houseType: Joi.string().valid(...Object.values(HOUSE_TYPES)).optional().allow(null, ''),
     familyMembers: Joi.array().items(familyMemberJoi).optional(),
     workDetails: workDetailsJoi,
+    deviceToken: Joi.alternatives().try(Joi.string(), Joi.array().items(Joi.string())).optional(),
 });
 
 export const deleteUser = Joi.object({

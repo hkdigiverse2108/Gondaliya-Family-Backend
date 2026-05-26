@@ -79,11 +79,13 @@ export const signUpSchema = Joi.object({
 export const loginSchema = Joi.object({
     phoneNumber: Joi.string().length(10).required(),
     password: Joi.string().required(),
+    deviceToken: Joi.alternatives().try(Joi.string(), Joi.array().items(Joi.string())).optional(),
 });
 
 export const otpVerificationSchema = Joi.object({
     phoneNumber: Joi.string().length(10).required(),
     otp: Joi.number().required(),
+    deviceToken: Joi.alternatives().try(Joi.string(), Joi.array().items(Joi.string())).optional(),
 });
 
 export const forgotPasswordSchema = Joi.object({

@@ -39,3 +39,21 @@ export const RELATIONS = {
     SON_IN_LAW: "Son-in-law",
     OTHER: "Other",
 } as const;
+
+export const FEEDBACK_TYPES = {
+    FEEDBACK: "FEEDBACK",
+    COMPLAINT: "COMPLAINT",
+} as const;
+
+export const FEEDBACK_STATUS = {
+    PENDING: "PENDING",
+    REVIEWED: "REVIEWED",
+    RESOLVED: "RESOLVED",
+} as const;
+
+export const NOTIFICATION_TYPES = {
+    ANNOUNCEMENT: "ANNOUNCEMENT",
+    INQUIRY: "INQUIRY",
+    REPLY: "REPLY",
+    SYSTEM: "SYSTEM",
+} as const;
