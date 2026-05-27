@@ -5,11 +5,16 @@ const workDetailsJoi = Joi.object({
     hasOwnBusiness: Joi.boolean().optional().allow(null),
     businessDetails: Joi.object({
         category: Joi.string().optional().allow(null, ''),
-        subCategory: Joi.string().optional().allow(null, ''),
+        subCategory: Joi.alternatives().try(
+            Joi.array().items(Joi.string()).optional(),
+            Joi.string().optional().allow(null, '')
+        ).optional().allow(null, ''),
         businessName: Joi.string().optional().allow(null, ''),
         ownerName: Joi.string().optional().allow(null, ''),
         description: Joi.string().optional().allow(null, ''),
         businessLogo: Joi.string().optional().allow(null, ''),
+        businessBanner: Joi.string().optional().allow(null, ''),
+        businessPhotos: Joi.array().items(Joi.string()).optional().allow(null),
         locations: Joi.array().items(Joi.object({
             shopAddress: Joi.string().optional().allow(null, ''),
             areaCity: Joi.string().optional().allow(null, ''),

@@ -43,12 +43,15 @@ const formatBusinessEntry = (
         },
         business: {
             category: bd.category || null,
-            subCategory: bd.subCategory || null,
+            subCategory: bd.subCategory || [],
             businessName: bd.businessName,
             ownerName: bd.ownerName || null,
             description: bd.description || null,
             locations: bd.locations || [],
             contactInfo: bd.contactInfo || {},
+            businessLogo: bd.businessLogo || null,
+            businessBanner: bd.businessBanner || null,
+            businessPhotos: bd.businessPhotos || [],
         },
     };
 };
@@ -148,7 +151,9 @@ export const getBusinesses = async (req, res) => {
                 return (
                     (b.business.businessName || '').toLowerCase().includes(searchLower) ||
                     (b.business.category || '').toLowerCase().includes(searchLower) ||
-                    (b.business.subCategory || '').toLowerCase().includes(searchLower) ||
+                    (Array.isArray(b.business.subCategory)
+                        ? b.business.subCategory.some(s => (s || '').toLowerCase().includes(searchLower))
+                        : (b.business.subCategory || '').toLowerCase().includes(searchLower)) ||
                     (b.business.description || '').toLowerCase().includes(searchLower) ||
                     (b.business.ownerName || '').toLowerCase().includes(searchLower) ||
                     (b.owner.firstName || '').toLowerCase().includes(searchLower) ||
@@ -166,9 +171,12 @@ export const getBusinesses = async (req, res) => {
 
         if (subCategory) {
             const sub = subCategory.trim().toLowerCase();
-            businesses = businesses.filter(
-                (b) => b.business.subCategory?.toLowerCase() === sub
-            );
+            businesses = businesses.filter((b) => {
+                if (Array.isArray(b.business.subCategory)) {
+                    return b.business.subCategory.some(s => (s || '').toLowerCase() === sub);
+                }
+                return b.business.subCategory?.toLowerCase() === sub;
+            });
         }
 
         if (city) {

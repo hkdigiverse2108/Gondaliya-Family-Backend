@@ -8,9 +8,12 @@ export const startConversationSchema = Joi.object({
 export const sendPrivateMessageSchema = Joi.object({
     conversationId: Joi.string().custom(isValidObjectId).required(),
     receiverId: Joi.string().custom(isValidObjectId).required(),
-    message: Joi.string().required(),
-    messageType: Joi.string().valid('text', 'give', 'take').required(),
-    relatedListingId: Joi.string().custom(isValidObjectId).optional().allow(null, '')
+    message: Joi.string().optional().allow(null, ''),
+    messageType: Joi.string().valid('text', 'give', 'take').optional(),
+    relatedListingId: Joi.string().custom(isValidObjectId).optional().allow(null, ''),
+    mediaUrl: Joi.string().optional().allow(null, ''),
+    mediaType: Joi.string().valid('TEXT', 'IMAGE', 'VIDEO', 'FILE').optional(),
+    fileSize: Joi.number().optional()
 });
 
 export const getPrivateMessagesQuerySchema = Joi.object({

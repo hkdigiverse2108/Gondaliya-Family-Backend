@@ -62,11 +62,13 @@ const workDetailsSchema = new Schema({
     hasOwnBusiness: { type: Boolean, default: null },
     businessDetails: {
         category: { type: String, default: null },
-        subCategory: { type: String, default: null },
+        subCategory: { type: [String], default: [] },
         businessName: { type: String, default: null },
         ownerName: { type: String, default: null },
         description: { type: String, default: null },
         businessLogo: { type: String, default: null },
+        businessBanner: { type: String, default: null },
+        businessPhotos: { type: [String], default: [] },
         locations: [{
             shopAddress: { type: String, default: null },
             areaCity: { type: String, default: null },

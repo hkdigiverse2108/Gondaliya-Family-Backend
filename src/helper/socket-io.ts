@@ -113,11 +113,42 @@ const ioEvents = (io: Server) => {
             }
         });
 
-        socket.on('send_private_message', async (data: { conversationId: string, receiverId: string, message: string, messageType?: string, relatedListingId?: string }) => {
+        socket.on('send_private_message', async (data: {
+            conversationId: string;
+            receiverId: string;
+            message?: string;
+            messageType?: string;
+            relatedListingId?: string;
+            mediaUrl?: string;
+            mediaType?: string;
+            fileSize?: number;
+        }) => {
             try {
-                const { conversationId, receiverId, message, messageType, relatedListingId } = data || {};
+                const { conversationId, receiverId, message, messageType, relatedListingId, mediaUrl, mediaType, fileSize } = data || {};
                 const senderId = socket.data.user?._id;
                 if (!senderId || !conversationId || !receiverId) return;
+
+                const actualMediaType = mediaType || 'TEXT';
+
+                if (!message && !mediaUrl) {
+                    logger.warn(`User ${senderId} attempted to send empty private message`);
+                    return;
+                }
+
+                // Enforce backend limits
+                const SIZE_LIMITS = {
+                    TEXT: 0,
+                    IMAGE: 5 * 1024 * 1024,      // 5 MB
+                    VIDEO: 50 * 1024 * 1024,     // 50 MB
+                    FILE: 10 * 1024 * 1024       // 10 MB
+                };
+                if (actualMediaType !== 'TEXT' && fileSize) {
+                    const limit = SIZE_LIMITS[actualMediaType as keyof typeof SIZE_LIMITS];
+                    if (limit && fileSize > limit) {
+                        logger.warn(`User ${senderId} sent file exceeding limit: ${fileSize} > ${limit}`);
+                        return;
+                    }
+                }
 
                 const convo = await getFirstMatch(privateConversationModel, {
                     _id: isValidObjectId(conversationId),
@@ -133,18 +164,32 @@ const ioEvents = (io: Server) => {
                     conversationId: isValidObjectId(conversationId),
                     senderId,
                     receiverId: isValidObjectId(receiverId),
-                    message,
+                    message: message || null,
                     messageType: messageType || 'text',
                     relatedListingId: relatedListingId ? isValidObjectId(relatedListingId) : null,
+                    mediaUrl: mediaUrl || null,
+                    mediaType: actualMediaType,
+                    fileSize: fileSize || 0,
                     isRead: false,
                     deletedBy: []
                 });
+
+                let conversationLastMessage = message;
+                if (!conversationLastMessage && mediaUrl) {
+                    if (actualMediaType === 'IMAGE') {
+                        conversationLastMessage = '📷 Photo';
+                    } else if (actualMediaType === 'VIDEO') {
+                        conversationLastMessage = '🎥 Video';
+                    } else {
+                        conversationLastMessage = '📁 File';
+                    }
+                }
 
                 await updateData(
                     privateConversationModel,
                     { _id: convo._id },
                     {
-                        lastMessage: message,
+                        lastMessage: conversationLastMessage,
                         lastMessageAt: new Date(),
                         deletedBy: []
                     },
@@ -165,6 +210,9 @@ const ioEvents = (io: Server) => {
                     message: privateMessage.message,
                     messageType: privateMessage.messageType,
                     relatedListingId: privateMessage.relatedListingId,
+                    mediaUrl: privateMessage.mediaUrl,
+                    mediaType: privateMessage.mediaType,
+                    fileSize: privateMessage.fileSize,
                     isRead: privateMessage.isRead,
                     createdAt: privateMessage.createdAt,
                     sender: {
@@ -179,8 +227,11 @@ const ioEvents = (io: Server) => {
                 const notifPayload = serializeForSocket({
                     conversationId,
                     senderName,
-                    message,
+                    message: conversationLastMessage,
                     messageType: messageType || 'text',
+                    mediaUrl: privateMessage.mediaUrl,
+                    mediaType: privateMessage.mediaType,
+                    fileSize: privateMessage.fileSize,
                     sender: {
                         name: senderName,
                         avatar: senderAvatar
@@ -199,7 +250,7 @@ const ioEvents = (io: Server) => {
                         },
                         {
                             title: senderName,
-                            body: messageType === 'give' ? `[GIVE] ${message}` : messageType === 'take' ? `[TAKE] ${message}` : message
+                            body: messageType === 'give' ? `[GIVE] ${conversationLastMessage || ''}` : messageType === 'take' ? `[TAKE] ${conversationLastMessage || ''}` : (conversationLastMessage || '')
                         }
                     ).catch((err) => {
                         logger.error(`Error sending push notification for private message: ${err}`);

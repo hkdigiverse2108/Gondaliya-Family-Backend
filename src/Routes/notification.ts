@@ -7,5 +7,6 @@ const router = Router();
 router.post('/add', validateRequest(createNotification), notificationController.createNotification);
 router.get('/all', notificationController.getNotifications);
 router.patch('/read-all', notificationController.readAllNotifications);
+router.post('/read-all', notificationController.readAllNotifications);
 
 export const notificationRouter = router;
