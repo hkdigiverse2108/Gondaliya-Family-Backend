@@ -78,7 +78,6 @@ const ioEvents = (io: Server) => {
         const user = socket.data.user;
         socket.join(CHAT_ROOM);
         if (user?._id) {
-            socket.join(`user:${user._id.toString()}`);
             socket.join(`user_${user._id.toString()}`);
         }
 
@@ -102,7 +101,6 @@ const ioEvents = (io: Server) => {
                 }, {}, {});
 
                 if (convo) {
-                    socket.join(`private:${conversationId}`);
                     socket.join(`private_${conversationId}`);
                     logger.info(`User ${userId} joined private room private_${conversationId}`);
                 } else {
@@ -221,7 +219,6 @@ const ioEvents = (io: Server) => {
                     }
                 });
 
-                io.to(`private:${conversationId}`).emit('receive_private_message', emitPayload);
                 io.to(`private_${conversationId}`).emit('receive_private_message', emitPayload);
 
                 const notifPayload = serializeForSocket({
@@ -237,7 +234,6 @@ const ioEvents = (io: Server) => {
                         avatar: senderAvatar
                     }
                 });
-                io.to(`user:${receiverId}`).emit('private_message_notification', notifPayload);
                 io.to(`user_${receiverId}`).emit('private_message_notification', notifPayload);
 
                 const receiver = await getFirstMatch(userModel, { _id: isValidObjectId(receiverId), isDeleted: false }, { deviceToken: 1 }, {});
