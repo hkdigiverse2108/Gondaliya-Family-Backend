@@ -17,13 +17,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "auth",
-                "signup"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["auth", "signup"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -51,13 +46,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "auth",
-                "login"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["auth", "login"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -85,13 +75,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "auth",
-                "verify-otp"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["auth", "verify-otp"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -119,13 +104,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "auth",
-                "forgot-password"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["auth", "forgot-password"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -153,13 +133,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "auth",
-                "reset-password"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["auth", "reset-password"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -198,13 +173,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "location",
-                "add"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["location", "add"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -232,13 +202,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "location",
-                "update"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["location", "update"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -266,13 +231,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "location",
-                ":id"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["location", ":id"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": [
                 {
@@ -307,13 +267,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "location",
-                "all"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["location", "all"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -343,13 +298,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "account",
-                "delete"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["account", "delete"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -368,12 +318,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "account"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["account"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -392,13 +338,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "account",
-                "delete"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["account", "delete"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -417,12 +358,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "account"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["account"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -452,13 +389,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "user",
-                "add"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["user", "add"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -486,13 +418,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "user",
-                "update"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["user", "update"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -520,13 +447,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "user",
-                ":id"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["user", ":id"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": [
                 {
@@ -561,13 +483,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "user",
-                "all"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["user", "all"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -586,13 +503,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "user",
-                ":id"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["user", ":id"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": [
                 {
@@ -618,14 +530,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "user",
-                ":id",
-                "family"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["user", ":id", "family"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": [
                 {
@@ -660,15 +566,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "user",
-                ":id",
-                "family",
-                ":memberId"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["user", ":id", "family", ":memberId"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": [
                 {
@@ -709,15 +608,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "user",
-                ":id",
-                "family",
-                ":memberId"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["user", ":id", "family", ":memberId"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": [
                 {
@@ -770,13 +662,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "announcements",
-                "add"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["announcements", "add"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -804,13 +691,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "announcements",
-                "all"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["announcements", "all"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -829,13 +711,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "announcements",
-                "update"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["announcements", "update"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -863,13 +740,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "announcements",
-                ":id"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["announcements", ":id"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": [
                 {
@@ -916,13 +788,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "parivar",
-                "villages"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["parivar", "villages"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -941,13 +808,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "parivar",
-                "all"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["parivar", "all"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -987,13 +849,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "chat",
-                "add"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["chat", "add"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1021,13 +878,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "chat",
-                "all"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["chat", "all"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1046,13 +898,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "chat",
-                ":id"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["chat", ":id"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": [
                 {
@@ -1078,13 +925,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "chat",
-                "block"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["chat", "block"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1133,13 +975,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "listings",
-                "add"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["listings", "add"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1167,13 +1004,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "listings",
-                "all"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["listings", "all"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1192,13 +1024,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "listings",
-                ":id"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["listings", ":id"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": [
                 {
@@ -1224,13 +1051,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "listings",
-                "update"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["listings", "update"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1258,13 +1080,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "listings",
-                "status"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["listings", "status"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1292,13 +1109,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "listings",
-                ":id"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["listings", ":id"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": [
                 {
@@ -1345,13 +1157,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "inquiries",
-                "add"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["inquiries", "add"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1379,13 +1186,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "inquiries",
-                "received"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["inquiries", "received"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1404,13 +1206,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "inquiries",
-                "sent"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["inquiries", "sent"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1429,13 +1226,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "inquiries",
-                "reply"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["inquiries", "reply"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1463,13 +1255,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "inquiries",
-                "read"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["inquiries", "read"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1518,13 +1305,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "notifications",
-                "all"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["notifications", "all"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1543,13 +1325,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "notifications",
-                "read-all"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["notifications", "read-all"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1589,13 +1366,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "feedback",
-                "add"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["feedback", "add"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1623,13 +1395,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "feedback",
-                "all"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["feedback", "all"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1648,13 +1415,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "feedback",
-                "status"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["feedback", "status"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1682,13 +1444,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "feedback",
-                ":id"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["feedback", ":id"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": [
                 {
@@ -1735,13 +1492,8 @@
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "support",
-                "all"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["support", "all"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1756,17 +1508,12 @@
           "name": "Update Support",
           "request": {
             "description": {
-              "content": "Controller: updateSupportContact\nSchema: updateSupport\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| phone | string | Required |\n| phone2 | string | Optional |\n| email | string | Required |\n| address | string | Optional |\n",
+              "content": "Controller: updateSupportContact\nSchema: updateSupport\n\n### Validation Rules\n| Field | Type | Requirement |\n|---|---|---|\n| phones | array | Required |\n| email | string | Required |\n| address | string | Optional |\n",
               "type": "text/markdown"
             },
             "url": {
-              "path": [
-                "support",
-                "update"
-              ],
-              "host": [
-                "{{BASE_URL}}"
-              ],
+              "path": ["support", "update"],
+              "host": ["{{BASE_URL}}"],
               "query": [],
               "variable": []
             },
@@ -1779,7 +1526,7 @@
             "method": "PUT",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"phone\": \"sample_phone\",\n  \"phone2\": \"sample_phone2\",\n  \"email\": \"test@example.com\",\n  \"address\": \"sample_address\"\n}"
+              "raw": "{\n  \"phones\": [\n    \"sample_phone\"\n  ],\n  \"email\": \"test@example.com\",\n  \"address\": \"sample_address\"\n}"
             }
           },
           "response": [],

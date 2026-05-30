@@ -12,7 +12,7 @@ export const getSupportContact = async (req, res) => {
         }
 
         let support: any = await getFirstMatch(supportModel, {}, {}, {});
-    
+
         await redisSet(cacheKey, JSON.stringify(support), 600);
 
         return responseSuccess(res, responseMessage.getDataSuccess("Support contact details"), support);
@@ -29,23 +29,21 @@ export const updateSupportContact = async (req, res) => {
             return responseError(res, HTTP_STATUS.FORBIDDEN, responseMessage.accessDenied);
         }
 
-        const { phone, phone2, email, address } = req.body;
+        const { phones, email, address } = req.body;
 
         let support = await getFirstMatch(supportModel, {}, {}, {});
 
         if (!support) {
             // Create a new settings document
             support = await createData(supportModel, {
-                phone,
-                phone2: phone2 || null,
+                phones,
                 email,
                 address: address || null
             });
         } else {
             // Update the existing document
             support = await updateData(supportModel, { _id: support._id }, {
-                phone,
-                phone2: phone2 || null,
+                phones,
                 email,
                 address: address || null
             }, {});
