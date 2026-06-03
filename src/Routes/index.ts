@@ -14,6 +14,7 @@ import { supportRouter } from './support';
 import { accountRouter } from './account';
 import { privateChatRouter } from './privateChat';
 import { uploadRouter } from './upload';
+import { adminRouter } from './admin';
 import { userJWT } from '../helper';
 
 const router = Router();
@@ -24,6 +25,7 @@ router.use('/account', accountRouter);
 router.use('/upload', uploadRouter);
 
 router.use(userJWT)
+router.use('/admin', adminRouter);
 router.use('/user', userRouter);
 router.use('/announcements', announcementRouter);
 router.use('/parivar', parivarRouter);
