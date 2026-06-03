@@ -89,6 +89,7 @@ export const loginSchema = Joi.object({
     phoneNumber: Joi.string().length(10).required(),
     password: Joi.string().required(),
     deviceToken: Joi.alternatives().try(Joi.string(), Joi.array().items(Joi.string())).optional(),
+    role: Joi.string().optional(),
 });
 
 export const otpVerificationSchema = Joi.object({

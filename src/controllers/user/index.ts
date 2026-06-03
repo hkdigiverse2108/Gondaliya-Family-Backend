@@ -26,6 +26,7 @@ export const createUser = async (req, res) => {
         for (const phone of incomingPhones) {
             const existing = await getFirstMatch(userModel, {
                 isDeleted: false,
+                role: USER_ROLES.USER,
                 $or: [
                     { phoneNumber: phone },
                     { phoneNumber2: phone },
@@ -107,6 +108,7 @@ export const updateUser = async (req, res) => {
         for (const phone of incomingPhones) {
             const existing = await getFirstMatch(userModel, {
                 isDeleted: false,
+                role: USER_ROLES.USER,
                 _id: { $ne: isValidObjectId(userId) },
                 $or: [
                     { phoneNumber: phone },
@@ -222,6 +224,7 @@ export const addFamilyMember = async (req, res) => {
         if (memberData.phoneNumber) {
             const existing = await getFirstMatch(userModel, {
                 isDeleted: false,
+                role: USER_ROLES.USER,
                 $or: [
                     { phoneNumber: memberData.phoneNumber },
                     { phoneNumber2: memberData.phoneNumber },
@@ -274,6 +277,7 @@ export const updateFamilyMember = async (req, res) => {
         if (isAddingPhone) {
             const existing = await getFirstMatch(userModel, {
                 isDeleted: false,
+                role: USER_ROLES.USER,
                 $or: [
                     { phoneNumber: updates.phoneNumber },
                     { phoneNumber2: updates.phoneNumber },
