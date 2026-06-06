@@ -7,7 +7,7 @@ import { responseMessage, getFirstMatch } from './index'
 const jwt_token_secret = process.env.JWT_TOKEN_SECRET || 'your_secret_key';
 
 export class AuthTokenError extends Error {
-    code: 'tokenNotFound' | 'invalidToken' | 'accountBlock' | 'differentToken';
+    code: 'tokenNotFound' | 'invalidToken' | 'accountBlock' | 'differentToken' | 'tokenExpire';
 
     constructor(code: AuthTokenError['code'], message?: string) {
         super(message || code);
@@ -46,17 +46,24 @@ export const verifyUserFromToken = async (authorization: string) => {
         if (err instanceof AuthTokenError) {
             throw err;
         }
-        if (err?.message === 'invalid signature') {
-            throw new AuthTokenError('differentToken', responseMessage.differentToken);
+        if (err.name === 'TokenExpiredError') {
+            throw new AuthTokenError('tokenExpire', responseMessage.tokenExpire);
         }
-        throw new AuthTokenError('invalidToken', responseMessage.invalidToken);
+        if (err.name === 'JsonWebTokenError' || err.name === 'NotBeforeError') {
+            if (err?.message === 'invalid signature') {
+                throw new AuthTokenError('differentToken', responseMessage.differentToken);
+            }
+            throw new AuthTokenError('invalidToken', responseMessage.invalidToken);
+        }
+        // Bubble up other errors (like mongoose/database timeout errors)
+        throw err;
     }
 };
 
 export const userJWT = async (req: Request, res: Response, next) => {
     const { authorization } = req.headers;
     if (!authorization) {
-        return responseError(res, HTTP_STATUS.TOKEN_EXPIRED, responseMessage?.tokenNotFound);
+        return responseError(res, HTTP_STATUS.UNAUTHORIZED, responseMessage?.tokenNotFound);
     }
 
     try {
@@ -66,14 +73,17 @@ export const userJWT = async (req: Request, res: Response, next) => {
     } catch (err: any) {
         if (err instanceof AuthTokenError) {
             if (err.code === 'accountBlock') {
-                return responseError(res, HTTP_STATUS.TOKEN_EXPIRED, err.message);
+                return responseError(res, HTTP_STATUS.FORBIDDEN, err.message);
             }
             if (err.code === 'differentToken') {
+                return responseError(res, HTTP_STATUS.FORBIDDEN, err.message);
+            }
+            if (err.code === 'tokenExpire') {
                 return responseError(res, HTTP_STATUS.TOKEN_EXPIRED, err.message);
             }
-            return responseError(res, HTTP_STATUS.TOKEN_EXPIRED, err.message);
+            return responseError(res, HTTP_STATUS.UNAUTHORIZED, err.message);
         }
-        console.error('JWT Error:', err);
-        return responseError(res, HTTP_STATUS.TOKEN_EXPIRED, responseMessage.invalidToken);
+        console.error('Database/Server Error during JWT verification:', err);
+        return responseError(res, HTTP_STATUS.INTERNAL_SERVER_ERROR, 'Internal Server Error');
     }
 };
