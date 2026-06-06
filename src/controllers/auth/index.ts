@@ -156,9 +156,9 @@ export const otpVerification = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const { phoneNumber, password, deviceToken } = req.body;
+        const { phoneNumber, password, deviceToken, role } = req.body;
 
-        const user = await getFirstMatch(userModel, { phoneNumber, isDeleted: false }, {}, {});
+        const user = await getFirstMatch(userModel, { phoneNumber, role: role || USER_ROLES.USER, isDeleted: false }, {}, {});
         if (!user) {
             return responseError(res, HTTP_STATUS.UNAUTHORIZED, "Invalid phone number or password!");
         }
@@ -184,6 +184,8 @@ export const login = async (req, res) => {
 
         return responseSuccess(res, responseMessage.loginSuccess, {
             _id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
             phoneNumber: user.phoneNumber,
             role: user.role,
             token

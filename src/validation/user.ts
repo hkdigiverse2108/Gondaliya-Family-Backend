@@ -39,6 +39,7 @@ const workDetailsJoi = Joi.object({
 }).optional().allow(null);
 
 const familyMemberJoi = Joi.object({
+    _id: Joi.string().custom(isValidObjectId).optional().allow(null, ''),
     firstName: Joi.string().optional().allow(null, ''),
     middleName: Joi.string().optional().allow(null, ''),
     lastName: Joi.string().optional().allow(null, ''),
@@ -50,6 +51,8 @@ const familyMemberJoi = Joi.object({
     bloodGroup: Joi.string().valid(...Object.values(BLOOD_GROUPS)).optional().allow(null, ''),
     phoneNumber: Joi.string().length(10).optional().allow(null, ''),
     workDetails: workDetailsJoi,
+    linkedUserId: Joi.string().custom(isValidObjectId).optional().allow(null, ''),
+    isIndependent: Joi.boolean().optional(),
 });
 
 export const createUser = Joi.object({

@@ -29,6 +29,7 @@ export const signUpSchema = Joi.object({
     houseType: Joi.string().valid(...Object.values(HOUSE_TYPES)).optional().allow(null, ''),
     familyMembers: Joi.array().items(
         Joi.object({
+            _id: Joi.string().optional().allow(null, ''),
             firstName: Joi.string().optional().allow(null, ''),
             middleName: Joi.string().optional().allow(null, ''),
             lastName: Joi.string().optional().allow(null, ''),
@@ -40,6 +41,8 @@ export const signUpSchema = Joi.object({
             bloodGroup: Joi.string().valid(...Object.values(BLOOD_GROUPS)).optional().allow(null, ''),
             phoneNumber: Joi.string().length(10).optional().allow(null, ''),
             workDetails: Joi.object().optional().allow(null),
+            linkedUserId: Joi.string().optional().allow(null, ''),
+            isIndependent: Joi.boolean().optional(),
         })
     ).optional(),
     workDetails: Joi.object({
@@ -86,6 +89,7 @@ export const loginSchema = Joi.object({
     phoneNumber: Joi.string().length(10).required(),
     password: Joi.string().required(),
     deviceToken: Joi.alternatives().try(Joi.string(), Joi.array().items(Joi.string())).optional(),
+    role: Joi.string().optional(),
 });
 
 export const otpVerificationSchema = Joi.object({

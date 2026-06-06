@@ -26,6 +26,7 @@ export const createUser = async (req, res) => {
         for (const phone of incomingPhones) {
             const existing = await getFirstMatch(userModel, {
                 isDeleted: false,
+                role: USER_ROLES.USER,
                 $or: [
                     { phoneNumber: phone },
                     { phoneNumber2: phone },
@@ -33,6 +34,12 @@ export const createUser = async (req, res) => {
                 ]
             }, {}, {});
             if (existing) {
+                const matchingMember = body.familyMembers?.find(
+                    (m: any) => m.phoneNumber === phone
+                );
+                if (matchingMember && (!existing.linkedFamily || !existing.linkedFamily.headUserId)) {
+                    continue;
+                }
                 return responseError(res, HTTP_STATUS.CONFLICT, `Phone number ${phone} is already registered in the system!`);
             }
         }
@@ -101,6 +108,7 @@ export const updateUser = async (req, res) => {
         for (const phone of incomingPhones) {
             const existing = await getFirstMatch(userModel, {
                 isDeleted: false,
+                role: USER_ROLES.USER,
                 _id: { $ne: isValidObjectId(userId) },
                 $or: [
                     { phoneNumber: phone },
@@ -109,6 +117,20 @@ export const updateUser = async (req, res) => {
                 ]
             }, {}, {});
             if (existing) {
+                const matchingMember = updateFields.familyMembers?.find(
+                    (m: any) => m.phoneNumber === phone
+                );
+                if (matchingMember) {
+                    const isSameLinkedUser =
+                        (matchingMember.linkedUserId && String(matchingMember.linkedUserId) === String(existing._id)) ||
+                        (existing.linkedFamily &&
+                         String(existing.linkedFamily.headUserId) === String(userId) &&
+                         String(existing.linkedFamily.familyMemberRefId) === String(matchingMember._id)) ||
+                        (!existing.linkedFamily || !existing.linkedFamily.headUserId);
+                    if (isSameLinkedUser) {
+                        continue;
+                    }
+                }
                 return responseError(res, HTTP_STATUS.CONFLICT, `Phone number ${phone} is already registered in the system!`);
             }
         }
@@ -202,6 +224,7 @@ export const addFamilyMember = async (req, res) => {
         if (memberData.phoneNumber) {
             const existing = await getFirstMatch(userModel, {
                 isDeleted: false,
+                role: USER_ROLES.USER,
                 $or: [
                     { phoneNumber: memberData.phoneNumber },
                     { phoneNumber2: memberData.phoneNumber },
@@ -209,7 +232,10 @@ export const addFamilyMember = async (req, res) => {
                 ]
             }, {}, {});
             if (existing) {
-                return responseError(res, HTTP_STATUS.CONFLICT, `Phone number ${memberData.phoneNumber} is already registered in the system!`);
+                const isLinkable = !existing.linkedFamily || !existing.linkedFamily.headUserId;
+                if (!isLinkable) {
+                    return responseError(res, HTTP_STATUS.CONFLICT, `Phone number ${memberData.phoneNumber} is already registered in the system!`);
+                }
             }
         }
 
@@ -251,6 +277,7 @@ export const updateFamilyMember = async (req, res) => {
         if (isAddingPhone) {
             const existing = await getFirstMatch(userModel, {
                 isDeleted: false,
+                role: USER_ROLES.USER,
                 $or: [
                     { phoneNumber: updates.phoneNumber },
                     { phoneNumber2: updates.phoneNumber },
@@ -258,7 +285,10 @@ export const updateFamilyMember = async (req, res) => {
                 ]
             }, {}, {});
             if (existing) {
-                return responseError(res, HTTP_STATUS.CONFLICT, `Phone number ${updates.phoneNumber} is already registered in the system!`);
+                const isLinkable = !existing.linkedFamily || !existing.linkedFamily.headUserId;
+                if (!isLinkable) {
+                    return responseError(res, HTTP_STATUS.CONFLICT, `Phone number ${updates.phoneNumber} is already registered in the system!`);
+                }
             }
         }
 
