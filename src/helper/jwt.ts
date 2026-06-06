@@ -56,7 +56,7 @@ export const verifyUserFromToken = async (authorization: string) => {
 export const userJWT = async (req: Request, res: Response, next) => {
     const { authorization } = req.headers;
     if (!authorization) {
-        return responseError(res, HTTP_STATUS.UNAUTHORIZED, responseMessage?.tokenNotFound);
+        return responseError(res, HTTP_STATUS.TOKEN_EXPIRED, responseMessage?.tokenNotFound);
     }
 
     try {
@@ -66,14 +66,14 @@ export const userJWT = async (req: Request, res: Response, next) => {
     } catch (err: any) {
         if (err instanceof AuthTokenError) {
             if (err.code === 'accountBlock') {
-                return responseError(res, HTTP_STATUS.FORBIDDEN, err.message);
+                return responseError(res, HTTP_STATUS.TOKEN_EXPIRED, err.message);
             }
             if (err.code === 'differentToken') {
-                return responseError(res, HTTP_STATUS.FORBIDDEN, err.message);
+                return responseError(res, HTTP_STATUS.TOKEN_EXPIRED, err.message);
             }
-            return responseError(res, HTTP_STATUS.UNAUTHORIZED, err.message);
+            return responseError(res, HTTP_STATUS.TOKEN_EXPIRED, err.message);
         }
         console.error('JWT Error:', err);
-        return responseError(res, HTTP_STATUS.UNAUTHORIZED, responseMessage.invalidToken);
+        return responseError(res, HTTP_STATUS.TOKEN_EXPIRED, responseMessage.invalidToken);
     }
 };
