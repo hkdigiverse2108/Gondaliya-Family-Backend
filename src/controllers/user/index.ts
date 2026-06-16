@@ -1,6 +1,6 @@
-import { userModel } from '../../database';
+import { userModel, businessModel } from '../../database';
 import { generateHash, HTTP_STATUS, isValidObjectId, resolvePagination, resolveSortAndFilter, USER_ROLES, responseSuccess, responseError, internalServerError } from '../../common';
-import { reqInfo, responseMessage, updateData, getFirstMatch, createData, getDataWithSorting, countData, redisGet, redisSet, redisDel, redisDelPattern, promoteIfHasPhone, resolveOnSelfRegister, linkSelfRegisteredMember, addPhoneToMember, registerDeviceTokens } from '../../helper';
+import { reqInfo, responseMessage, updateData, getFirstMatch, createData, getDataWithSorting, countData, redisGet, redisSet, redisDel, redisDelPattern, promoteIfHasPhone, resolveOnSelfRegister, linkSelfRegisteredMember, addPhoneToMember, registerDeviceTokens, populateUserBusinesses, saveUserBusinessesFromPayload } from '../../helper';
 import mongoose from 'mongoose';
 
 export const createUser = async (req, res) => {
@@ -59,6 +59,16 @@ export const createUser = async (req, res) => {
         }
 
         console.log("DEBUG: createData result:", JSON.stringify(response, null, 2));
+
+        // Save businesses from payload (maps created member _ids to payload)
+        const savedMembers = response.familyMembers || [];
+        const payloadMembers = (body.familyMembers || []).map((m: any, idx: number) => {
+            if (!m._id && savedMembers[idx]) {
+                return { ...m, _id: savedMembers[idx]._id };
+            }
+            return m;
+        });
+        await saveUserBusinessesFromPayload(String(response._id), body.workDetails, payloadMembers);
 
         if (response.familyMembers?.length) {
             await promoteIfHasPhone(response);
@@ -124,8 +134,8 @@ export const updateUser = async (req, res) => {
                     const isSameLinkedUser =
                         (matchingMember.linkedUserId && String(matchingMember.linkedUserId) === String(existing._id)) ||
                         (existing.linkedFamily &&
-                         String(existing.linkedFamily.headUserId) === String(userId) &&
-                         String(existing.linkedFamily.familyMemberRefId) === String(matchingMember._id)) ||
+                            String(existing.linkedFamily.headUserId) === String(userId) &&
+                            String(existing.linkedFamily.familyMemberRefId) === String(matchingMember._id)) ||
                         (!existing.linkedFamily || !existing.linkedFamily.headUserId);
                     if (isSameLinkedUser) {
                         continue;
@@ -147,6 +157,16 @@ export const updateUser = async (req, res) => {
 
         const user = await updateData(userModel, { _id: isValidObjectId(userId), isDeleted: false }, updateFields, {});
         if (!user) return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound("User"));
+
+        // Save businesses from payload (maps created member _ids to payload)
+        const savedMembers = user.familyMembers || [];
+        const payloadMembers = (updateFields.familyMembers || []).map((m: any, idx: number) => {
+            if (!m._id && savedMembers[idx]) {
+                return { ...m, _id: savedMembers[idx]._id };
+            }
+            return m;
+        });
+        await saveUserBusinessesFromPayload(userId, updateFields.workDetails, payloadMembers);
 
         await redisDelPattern(`users:list:*`);
         await redisDel(`user:${userId}`);
@@ -246,6 +266,10 @@ export const addFamilyMember = async (req, res) => {
             await addPhoneToMember(String(head._id), String(memberData._id), memberData.phoneNumber);
         }
 
+        if (memberData.workDetails) {
+            await saveUserBusinessesFromPayload(headId, null, [memberData]);
+        }
+
         await redisDelPattern(`users:list:*`);
         await redisDel(`user:${headId}`);
         await redisDel('parivar:villages');
@@ -308,6 +332,13 @@ export const updateFamilyMember = async (req, res) => {
             await addPhoneToMember(headId, memberId, updates.phoneNumber);
         }
 
+        if (updates.workDetails) {
+            await saveUserBusinessesFromPayload(headId, null, [{
+                _id: memberId,
+                workDetails: updates.workDetails
+            }]);
+        }
+
         if (member.isIndependent && member.linkedUserId) {
             const syncFields: any = {};
             const personalFields = ['firstName', 'middleName', 'lastName', 'profilePhoto', 'dob', 'education', 'isMarried', 'bloodGroup'];
@@ -353,6 +384,12 @@ export const deleteFamilyMember = async (req, res) => {
             $pull: { familyMembers: { _id: isValidObjectId(memberId) } }
         }, {});
 
+        // Mark deleted family member's business as deleted
+        await businessModel.updateMany(
+            { userId: isValidObjectId(headId), familyMemberId: isValidObjectId(memberId) },
+            { $set: { isDeleted: true } }
+        );
+
         await redisDelPattern(`users:list:*`);
         await redisDel(`user:${headId}`);
         await redisDel('parivar:villages');
@@ -378,8 +415,11 @@ export const getUserById = async (req, res) => {
         const user = await getFirstMatch(userModel, { _id: isValidObjectId(id), isDeleted: false }, {}, {});
         if (!user) return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound("User"));
 
-        await redisSet(cacheKey, JSON.stringify(user), 600);
-        return responseSuccess(res, responseMessage.getDataSuccess("User"), user);
+        // Populate business details at runtime
+        const populatedUser = await populateUserBusinesses(user);
+
+        await redisSet(cacheKey, JSON.stringify(populatedUser), 600);
+        return responseSuccess(res, responseMessage.getDataSuccess("User"), populatedUser);
     } catch (error) {
         return internalServerError(res, error);
     }

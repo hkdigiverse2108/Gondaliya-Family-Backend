@@ -1,6 +1,6 @@
 import { userModel } from '../../database';
 import { responseSuccess, responseError, internalServerError, HTTP_STATUS, generateHash, compareHash, generateToken, USER_ROLES } from '../../common';
-import { responseMessage, redisSet, redisGet, redisDel, getFirstMatch, createData, updateData, promoteIfHasPhone, resolveOnSelfRegister, linkSelfRegisteredMember, registerDeviceTokens } from '../../helper';
+import { responseMessage, redisSet, redisGet, redisDel, getFirstMatch, createData, updateData, promoteIfHasPhone, resolveOnSelfRegister, linkSelfRegisteredMember, registerDeviceTokens, saveUserBusinessesFromPayload } from '../../helper';
 
 export const signUp = async (req, res) => {
     try {
@@ -83,6 +83,16 @@ export const signUp = async (req, res) => {
         });
 
         console.log("DEBUG: signUp createData result:", JSON.stringify(newUser, null, 2));
+
+        // Save businesses from payload (maps created member _ids to payload)
+        const savedMembers = newUser.familyMembers || [];
+        const payloadMembers = (familyMembers || []).map((m: any, idx: number) => {
+            if (!m._id && savedMembers[idx]) {
+                return { ...m, _id: savedMembers[idx]._id };
+            }
+            return m;
+        });
+        await saveUserBusinessesFromPayload(String(newUser._id), workDetails, payloadMembers);
 
         // Auto-create accounts for family members that already have a phone number
         if (newUser.familyMembers?.length) {
