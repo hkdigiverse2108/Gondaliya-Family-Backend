@@ -2,34 +2,6 @@ import Joi from 'joi';
 import { isValidObjectId, HOUSE_TYPES, MARITAL_STATUS, BLOOD_GROUPS, RELATIONS } from '../common';
 
 const workDetailsJoi = Joi.object({
-    hasOwnBusiness: Joi.boolean().optional().allow(null),
-    businessDetails: Joi.object({
-        category: Joi.string().optional().allow(null, ''),
-        subCategory: Joi.alternatives().try(
-            Joi.array().items(Joi.string()).optional(),
-            Joi.string().optional().allow(null, '')
-        ).optional().allow(null, ''),
-        businessName: Joi.string().optional().allow(null, ''),
-        ownerName: Joi.string().optional().allow(null, ''),
-        description: Joi.string().optional().allow(null, ''),
-        businessLogo: Joi.string().optional().allow(null, ''),
-        businessBanner: Joi.string().optional().allow(null, ''),
-        businessPhotos: Joi.array().items(Joi.string()).optional().allow(null),
-        locations: Joi.array().items(Joi.object({
-            shopAddress: Joi.string().optional().allow(null, ''),
-            areaCity: Joi.string().optional().allow(null, ''),
-            state: Joi.string().optional().allow(null, ''),
-            pincode: Joi.string().optional().allow(null, ''),
-            googleMapLink: Joi.string().optional().allow(null, ''),
-        })).optional().allow(null),
-        contactInfo: Joi.object({
-            mobile1: Joi.string().optional().allow(null, ''),
-            mobile2: Joi.string().optional().allow(null, ''),
-            email: Joi.string().email().optional().allow(null, ''),
-            website: Joi.string().optional().allow(null, ''),
-            portfolioLink: Joi.string().optional().allow(null, ''),
-        }).optional().allow(null),
-    }).optional().allow(null),
     jobDetails: Joi.object({
         jobCategory: Joi.string().optional().allow(null, ''),
         jobRole: Joi.string().optional().allow(null, ''),

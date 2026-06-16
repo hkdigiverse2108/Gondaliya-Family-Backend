@@ -1,31 +1,22 @@
-import { userModel } from '../../database';
-import { HTTP_STATUS, isValidObjectId, resolvePagination, responseSuccess, responseError, internalServerError } from '../../common';
-import { reqInfo, responseMessage, getData, getFirstMatch, redisGet, redisSet } from '../../helper';
+import { userModel, businessModel } from '../../database';
+import { HTTP_STATUS, isValidObjectId, resolvePagination, responseSuccess, responseError, internalServerError, USER_ROLES } from '../../common';
+import { reqInfo, responseMessage, redisGet, redisSet, redisDelPattern } from '../../helper';
 
-const USER_BUSINESS_PROJECTION = {
-    firstName: 1,
-    lastName: 1,
-    profilePhoto: 1,
-    phoneNumber: 1,
-    village: 1,
-    currentCity: 1,
-    workDetails: 1,
-    familyMembers: 1,
-};
+const formatBusinessDoc = (business: any) => {
+    const user = business.userId;
+    if (!user) return null;
 
-const hasBusiness = (workDetails: any) =>
-    workDetails?.hasOwnBusiness === true &&
-    !!workDetails?.businessDetails?.businessName?.trim();
+    let familyMember = null;
+    let source: 'head' | 'familyMember' = 'head';
+    if (business.familyMemberId && user.familyMembers) {
+        familyMember = user.familyMembers.find((m: any) => String(m._id) === String(business.familyMemberId));
+        if (familyMember) {
+            source = 'familyMember';
+        }
+    }
 
-const formatBusinessEntry = (
-    user: any,
-    workDetails: any,
-    source: 'head' | 'familyMember',
-    familyMember?: any
-) => {
-    const bd = workDetails.businessDetails;
     const ownerPhone =
-        bd?.contactInfo?.mobile1 ||
+        business.contactInfo?.mobile1 ||
         (source === 'familyMember' ? familyMember?.phoneNumber : null) ||
         user.phoneNumber;
 
@@ -42,46 +33,19 @@ const formatBusinessEntry = (
             currentCity: user.currentCity,
         },
         business: {
-            category: bd.category || null,
-            subCategory: bd.subCategory || [],
-            businessName: bd.businessName,
-            ownerName: bd.ownerName || null,
-            description: bd.description || null,
-            locations: bd.locations || [],
-            contactInfo: bd.contactInfo || {},
-            businessLogo: bd.businessLogo || null,
-            businessBanner: bd.businessBanner || null,
-            businessPhotos: bd.businessPhotos || [],
+            _id: business._id,
+            category: business.category || null,
+            subCategory: business.subCategory || [],
+            businessName: business.businessName,
+            ownerName: business.ownerName || null,
+            description: business.description || null,
+            locations: business.locations || [],
+            contactInfo: business.contactInfo || {},
+            businessLogo: business.businessLogo || null,
+            businessBanner: business.businessBanner || null,
+            businessPhotos: business.businessPhotos || [],
         },
     };
-};
-
-const matchesCity = (entry: any, city: string) => {
-    const cityLower = city.trim().toLowerCase();
-    const owner = entry.owner;
-    if (owner.village?.toLowerCase() === cityLower) return true;
-    if (owner.currentCity?.toLowerCase() === cityLower) return true;
-    return (entry.business.locations || []).some(
-        (loc: any) => loc?.areaCity?.toLowerCase() === cityLower
-    );
-};
-
-const collectBusinessesFromUsers = (users: any[]) => {
-    const entries: any[] = [];
-
-    for (const user of users) {
-        if (hasBusiness(user.workDetails)) {
-            entries.push(formatBusinessEntry(user, user.workDetails, 'head'));
-        }
-
-        for (const member of user.familyMembers || []) {
-            if (hasBusiness(member.workDetails)) {
-                entries.push(formatBusinessEntry(user, member.workDetails, 'familyMember', member));
-            }
-        }
-    }
-
-    return entries;
 };
 
 export const getBusinesses = async (req, res) => {
@@ -97,104 +61,81 @@ export const getBusinesses = async (req, res) => {
 
         let criteria: any = {
             isDeleted: false,
-            isActive: true,
-            $or: [
-                {
-                    'workDetails.hasOwnBusiness': true,
-                    'workDetails.businessDetails.businessName': { $nin: [null, ''] },
-                },
-                {
-                    familyMembers: {
-                        $elemMatch: {
-                            'workDetails.hasOwnBusiness': true,
-                            'workDetails.businessDetails.businessName': { $nin: [null, ''] },
-                        },
-                    },
-                },
-            ],
+            isActive: true
         };
 
-        if (search) {
-            const searchRegex = { $regex: search.trim(), $options: 'i' };
-            criteria = {
-                isDeleted: false,
-                isActive: true,
-                $and: [
-                    { $or: criteria.$or },
-                    {
-                        $or: [
-                            { 'workDetails.businessDetails.businessName': searchRegex },
-                            { 'workDetails.businessDetails.category': searchRegex },
-                            { 'workDetails.businessDetails.subCategory': searchRegex },
-                            { 'workDetails.businessDetails.description': searchRegex },
-                            { 'workDetails.businessDetails.ownerName': searchRegex },
-                            { firstName: searchRegex },
-                            { lastName: searchRegex },
-                            { 'familyMembers.workDetails.businessDetails.businessName': searchRegex },
-                            { 'familyMembers.workDetails.businessDetails.category': searchRegex },
-                            { 'familyMembers.workDetails.businessDetails.subCategory': searchRegex },
-                            { 'familyMembers.firstName': searchRegex },
-                            { 'familyMembers.lastName': searchRegex },
-                        ],
-                    },
-                ],
-            };
-        }
-
-        const users = await getData(userModel, criteria, USER_BUSINESS_PROJECTION, { sort: { firstName: 1 } });
-
-        let businesses = collectBusinessesFromUsers(users);
-
-        if (search) {
-            const searchLower = search.trim().toLowerCase();
-            businesses = businesses.filter((b) => {
-                return (
-                    (b.business.businessName || '').toLowerCase().includes(searchLower) ||
-                    (b.business.category || '').toLowerCase().includes(searchLower) ||
-                    (Array.isArray(b.business.subCategory)
-                        ? b.business.subCategory.some(s => (s || '').toLowerCase().includes(searchLower))
-                        : (b.business.subCategory || '').toLowerCase().includes(searchLower)) ||
-                    (b.business.description || '').toLowerCase().includes(searchLower) ||
-                    (b.business.ownerName || '').toLowerCase().includes(searchLower) ||
-                    (b.owner.firstName || '').toLowerCase().includes(searchLower) ||
-                    (b.owner.lastName || '').toLowerCase().includes(searchLower)
-                );
-            });
-        }
-
         if (category) {
-            const cat = category.trim().toLowerCase();
-            businesses = businesses.filter(
-                (b) => b.business.category?.toLowerCase() === cat
-            );
+            criteria.category = { $regex: `^${category.trim()}$`, $options: 'i' };
         }
 
         if (subCategory) {
-            const sub = subCategory.trim().toLowerCase();
-            businesses = businesses.filter((b) => {
-                if (Array.isArray(b.business.subCategory)) {
-                    return b.business.subCategory.some(s => (s || '').toLowerCase() === sub);
-                }
-                return b.business.subCategory?.toLowerCase() === sub;
-            });
+            criteria.subCategory = { $regex: `^${subCategory.trim()}$`, $options: 'i' };
+        }
+
+        if (search) {
+            const searchRegex = new RegExp(search.trim(), 'i');
+            const matchingUsers = await userModel.find({
+                isDeleted: false,
+                isActive: true,
+                $or: [
+                    { firstName: searchRegex },
+                    { lastName: searchRegex },
+                    { 'familyMembers.firstName': searchRegex },
+                    { 'familyMembers.lastName': searchRegex }
+                ]
+            }, { _id: 1, familyMembers: 1 });
+
+            const userIds = matchingUsers.map(u => u._id);
+            const familyMemberIds = matchingUsers.flatMap(u => (u.familyMembers || []).map(m => m._id));
+
+            criteria.$or = [
+                { businessName: searchRegex },
+                { category: searchRegex },
+                { subCategory: searchRegex },
+                { description: searchRegex },
+                { ownerName: searchRegex },
+                { userId: { $in: userIds } },
+                { familyMemberId: { $in: familyMemberIds } }
+            ];
         }
 
         if (city) {
-            businesses = businesses.filter((b) => matchesCity(b, city));
+            const cityRegex = new RegExp(city.trim(), 'i');
+            const matchingCityUsers = await userModel.find({
+                isDeleted: false,
+                isActive: true,
+                $or: [
+                    { village: cityRegex },
+                    { currentCity: cityRegex }
+                ]
+            }, { _id: 1 });
+            const cityUserIds = matchingCityUsers.map(u => u._id);
+
+            criteria.$or = criteria.$or || [];
+            criteria.$or.push({ 'locations.areaCity': cityRegex });
+            criteria.$or.push({ userId: { $in: cityUserIds } });
         }
 
-        businesses.sort((a, b) =>
-            (a.business.businessName || '').localeCompare(b.business.businessName || '')
-        );
-
-        const totalCount = businesses.length;
+        const totalCount = await businessModel.countDocuments(criteria);
         const { skip, limit: limitValue, hasLimit } = resolvePagination(page, limit, totalCount);
 
-        const pagedData = hasLimit ? businesses.slice(skip, skip + limitValue) : businesses;
+        let query = businessModel.find(criteria)
+            .populate({
+                path: 'userId',
+                select: 'firstName lastName profilePhoto phoneNumber village currentCity familyMembers'
+            })
+            .sort({ businessName: 1 });
+
+        if (hasLimit) {
+            query = query.skip(skip).limit(limitValue);
+        }
+
+        const results = await query;
+        const formatted = results.map(formatBusinessDoc).filter(Boolean);
         const stateObj = resolvePagination(page, limit, totalCount);
 
         const result = {
-            data: pagedData,
+            data: formatted,
             totalData: totalCount,
             state: stateObj,
         };
@@ -219,37 +160,170 @@ export const getBusinessById = async (req, res) => {
             return responseSuccess(res, responseMessage.getDataSuccess('Business details'), JSON.parse(cachedData));
         }
 
-        const user = await getFirstMatch(
-            userModel,
-            { _id: isValidObjectId(id), isDeleted: false, isActive: true },
-            USER_BUSINESS_PROJECTION,
-            {}
-        );
+        // Try finding by business ID first
+        let business = await businessModel.findOne({ _id: isValidObjectId(id), isDeleted: false })
+            .populate({
+                path: 'userId',
+                select: 'firstName lastName profilePhoto phoneNumber village currentCity familyMembers'
+            });
 
-        if (!user) {
+        if (!business) {
+            // Fallback: assume id is userId
+            let queryCriteria: any = { userId: isValidObjectId(id), isDeleted: false };
+            if (familyMemberId) {
+                queryCriteria.familyMemberId = isValidObjectId(familyMemberId);
+            } else {
+                queryCriteria.familyMemberId = null;
+            }
+            business = await businessModel.findOne(queryCriteria)
+                .populate({
+                    path: 'userId',
+                    select: 'firstName lastName profilePhoto phoneNumber village currentCity familyMembers'
+                });
+        }
+
+        if (!business) {
             return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound('Business'));
         }
 
-        let entry;
-
-        if (familyMemberId) {
-            const member = (user.familyMembers || []).find(
-                (m: any) => String(m._id) === String(familyMemberId)
-            );
-            if (!member || !hasBusiness(member.workDetails)) {
-                return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound('Business'));
-            }
-            entry = formatBusinessEntry(user, member.workDetails, 'familyMember', member);
-        } else {
-            if (!hasBusiness(user.workDetails)) {
-                return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound('Business'));
-            }
-            entry = formatBusinessEntry(user, user.workDetails, 'head');
-        }
-
+        const entry = formatBusinessDoc(business);
         await redisSet(cacheKey, JSON.stringify(entry), 600);
 
         return responseSuccess(res, responseMessage.getDataSuccess('Business details'), entry);
+    } catch (error) {
+        return internalServerError(res, error);
+    }
+};
+
+export const createBusiness = async (req, res) => {
+    reqInfo(req);
+    try {
+        const { user } = req.headers;
+        const body = req.body || {};
+
+        // If familyMemberId is provided, verify it belongs to user
+        if (body.familyMemberId) {
+            const member = (user.familyMembers || []).find(
+                (m: any) => String(m._id) === String(body.familyMemberId)
+            );
+            if (!member) {
+                return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound('Family member'));
+            }
+        }
+
+        const newBusiness = new businessModel({
+            ...body,
+            userId: user._id,
+        });
+
+        const response = await newBusiness.save();
+        if (!response) {
+            return responseError(res, HTTP_STATUS.BAD_REQUEST, responseMessage.addDataError);
+        }
+
+        await redisDelPattern('businesses:list:*');
+        await redisDelPattern('businesses:detail:*');
+
+        const populated = await businessModel.findById(response._id).populate({
+            path: 'userId',
+            select: 'firstName lastName profilePhoto phoneNumber village currentCity familyMembers'
+        });
+        const formatted = formatBusinessDoc(populated);
+
+        return responseSuccess(res, responseMessage.addDataSuccess('Business'), formatted);
+    } catch (error) {
+        return internalServerError(res, error);
+    }
+};
+
+export const updateBusiness = async (req, res) => {
+    reqInfo(req);
+    try {
+        const { user } = req.headers;
+        const { id } = req.params;
+        const body = req.body || {};
+
+        const business = await businessModel.findOne({ _id: isValidObjectId(id), isDeleted: false });
+        if (!business) {
+            return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound('Business'));
+        }
+
+        // Only owner can update
+        if (String(business.userId) !== String(user._id)) {
+            return responseError(res, HTTP_STATUS.FORBIDDEN, responseMessage.accessDenied);
+        }
+
+        // If changing familyMemberId, verify it belongs to user
+        if (body.familyMemberId) {
+            const member = (user.familyMembers || []).find(
+                (m: any) => String(m._id) === String(body.familyMemberId)
+            );
+            if (!member) {
+                return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound('Family member'));
+            }
+        }
+
+        const updated = await businessModel.findByIdAndUpdate(
+            id,
+            { $set: body },
+            { new: true }
+        ).populate({
+            path: 'userId',
+            select: 'firstName lastName profilePhoto phoneNumber village currentCity familyMembers'
+        });
+
+        await redisDelPattern('businesses:list:*');
+        await redisDelPattern('businesses:detail:*');
+
+        const formatted = formatBusinessDoc(updated);
+        return responseSuccess(res, responseMessage.updateDataSuccess('Business'), formatted);
+    } catch (error) {
+        return internalServerError(res, error);
+    }
+};
+
+export const deleteBusiness = async (req, res) => {
+    reqInfo(req);
+    try {
+        const { user } = req.headers;
+        const { id } = req.params;
+
+        const business = await businessModel.findOne({ _id: isValidObjectId(id), isDeleted: false });
+        if (!business) {
+            return responseError(res, HTTP_STATUS.NOT_FOUND, responseMessage.getDataNotFound('Business'));
+        }
+
+        // Only owner or admin can delete
+        if (user.role !== USER_ROLES.ADMIN && String(business.userId) !== String(user._id)) {
+            return responseError(res, HTTP_STATUS.FORBIDDEN, responseMessage.accessDenied);
+        }
+
+        await businessModel.findByIdAndUpdate(id, { isDeleted: true });
+
+        await redisDelPattern('businesses:list:*');
+        await redisDelPattern('businesses:detail:*');
+
+        return responseSuccess(res, responseMessage.deleteDataSuccess('Business'));
+    } catch (error) {
+        return internalServerError(res, error);
+    }
+};
+
+export const getMyBusinesses = async (req, res) => {
+    reqInfo(req);
+    try {
+        const { user } = req.headers;
+
+        const results = await businessModel.find({
+            userId: user._id,
+            isDeleted: false
+        }).populate({
+            path: 'userId',
+            select: 'firstName lastName profilePhoto phoneNumber village currentCity familyMembers'
+        }).sort({ businessName: 1 });
+
+        const formatted = results.map(formatBusinessDoc).filter(Boolean);
+        return responseSuccess(res, responseMessage.getDataSuccess('My businesses'), formatted);
     } catch (error) {
         return internalServerError(res, error);
     }

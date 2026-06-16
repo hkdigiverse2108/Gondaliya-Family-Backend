@@ -1,4 +1,4 @@
-import { userModel } from '../../database';
+import { userModel, businessModel } from '../../database';
 import { responseSuccess, internalServerError } from '../../common';
 import { reqInfo, responseMessage, getData, redisGet, redisSet } from '../../helper';
 
@@ -53,6 +53,25 @@ export const getParivarDirectory = async (req, res) => {
             criteria.village = { $regex: `^${village.trim()}$`, $options: 'i' };
         }
 
+        let searchUserIds: any[] = [];
+        let searchFamilyMemberIds: any[] = [];
+        if (search) {
+            const searchRegex = new RegExp(search.trim(), 'i');
+            const matchingBusinesses = await businessModel.find({
+                isDeleted: false,
+                isActive: true,
+                $or: [
+                    { businessName: searchRegex },
+                    { category: searchRegex },
+                    { subCategory: searchRegex },
+                    { description: searchRegex }
+                ]
+            }, { userId: 1, familyMemberId: 1 });
+
+            searchUserIds = matchingBusinesses.map(b => b.userId);
+            searchFamilyMemberIds = matchingBusinesses.filter(b => b.familyMemberId).map(b => b.familyMemberId!);
+        }
+
         if (search) {
             const searchRegex = { $regex: search.trim(), $options: 'i' };
             criteria.$or = [
@@ -62,9 +81,6 @@ export const getParivarDirectory = async (req, res) => {
                 { lastName: searchRegex },
                 { currentCity: searchRegex },
                 { village: searchRegex },
-                { 'workDetails.businessDetails.businessName': searchRegex },
-                { 'workDetails.businessDetails.category': searchRegex },
-                { 'workDetails.businessDetails.subCategory': searchRegex },
                 { 'workDetails.jobDetails.companyName': searchRegex },
                 { 'workDetails.jobDetails.jobRole': searchRegex },
 
@@ -73,30 +89,65 @@ export const getParivarDirectory = async (req, res) => {
                 { 'familyMembers.middleName': searchRegex },
                 { 'familyMembers.lastName': searchRegex },
                 { 'familyMembers.relation': searchRegex },
-                { 'familyMembers.workDetails.businessDetails.businessName': searchRegex },
-                { 'familyMembers.workDetails.businessDetails.category': searchRegex },
                 { 'familyMembers.workDetails.jobDetails.companyName': searchRegex }
             ];
+
+            if (searchUserIds.length > 0) {
+                criteria.$or.push({ _id: { $in: searchUserIds } });
+            }
+            if (searchFamilyMemberIds.length > 0) {
+                criteria.$or.push({ 'familyMembers._id': { $in: searchFamilyMemberIds } });
+            }
         }
 
         const heads = await getData(userModel, criteria, {}, {});
+
+        const headIds = heads.map((h: any) => h._id);
+        const memberIds = heads.flatMap((h: any) => (h.familyMembers || []).map((m: any) => m._id));
+
+        const allBusinesses = await businessModel.find({
+            isDeleted: false,
+            isActive: true,
+            $or: [
+                { userId: { $in: headIds }, familyMemberId: null },
+                { familyMemberId: { $in: memberIds } }
+            ]
+        });
+
+        const headBusinessesMap = new Map<string, any[]>();
+        const memberBusinessesMap = new Map<string, any[]>();
+
+        for (const b of allBusinesses) {
+            if (b.familyMemberId) {
+                const key = String(b.familyMemberId);
+                if (!memberBusinessesMap.has(key)) memberBusinessesMap.set(key, []);
+                memberBusinessesMap.get(key)!.push(b);
+            } else {
+                const key = String(b.userId);
+                if (!headBusinessesMap.has(key)) headBusinessesMap.set(key, []);
+                headBusinessesMap.get(key)!.push(b);
+            }
+        }
+
         const result = heads.map((head: any) => {
             let headWorkSummary = null;
-            if (head.workDetails) {
-                if (head.workDetails.hasOwnBusiness && head.workDetails.businessDetails?.businessName) {
-                    headWorkSummary = `${head.workDetails.businessDetails.businessName} (${head.workDetails.businessDetails.category || ''})`;
-                } else if (head.workDetails.jobDetails?.companyName) {
-                    headWorkSummary = `${head.workDetails.jobDetails.jobRole || 'Job'} at ${head.workDetails.jobDetails.companyName}`;
+            if (head.workDetails && head.workDetails.jobDetails && head.workDetails.jobDetails.companyName) {
+                headWorkSummary = `${head.workDetails.jobDetails.jobRole || 'Job'} at ${head.workDetails.jobDetails.companyName}`;
+            } else {
+                const userBizs = headBusinessesMap.get(String(head._id)) || [];
+                if (userBizs.length > 0) {
+                    headWorkSummary = userBizs.map((b: any) => `${b.businessName} (${b.category || ''})`).join(', ');
                 }
             }
 
             const formattedFamilyMembers = (head.familyMembers || []).map((member: any) => {
                 let memberWorkSummary = null;
-                if (member.workDetails) {
-                    if (member.workDetails.hasOwnBusiness && member.workDetails.businessDetails?.businessName) {
-                        memberWorkSummary = `${member.workDetails.businessDetails.businessName} (${member.workDetails.businessDetails.category || ''})`;
-                    } else if (member.workDetails.jobDetails?.companyName) {
-                        memberWorkSummary = `${member.workDetails.jobDetails.jobRole || 'Job'} at ${member.workDetails.jobDetails.companyName}`;
+                if (member.workDetails && member.workDetails.jobDetails && member.workDetails.jobDetails.companyName) {
+                    memberWorkSummary = `${member.workDetails.jobDetails.jobRole || 'Job'} at ${member.workDetails.jobDetails.companyName}`;
+                } else {
+                    const memberBizs = memberBusinessesMap.get(String(member._id)) || [];
+                    if (memberBizs.length > 0) {
+                        memberWorkSummary = memberBizs.map((b: any) => `${b.businessName} (${b.category || ''})`).join(', ');
                     }
                 }
 

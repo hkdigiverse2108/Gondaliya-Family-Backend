@@ -1,4 +1,4 @@
-import { inquiryModel, listingModel, userModel } from '../../database';
+import { inquiryModel, listingModel, userModel, businessModel } from '../../database';
 import { HTTP_STATUS, isValidObjectId, resolvePagination, responseSuccess, responseError, internalServerError, NOTIFICATION_TYPES } from '../../common';
 import { reqInfo, responseMessage, createData, updateData, getFirstMatch, getData, countData, findAllWithPopulate, dispatchNotification, redisGet, redisSet, redisDelPattern } from '../../helper';
 
@@ -17,11 +17,11 @@ export const createInquiry = async (req, res) => {
             }
             ownerId = listing.postedBy;
         } else if (targetType === 'BUSINESS') {
-            const bizUser = await getFirstMatch(userModel, { _id: isValidObjectId(targetId), isDeleted: false }, {}, {});
-            if (!bizUser) {
-                return responseError(res, HTTP_STATUS.NOT_FOUND, "Business user not found!");
+            const business = await getFirstMatch(businessModel, { _id: isValidObjectId(targetId), isDeleted: false }, {}, {});
+            if (!business) {
+                return responseError(res, HTTP_STATUS.NOT_FOUND, "Business not found!");
             }
-            ownerId = bizUser._id;
+            ownerId = business.userId;
         }
 
         if (!ownerId) {
@@ -75,9 +75,12 @@ export const getReceivedInquiries = async (req, res) => {
         const myListings = await getData(listingModel, { postedBy: user._id, isDeleted: false }, { _id: 1 }, {});
         const listingIds = myListings.map(l => l._id);
 
+        const myBusinesses = await businessModel.find({ userId: user._id, isDeleted: false }, { _id: 1 });
+        const businessIds = myBusinesses.map(b => b._id);
+
         const criteria = {
             $or: [
-                { targetType: 'BUSINESS', targetId: user._id },
+                { targetType: 'BUSINESS', targetId: { $in: [user._id, ...businessIds] } },
                 { targetType: 'LISTING', targetId: { $in: listingIds } }
             ]
         };
@@ -106,7 +109,17 @@ export const getReceivedInquiries = async (req, res) => {
             if (inq.targetType === 'LISTING') {
                 targetDetails = await getFirstMatch(listingModel, { _id: inq.targetId }, { title: 1, type: 1 }, {});
             } else if (inq.targetType === 'BUSINESS') {
-                targetDetails = await getFirstMatch(userModel, { _id: inq.targetId }, { firstName: 1, lastName: 1, workDetails: 1 }, {});
+                targetDetails = await getFirstMatch(businessModel, { _id: inq.targetId }, { businessName: 1, category: 1 }, {});
+                if (!targetDetails) {
+                    // Fallback to userModel for legacy inquiries
+                    const u = await getFirstMatch(userModel, { _id: inq.targetId }, { firstName: 1, lastName: 1, workDetails: 1 }, {});
+                    if (u) {
+                        targetDetails = {
+                            businessName: u.workDetails?.businessDetails?.businessName || `${u.firstName}'s Business`,
+                            category: u.workDetails?.businessDetails?.category || null
+                        };
+                    }
+                }
             }
             return {
                 ...inq,
@@ -167,7 +180,17 @@ export const getSentInquiries = async (req, res) => {
             if (inq.targetType === 'LISTING') {
                 targetDetails = await getFirstMatch(listingModel, { _id: inq.targetId }, { title: 1, type: 1 }, {});
             } else if (inq.targetType === 'BUSINESS') {
-                targetDetails = await getFirstMatch(userModel, { _id: inq.targetId }, { firstName: 1, lastName: 1, workDetails: 1 }, {});
+                targetDetails = await getFirstMatch(businessModel, { _id: inq.targetId }, { businessName: 1, category: 1 }, {});
+                if (!targetDetails) {
+                    // Fallback to userModel for legacy inquiries
+                    const u = await getFirstMatch(userModel, { _id: inq.targetId }, { firstName: 1, lastName: 1, workDetails: 1 }, {});
+                    if (u) {
+                        targetDetails = {
+                            businessName: u.workDetails?.businessDetails?.businessName || `${u.firstName}'s Business`,
+                            category: u.workDetails?.businessDetails?.category || null
+                        };
+                    }
+                }
             }
             return {
                 ...inq,
@@ -205,8 +228,17 @@ export const replyInquiry = async (req, res) => {
 
         // Validate that this user is the actual target/owner
         let isAuthorized = false;
-        if (inquiry.targetType === 'BUSINESS' && String(inquiry.targetId) === String(user._id)) {
-            isAuthorized = true;
+        if (inquiry.targetType === 'BUSINESS') {
+            // Check if user owns the business
+            const business = await getFirstMatch(businessModel, { _id: inquiry.targetId }, {}, {});
+            if (business && String(business.userId) === String(user._id)) {
+                isAuthorized = true;
+            } else {
+                // Fallback for legacy inquiries where targetId was userId
+                if (String(inquiry.targetId) === String(user._id)) {
+                    isAuthorized = true;
+                }
+            }
         } else if (inquiry.targetType === 'LISTING') {
             const listing = await getFirstMatch(listingModel, { _id: inquiry.targetId }, {}, {});
             if (listing && String(listing.postedBy) === String(user._id)) {
