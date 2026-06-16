@@ -88,7 +88,8 @@ export const createUser = async (req, res) => {
         await redisDelPattern('parivar:directory:*');
         await redisDelPattern('businesses:list:*');
         await redisDelPattern('businesses:detail:*');
-        return responseSuccess(res, responseMessage.addDataSuccess("User"), response);
+        const populatedUser = await populateUserBusinesses(response);
+        return responseSuccess(res, responseMessage.addDataSuccess("User"), populatedUser);
     } catch (error: any) {
         console.error("DEBUG: Error in createUser:", error);
         return internalServerError(res, error);
@@ -174,7 +175,8 @@ export const updateUser = async (req, res) => {
         await redisDelPattern('parivar:directory:*');
         await redisDelPattern('businesses:list:*');
         await redisDelPattern('businesses:detail:*');
-        return responseSuccess(res, responseMessage.updateDataSuccess("User"), user);
+        const populatedUser = await populateUserBusinesses(user);
+        return responseSuccess(res, responseMessage.updateDataSuccess("User"), populatedUser);
     } catch (error) {
         return internalServerError(res, error);
     }
@@ -222,7 +224,8 @@ export const getUsers = async (req, res) => {
         const totalCount = await countData(userModel, criteria);
         const stateObj = await resolvePagination(page, limit, totalCount);
 
-        const result = { data: response, totalData: totalCount, state: stateObj };
+        const populatedData = await Promise.all(response.map((u: any) => populateUserBusinesses(u)));
+        const result = { data: populatedData, totalData: totalCount, state: stateObj };
         await redisSet(cacheKey, JSON.stringify(result), 600);
         return responseSuccess(res, responseMessage.getDataSuccess("Users"), result);
     } catch (error) {
@@ -276,7 +279,8 @@ export const addFamilyMember = async (req, res) => {
         await redisDelPattern('parivar:directory:*');
         await redisDelPattern('businesses:list:*');
         await redisDelPattern('businesses:detail:*');
-        return responseSuccess(res, responseMessage.addDataSuccess("Family member"), updatedHead);
+        const populatedHead = await populateUserBusinesses(updatedHead);
+        return responseSuccess(res, responseMessage.addDataSuccess("Family member"), populatedHead);
     } catch (error) {
         return internalServerError(res, error);
     }
@@ -356,7 +360,8 @@ export const updateFamilyMember = async (req, res) => {
         await redisDelPattern('parivar:directory:*');
         await redisDelPattern('businesses:list:*');
         await redisDelPattern('businesses:detail:*');
-        return responseSuccess(res, responseMessage.updateDataSuccess("Family member"), updatedHead);
+        const populatedHead = await populateUserBusinesses(updatedHead);
+        return responseSuccess(res, responseMessage.updateDataSuccess("Family member"), populatedHead);
     } catch (error) {
         return internalServerError(res, error);
     }
